@@ -1,0 +1,710 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7A3865F60E9D3C29CAF499DC /* Pods_HollySounds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73CC2AE1153EEAB887F6686F /* Pods_HollySounds.framework */; };
+		E707164228A0F6CF006805F8 /* SampleAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E707164128A0F6CF006805F8 /* SampleAnimationView.swift */; };
+		E7075AB428B8AD6D00161D49 /* GalleryHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7075AB228B8AD6D00161D49 /* GalleryHeaderView.swift */; };
+		E7075AB528B8AD6D00161D49 /* GalleryHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7075AB328B8AD6D00161D49 /* GalleryHeaderView.xib */; };
+		E70B4E5D27FC176A00C64624 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70B4E5C27FC176A00C64624 /* SoundManager.swift */; };
+		E7104EF627F4C97F00A26F34 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7104EF527F4C97F00A26F34 /* AppDelegate.swift */; };
+		E7104EFF27F4C98100A26F34 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7104EFE27F4C98100A26F34 /* Assets.xcassets */; };
+		E7104F0227F4C98100A26F34 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7104F0027F4C98100A26F34 /* LaunchScreen.storyboard */; };
+		E71332A628E6E34000FDAE94 /* GalleryBackgroundTop.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E71332A528E6E34000FDAE94 /* GalleryBackgroundTop.mp4 */; };
+		E71332B328E6F88000FDAE94 /* Neon Ocean Preview.wav in Resources */ = {isa = PBXBuildFile; fileRef = E71332AF28E6F87F00FDAE94 /* Neon Ocean Preview.wav */; };
+		E71332B428E6F88000FDAE94 /* Magic Forest Preview.wav in Resources */ = {isa = PBXBuildFile; fileRef = E71332B028E6F87F00FDAE94 /* Magic Forest Preview.wav */; };
+		E71332B528E6F88000FDAE94 /* Sea Breeze Preview.wav in Resources */ = {isa = PBXBuildFile; fileRef = E71332B128E6F88000FDAE94 /* Sea Breeze Preview.wav */; };
+		E71332B628E6F88000FDAE94 /* Desert Dawn Preview.wav in Resources */ = {isa = PBXBuildFile; fileRef = E71332B228E6F88000FDAE94 /* Desert Dawn Preview.wav */; };
+		E7158F73291A63200009BD40 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7158F71291A63200009BD40 /* SplashViewController.swift */; };
+		E7158F74291A63200009BD40 /* SplashViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7158F72291A63200009BD40 /* SplashViewController.xib */; };
+		E71A3D3D27F4CA3600F61045 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71A3D3B27F4CA3600F61045 /* RootViewController.swift */; };
+		E71A3D3E27F4CA3600F61045 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E71A3D3C27F4CA3600F61045 /* RootViewController.xib */; };
+		E71A3D4327F4CA5200F61045 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71A3D4127F4CA5200F61045 /* PlayerViewController.swift */; };
+		E71A3D4427F4CA5200F61045 /* PlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E71A3D4227F4CA5200F61045 /* PlayerViewController.xib */; };
+		E741167B28A973E5002BF4E6 /* Video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E741167A28A973E5002BF4E6 /* Video.mp4 */; };
+		E74816372802DBB80070DBB8 /* TouchPadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74816362802DBB80070DBB8 /* TouchPadView.swift */; };
+		E74816392802DD040070DBB8 /* TouchPadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E74816382802DD040070DBB8 /* TouchPadView.xib */; };
+		E748163B2802E7360070DBB8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E748163A2802E7360070DBB8 /* Constants.swift */; };
+		E74CFF1F286F07B7001B23FA /* Magic Forest.zip in Resources */ = {isa = PBXBuildFile; fileRef = E74CFF1E286F07B7001B23FA /* Magic Forest.zip */; };
+		E74CFF25286F0974001B23FA /* Neon Ocean.zip in Resources */ = {isa = PBXBuildFile; fileRef = E74CFF24286F0974001B23FA /* Neon Ocean.zip */; };
+		E77B9B0328A7DC2A0031BC67 /* LoopAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77B9B0228A7DC2A0031BC67 /* LoopAnimationView.swift */; };
+		E78EAE532868753500A577B6 /* Sea Breeze.zip in Resources */ = {isa = PBXBuildFile; fileRef = E78EAE522868753500A577B6 /* Sea Breeze.zip */; };
+		E78EAE56286875A200A577B6 /* OggDecoder in Frameworks */ = {isa = PBXBuildFile; productRef = E78EAE55286875A200A577B6 /* OggDecoder */; };
+		E79084C42876C8890014F0B8 /* Desert Dawn.zip in Resources */ = {isa = PBXBuildFile; fileRef = E79084C32876C8890014F0B8 /* Desert Dawn.zip */; };
+		E7922FB0280C0D6200AE5AD0 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7922FAF280C0D6200AE5AD0 /* TabBarView.swift */; };
+		E7922FB3280C0D9000AE5AD0 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7922FB2280C0D9000AE5AD0 /* Settings.swift */; };
+		E7922FB6280C0EDA00AE5AD0 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7922FB5280C0EDA00AE5AD0 /* Package.swift */; };
+		E7922FB8280C0EF700AE5AD0 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7922FB7280C0EF700AE5AD0 /* DataManager.swift */; };
+		E7922FBE280C132100AE5AD0 /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7922FBC280C132100AE5AD0 /* GalleryViewController.swift */; };
+		E7922FBF280C132100AE5AD0 /* GalleryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7922FBD280C132100AE5AD0 /* GalleryViewController.xib */; };
+		E7922FC3280C134D00AE5AD0 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7922FC1280C134D00AE5AD0 /* ProfileViewController.swift */; };
+		E7922FC4280C134D00AE5AD0 /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7922FC2280C134D00AE5AD0 /* ProfileViewController.xib */; };
+		E7922FC7280C150800AE5AD0 /* PackageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7922FC6280C150800AE5AD0 /* PackageCell.swift */; };
+		E7922FC9280C155C00AE5AD0 /* PackageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7922FC8280C155C00AE5AD0 /* PackageCell.xib */; };
+		E7D291BD285F19FF00B528E2 /* URL+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D291BC285F19FF00B528E2 /* URL+Extension.swift */; };
+		E7E9C9A228511A75003BB788 /* AVAudioPCMBuffer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E9C9A128511A75003BB788 /* AVAudioPCMBuffer+Extension.swift */; };
+		E7FB904F280FC4F400144E07 /* Sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7FB904E280FC4F400144E07 /* Sound.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		3D90BA51D61609455D7778F9 /* Pods-HollySounds.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HollySounds.release.xcconfig"; path = "Target Support Files/Pods-HollySounds/Pods-HollySounds.release.xcconfig"; sourceTree = "<group>"; };
+		738AD27F42BB9FFA1F18A7A7 /* Pods-HollySounds.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HollySounds.debug.xcconfig"; path = "Target Support Files/Pods-HollySounds/Pods-HollySounds.debug.xcconfig"; sourceTree = "<group>"; };
+		73CC2AE1153EEAB887F6686F /* Pods_HollySounds.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HollySounds.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E707164128A0F6CF006805F8 /* SampleAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleAnimationView.swift; sourceTree = "<group>"; };
+		E7075AB228B8AD6D00161D49 /* GalleryHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryHeaderView.swift; sourceTree = "<group>"; };
+		E7075AB328B8AD6D00161D49 /* GalleryHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GalleryHeaderView.xib; sourceTree = "<group>"; };
+		E70B4E5C27FC176A00C64624 /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
+		E7104EF227F4C97F00A26F34 /* HollySounds.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HollySounds.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E7104EF527F4C97F00A26F34 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		E7104EFE27F4C98100A26F34 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E7104F0127F4C98100A26F34 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		E7104F0327F4C98100A26F34 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E71332A528E6E34000FDAE94 /* GalleryBackgroundTop.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = GalleryBackgroundTop.mp4; sourceTree = "<group>"; };
+		E71332AF28E6F87F00FDAE94 /* Neon Ocean Preview.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Neon Ocean Preview.wav"; sourceTree = "<group>"; };
+		E71332B028E6F87F00FDAE94 /* Magic Forest Preview.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Magic Forest Preview.wav"; sourceTree = "<group>"; };
+		E71332B128E6F88000FDAE94 /* Sea Breeze Preview.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Sea Breeze Preview.wav"; sourceTree = "<group>"; };
+		E71332B228E6F88000FDAE94 /* Desert Dawn Preview.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Desert Dawn Preview.wav"; sourceTree = "<group>"; };
+		E7158F71291A63200009BD40 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		E7158F72291A63200009BD40 /* SplashViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SplashViewController.xib; sourceTree = "<group>"; };
+		E71A3D3B27F4CA3600F61045 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		E71A3D3C27F4CA3600F61045 /* RootViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
+		E71A3D4127F4CA5200F61045 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
+		E71A3D4227F4CA5200F61045 /* PlayerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerViewController.xib; sourceTree = "<group>"; };
+		E741167A28A973E5002BF4E6 /* Video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Video.mp4; sourceTree = "<group>"; };
+		E74816362802DBB80070DBB8 /* TouchPadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchPadView.swift; sourceTree = "<group>"; };
+		E74816382802DD040070DBB8 /* TouchPadView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TouchPadView.xib; sourceTree = "<group>"; };
+		E748163A2802E7360070DBB8 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		E74CFF1E286F07B7001B23FA /* Magic Forest.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "Magic Forest.zip"; sourceTree = "<group>"; };
+		E74CFF24286F0974001B23FA /* Neon Ocean.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "Neon Ocean.zip"; sourceTree = "<group>"; };
+		E77B9B0228A7DC2A0031BC67 /* LoopAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoopAnimationView.swift; sourceTree = "<group>"; };
+		E78EAE522868753500A577B6 /* Sea Breeze.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "Sea Breeze.zip"; sourceTree = "<group>"; };
+		E79084C32876C8890014F0B8 /* Desert Dawn.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "Desert Dawn.zip"; sourceTree = "<group>"; };
+		E7922FAF280C0D6200AE5AD0 /* TabBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
+		E7922FB2280C0D9000AE5AD0 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		E7922FB5280C0EDA00AE5AD0 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
+		E7922FB7280C0EF700AE5AD0 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		E7922FBC280C132100AE5AD0 /* GalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
+		E7922FBD280C132100AE5AD0 /* GalleryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GalleryViewController.xib; sourceTree = "<group>"; };
+		E7922FC1280C134D00AE5AD0 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		E7922FC2280C134D00AE5AD0 /* ProfileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
+		E7922FC6280C150800AE5AD0 /* PackageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageCell.swift; sourceTree = "<group>"; };
+		E7922FC8280C155C00AE5AD0 /* PackageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PackageCell.xib; sourceTree = "<group>"; };
+		E7D291BC285F19FF00B528E2 /* URL+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extension.swift"; sourceTree = "<group>"; };
+		E7E9C9A128511A75003BB788 /* AVAudioPCMBuffer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AVAudioPCMBuffer+Extension.swift"; sourceTree = "<group>"; };
+		E7FB904E280FC4F400144E07 /* Sound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E7104EEF27F4C97F00A26F34 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7A3865F60E9D3C29CAF499DC /* Pods_HollySounds.framework in Frameworks */,
+				E78EAE56286875A200A577B6 /* OggDecoder in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5F5F202B23E90047975FCB2F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				738AD27F42BB9FFA1F18A7A7 /* Pods-HollySounds.debug.xcconfig */,
+				3D90BA51D61609455D7778F9 /* Pods-HollySounds.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		DB3D316C17BA808EE69B4C12 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				73CC2AE1153EEAB887F6686F /* Pods_HollySounds.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E70B4E5B27FC175A00C64624 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				E7922FB4280C0D9300AE5AD0 /* Objects */,
+				E70B4E5C27FC176A00C64624 /* SoundManager.swift */,
+				E748163A2802E7360070DBB8 /* Constants.swift */,
+				E7922FB7280C0EF700AE5AD0 /* DataManager.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		E70B4E5E27FC191300C64624 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				E71332B228E6F88000FDAE94 /* Desert Dawn Preview.wav */,
+				E71332B028E6F87F00FDAE94 /* Magic Forest Preview.wav */,
+				E71332AF28E6F87F00FDAE94 /* Neon Ocean Preview.wav */,
+				E71332B128E6F88000FDAE94 /* Sea Breeze Preview.wav */,
+				E71332A528E6E34000FDAE94 /* GalleryBackgroundTop.mp4 */,
+				E741167A28A973E5002BF4E6 /* Video.mp4 */,
+				E78EAE522868753500A577B6 /* Sea Breeze.zip */,
+				E74CFF1E286F07B7001B23FA /* Magic Forest.zip */,
+				E74CFF24286F0974001B23FA /* Neon Ocean.zip */,
+				E79084C32876C8890014F0B8 /* Desert Dawn.zip */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		E7104EE927F4C97F00A26F34 = {
+			isa = PBXGroup;
+			children = (
+				E7104EF427F4C97F00A26F34 /* HollySounds */,
+				E7104EF327F4C97F00A26F34 /* Products */,
+				5F5F202B23E90047975FCB2F /* Pods */,
+				DB3D316C17BA808EE69B4C12 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		E7104EF327F4C97F00A26F34 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E7104EF227F4C97F00A26F34 /* HollySounds.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E7104EF427F4C97F00A26F34 /* HollySounds */ = {
+			isa = PBXGroup;
+			children = (
+				E70B4E5E27FC191300C64624 /* Assets */,
+				E7E9C9A028511A55003BB788 /* Extensions */,
+				E70B4E5B27FC175A00C64624 /* Data */,
+				E77660A927FC111A00936068 /* Components */,
+				E71A3D3A27F4CA2300F61045 /* ViewControllers */,
+				E7104EF527F4C97F00A26F34 /* AppDelegate.swift */,
+				E7104EFE27F4C98100A26F34 /* Assets.xcassets */,
+				E7104F0027F4C98100A26F34 /* LaunchScreen.storyboard */,
+				E7104F0327F4C98100A26F34 /* Info.plist */,
+			);
+			path = HollySounds;
+			sourceTree = "<group>";
+		};
+		E7158F70291A63090009BD40 /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				E7158F71291A63200009BD40 /* SplashViewController.swift */,
+				E7158F72291A63200009BD40 /* SplashViewController.xib */,
+			);
+			path = Splash;
+			sourceTree = "<group>";
+		};
+		E71A3D3A27F4CA2300F61045 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				E7158F70291A63090009BD40 /* Splash */,
+				E71A3D3F27F4CA3900F61045 /* Root */,
+				E7922FBB280C122B00AE5AD0 /* Gallery */,
+				E7922FC0280C133300AE5AD0 /* Profile */,
+				E71A3D4027F4CA4000F61045 /* Player */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		E71A3D3F27F4CA3900F61045 /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				E7922FB1280C0D6500AE5AD0 /* Components */,
+				E71A3D3B27F4CA3600F61045 /* RootViewController.swift */,
+				E71A3D3C27F4CA3600F61045 /* RootViewController.xib */,
+			);
+			path = Root;
+			sourceTree = "<group>";
+		};
+		E71A3D4027F4CA4000F61045 /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				E74816352802DB9F0070DBB8 /* Component */,
+				E71A3D4127F4CA5200F61045 /* PlayerViewController.swift */,
+				E71A3D4227F4CA5200F61045 /* PlayerViewController.xib */,
+			);
+			path = Player;
+			sourceTree = "<group>";
+		};
+		E74816352802DB9F0070DBB8 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				E74816362802DBB80070DBB8 /* TouchPadView.swift */,
+				E74816382802DD040070DBB8 /* TouchPadView.xib */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
+		E77660A927FC111A00936068 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				E77B9B0228A7DC2A0031BC67 /* LoopAnimationView.swift */,
+				E707164128A0F6CF006805F8 /* SampleAnimationView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		E7922FB1280C0D6500AE5AD0 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				E7922FAF280C0D6200AE5AD0 /* TabBarView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		E7922FB4280C0D9300AE5AD0 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				E7922FB2280C0D9000AE5AD0 /* Settings.swift */,
+				E7922FB5280C0EDA00AE5AD0 /* Package.swift */,
+				E7FB904E280FC4F400144E07 /* Sound.swift */,
+			);
+			path = Objects;
+			sourceTree = "<group>";
+		};
+		E7922FBB280C122B00AE5AD0 /* Gallery */ = {
+			isa = PBXGroup;
+			children = (
+				E7922FC5280C14EB00AE5AD0 /* Components */,
+				E7922FBC280C132100AE5AD0 /* GalleryViewController.swift */,
+				E7922FBD280C132100AE5AD0 /* GalleryViewController.xib */,
+			);
+			path = Gallery;
+			sourceTree = "<group>";
+		};
+		E7922FC0280C133300AE5AD0 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				E7922FC1280C134D00AE5AD0 /* ProfileViewController.swift */,
+				E7922FC2280C134D00AE5AD0 /* ProfileViewController.xib */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		E7922FC5280C14EB00AE5AD0 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				E7922FC6280C150800AE5AD0 /* PackageCell.swift */,
+				E7922FC8280C155C00AE5AD0 /* PackageCell.xib */,
+				E7075AB228B8AD6D00161D49 /* GalleryHeaderView.swift */,
+				E7075AB328B8AD6D00161D49 /* GalleryHeaderView.xib */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		E7E9C9A028511A55003BB788 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E7E9C9A128511A75003BB788 /* AVAudioPCMBuffer+Extension.swift */,
+				E7D291BC285F19FF00B528E2 /* URL+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E7104EF127F4C97F00A26F34 /* HollySounds */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E7104F0627F4C98100A26F34 /* Build configuration list for PBXNativeTarget "HollySounds" */;
+			buildPhases = (
+				DAFEEBED842D003DF6C67B4F /* [CP] Check Pods Manifest.lock */,
+				E7104EEE27F4C97F00A26F34 /* Sources */,
+				E7104EEF27F4C97F00A26F34 /* Frameworks */,
+				E7104EF027F4C97F00A26F34 /* Resources */,
+				618A14EBEA296B63B48523A6 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HollySounds;
+			packageProductDependencies = (
+				E78EAE55286875A200A577B6 /* OggDecoder */,
+			);
+			productName = HolllySounds;
+			productReference = E7104EF227F4C97F00A26F34 /* HollySounds.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E7104EEA27F4C97F00A26F34 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1330;
+				LastUpgradeCheck = 1330;
+				TargetAttributes = {
+					E7104EF127F4C97F00A26F34 = {
+						CreatedOnToolsVersion = 13.3;
+					};
+				};
+			};
+			buildConfigurationList = E7104EED27F4C97F00A26F34 /* Build configuration list for PBXProject "HollySounds" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = E7104EE927F4C97F00A26F34;
+			packageReferences = (
+				E78EAE54286875A200A577B6 /* XCRemoteSwiftPackageReference "OggDecoder" */,
+			);
+			productRefGroup = E7104EF327F4C97F00A26F34 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E7104EF127F4C97F00A26F34 /* HollySounds */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E7104EF027F4C97F00A26F34 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E7922FC4280C134D00AE5AD0 /* ProfileViewController.xib in Resources */,
+				E79084C42876C8890014F0B8 /* Desert Dawn.zip in Resources */,
+				E74CFF1F286F07B7001B23FA /* Magic Forest.zip in Resources */,
+				E7158F74291A63200009BD40 /* SplashViewController.xib in Resources */,
+				E7104F0227F4C98100A26F34 /* LaunchScreen.storyboard in Resources */,
+				E7922FBF280C132100AE5AD0 /* GalleryViewController.xib in Resources */,
+				E71A3D4427F4CA5200F61045 /* PlayerViewController.xib in Resources */,
+				E7104EFF27F4C98100A26F34 /* Assets.xcassets in Resources */,
+				E74CFF25286F0974001B23FA /* Neon Ocean.zip in Resources */,
+				E7922FC9280C155C00AE5AD0 /* PackageCell.xib in Resources */,
+				E74816392802DD040070DBB8 /* TouchPadView.xib in Resources */,
+				E71332B628E6F88000FDAE94 /* Desert Dawn Preview.wav in Resources */,
+				E71332B328E6F88000FDAE94 /* Neon Ocean Preview.wav in Resources */,
+				E71332A628E6E34000FDAE94 /* GalleryBackgroundTop.mp4 in Resources */,
+				E71332B528E6F88000FDAE94 /* Sea Breeze Preview.wav in Resources */,
+				E71332B428E6F88000FDAE94 /* Magic Forest Preview.wav in Resources */,
+				E7075AB528B8AD6D00161D49 /* GalleryHeaderView.xib in Resources */,
+				E71A3D3E27F4CA3600F61045 /* RootViewController.xib in Resources */,
+				E741167B28A973E5002BF4E6 /* Video.mp4 in Resources */,
+				E78EAE532868753500A577B6 /* Sea Breeze.zip in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		618A14EBEA296B63B48523A6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HollySounds/Pods-HollySounds-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HollySounds/Pods-HollySounds-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HollySounds/Pods-HollySounds-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DAFEEBED842D003DF6C67B4F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-HollySounds-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E7104EEE27F4C97F00A26F34 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E7922FBE280C132100AE5AD0 /* GalleryViewController.swift in Sources */,
+				E71A3D3D27F4CA3600F61045 /* RootViewController.swift in Sources */,
+				E7922FB8280C0EF700AE5AD0 /* DataManager.swift in Sources */,
+				E7E9C9A228511A75003BB788 /* AVAudioPCMBuffer+Extension.swift in Sources */,
+				E74816372802DBB80070DBB8 /* TouchPadView.swift in Sources */,
+				E707164228A0F6CF006805F8 /* SampleAnimationView.swift in Sources */,
+				E7922FB3280C0D9000AE5AD0 /* Settings.swift in Sources */,
+				E7922FB6280C0EDA00AE5AD0 /* Package.swift in Sources */,
+				E7922FC3280C134D00AE5AD0 /* ProfileViewController.swift in Sources */,
+				E7FB904F280FC4F400144E07 /* Sound.swift in Sources */,
+				E7D291BD285F19FF00B528E2 /* URL+Extension.swift in Sources */,
+				E77B9B0328A7DC2A0031BC67 /* LoopAnimationView.swift in Sources */,
+				E7075AB428B8AD6D00161D49 /* GalleryHeaderView.swift in Sources */,
+				E7922FB0280C0D6200AE5AD0 /* TabBarView.swift in Sources */,
+				E70B4E5D27FC176A00C64624 /* SoundManager.swift in Sources */,
+				E7104EF627F4C97F00A26F34 /* AppDelegate.swift in Sources */,
+				E71A3D4327F4CA5200F61045 /* PlayerViewController.swift in Sources */,
+				E748163B2802E7360070DBB8 /* Constants.swift in Sources */,
+				E7922FC7280C150800AE5AD0 /* PackageCell.swift in Sources */,
+				E7158F73291A63200009BD40 /* SplashViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		E7104F0027F4C98100A26F34 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E7104F0127F4C98100A26F34 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		E7104F0427F4C98100A26F34 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		E7104F0527F4C98100A26F34 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		E7104F0727F4C98100A26F34 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 738AD27F42BB9FFA1F18A7A7 /* Pods-HollySounds.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 25;
+				DEVELOPMENT_TEAM = U2464R58MS;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HollySounds/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Oomie;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "App needs this to record your sound.";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIStatusBarHidden = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.oomie.oomieapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		E7104F0827F4C98100A26F34 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3D90BA51D61609455D7778F9 /* Pods-HollySounds.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 25;
+				DEVELOPMENT_TEAM = U2464R58MS;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HollySounds/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Oomie;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "App needs this to record your sound.";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIStatusBarHidden = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.oomie.oomieapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E7104EED27F4C97F00A26F34 /* Build configuration list for PBXProject "HollySounds" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E7104F0427F4C98100A26F34 /* Debug */,
+				E7104F0527F4C98100A26F34 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E7104F0627F4C98100A26F34 /* Build configuration list for PBXNativeTarget "HollySounds" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E7104F0727F4C98100A26F34 /* Debug */,
+				E7104F0827F4C98100A26F34 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E78EAE54286875A200A577B6 /* XCRemoteSwiftPackageReference "OggDecoder" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/arkasas/OggDecoder.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E78EAE55286875A200A577B6 /* OggDecoder */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E78EAE54286875A200A577B6 /* XCRemoteSwiftPackageReference "OggDecoder" */;
+			productName = OggDecoder;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = E7104EEA27F4C97F00A26F34 /* Project object */;
+}

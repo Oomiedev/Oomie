@@ -1,0 +1,51 @@
+PODS:
+  - AFKit (0.1.30):
+    - DeviceKit
+    - Player
+    - Realm
+    - RealmSwift
+    - Sodium
+  - DeviceKit (4.7.0)
+  - Player (0.14.0)
+  - Realm (10.30.0):
+    - Realm/Headers (= 10.30.0)
+  - Realm/Headers (10.30.0)
+  - RealmSwift (10.30.0):
+    - Realm (= 10.30.0)
+  - Sodium (0.9.1)
+  - ZIPFoundation (0.9.15)
+
+DEPENDENCIES:
+  - "AFKit (from `git@bitbucket.org:appyfurious_team/afkit.git`)"
+  - ZIPFoundation
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - DeviceKit
+    - Player
+    - Realm
+    - RealmSwift
+    - Sodium
+    - ZIPFoundation
+
+EXTERNAL SOURCES:
+  AFKit:
+    :git: "git@bitbucket.org:appyfurious_team/afkit.git"
+
+CHECKOUT OPTIONS:
+  AFKit:
+    :commit: 11a1189ec8f8aa1b5686ad7e950d329be1bcc303
+    :git: "git@bitbucket.org:appyfurious_team/afkit.git"
+
+SPEC CHECKSUMS:
+  AFKit: 5b8067aff2ad8c14d2c4ebfa11ed89854befa46a
+  DeviceKit: c870c34f7c0e0ac4caa6f052e6efe7ef1472c5a1
+  Player: 37e0acc16ea1495fc241df88fe9f089367513331
+  Realm: 247ccacf72e656c6ee09b242f7d24d5cf99cc058
+  RealmSwift: b3f5c52afa6ac480bd9c3e791c2576f55b3ecb44
+  Sodium: 23d11554ecd556196d313cf6130d406dfe7ac6da
+  ZIPFoundation: 063163dc828bf699c5be160eb4f58f676322d94f
+
+PODFILE CHECKSUM: 45c7c15cdc152aee3a8c5a0b6b36cfcf7537219d
+
+COCOAPODS: 1.11.3
