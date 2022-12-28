@@ -1,5 +1,5 @@
 PODS:
-  - AFKit (0.1.30):
+  - AFKit (0.1.32):
     - DeviceKit
     - Player
     - Realm
@@ -7,16 +7,16 @@ PODS:
     - Sodium
   - DeviceKit (4.7.0)
   - Player (0.14.0)
-  - Realm (10.30.0):
-    - Realm/Headers (= 10.30.0)
-  - Realm/Headers (10.30.0)
-  - RealmSwift (10.30.0):
-    - Realm (= 10.30.0)
+  - Realm (10.32.1):
+    - Realm/Headers (= 10.32.1)
+  - Realm/Headers (10.32.1)
+  - RealmSwift (10.32.1):
+    - Realm (= 10.32.1)
   - Sodium (0.9.1)
   - ZIPFoundation (0.9.15)
 
 DEPENDENCIES:
-  - "AFKit (from `git@bitbucket.org:appyfurious_team/afkit.git`)"
+  - AFKit (from `https://github.com/NomadicWarrior/oomie1.git`)
   - ZIPFoundation
 
 SPEC REPOS:
@@ -30,22 +30,22 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   AFKit:
-    :git: "git@bitbucket.org:appyfurious_team/afkit.git"
+    :git: https://github.com/NomadicWarrior/oomie1.git
 
 CHECKOUT OPTIONS:
   AFKit:
-    :commit: 11a1189ec8f8aa1b5686ad7e950d329be1bcc303
-    :git: "git@bitbucket.org:appyfurious_team/afkit.git"
+    :commit: 9989dd460442f85fbfd0c91f8f010ef74cf73568
+    :git: https://github.com/NomadicWarrior/oomie1.git
 
 SPEC CHECKSUMS:
-  AFKit: 5b8067aff2ad8c14d2c4ebfa11ed89854befa46a
+  AFKit: 0d1691e09c86a0467114b60c039d45fc4ee9214f
   DeviceKit: c870c34f7c0e0ac4caa6f052e6efe7ef1472c5a1
   Player: 37e0acc16ea1495fc241df88fe9f089367513331
-  Realm: 247ccacf72e656c6ee09b242f7d24d5cf99cc058
-  RealmSwift: b3f5c52afa6ac480bd9c3e791c2576f55b3ecb44
+  Realm: fd821b81e5479be497cc5bca2e020f707d8323eb
+  RealmSwift: 8635e4cc524790916d72b0ffa51c1a91f4ec9668
   Sodium: 23d11554ecd556196d313cf6130d406dfe7ac6da
   ZIPFoundation: 063163dc828bf699c5be160eb4f58f676322d94f
 
-PODFILE CHECKSUM: 45c7c15cdc152aee3a8c5a0b6b36cfcf7537219d
+PODFILE CHECKSUM: d7e239b48acc1982cb5f107a754c86b825283830
 
 COCOAPODS: 1.11.3
