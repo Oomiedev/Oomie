@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C10EEAB2965E0F400F3F7AF /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C10EEAA2965E0F400F3F7AF /* StoreKit.framework */; };
+		5CDE5120295CA97B00767056 /* SubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDE511F295CA97B00767056 /* SubscriptionView.swift */; };
+		5CDE5122295CAA4E00767056 /* SubscriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDE5121295CAA4E00767056 /* SubscriptionViewController.swift */; };
+		5CDE5124295CB6A300767056 /* SubscriptionPlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDE5123295CB6A300767056 /* SubscriptionPlanView.swift */; };
 		7A3865F60E9D3C29CAF499DC /* Pods_HollySounds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73CC2AE1153EEAB887F6686F /* Pods_HollySounds.framework */; };
 		E707164228A0F6CF006805F8 /* SampleAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E707164128A0F6CF006805F8 /* SampleAnimationView.swift */; };
 		E7075AB428B8AD6D00161D49 /* GalleryHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7075AB228B8AD6D00161D49 /* GalleryHeaderView.swift */; };
@@ -53,6 +57,10 @@
 
 /* Begin PBXFileReference section */
 		3D90BA51D61609455D7778F9 /* Pods-HollySounds.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HollySounds.release.xcconfig"; path = "Target Support Files/Pods-HollySounds/Pods-HollySounds.release.xcconfig"; sourceTree = "<group>"; };
+		5C10EEAA2965E0F400F3F7AF /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		5CDE511F295CA97B00767056 /* SubscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionView.swift; sourceTree = "<group>"; };
+		5CDE5121295CAA4E00767056 /* SubscriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionViewController.swift; sourceTree = "<group>"; };
+		5CDE5123295CB6A300767056 /* SubscriptionPlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionPlanView.swift; sourceTree = "<group>"; };
 		738AD27F42BB9FFA1F18A7A7 /* Pods-HollySounds.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HollySounds.debug.xcconfig"; path = "Target Support Files/Pods-HollySounds/Pods-HollySounds.debug.xcconfig"; sourceTree = "<group>"; };
 		73CC2AE1153EEAB887F6686F /* Pods_HollySounds.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HollySounds.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E707164128A0F6CF006805F8 /* SampleAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleAnimationView.swift; sourceTree = "<group>"; };
@@ -104,6 +112,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C10EEAB2965E0F400F3F7AF /* StoreKit.framework in Frameworks */,
 				7A3865F60E9D3C29CAF499DC /* Pods_HollySounds.framework in Frameworks */,
 				E78EAE56286875A200A577B6 /* OggDecoder in Frameworks */,
 			);
@@ -112,6 +121,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5CDE511D295CA96200767056 /* Subscription */ = {
+			isa = PBXGroup;
+			children = (
+				5CDE511E295CA96B00767056 /* View */,
+				5CDE5121295CAA4E00767056 /* SubscriptionViewController.swift */,
+			);
+			path = Subscription;
+			sourceTree = "<group>";
+		};
+		5CDE511E295CA96B00767056 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5CDE511F295CA97B00767056 /* SubscriptionView.swift */,
+				5CDE5123295CB6A300767056 /* SubscriptionPlanView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		5F5F202B23E90047975FCB2F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -124,6 +151,7 @@
 		DB3D316C17BA808EE69B4C12 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5C10EEAA2965E0F400F3F7AF /* StoreKit.framework */,
 				73CC2AE1153EEAB887F6686F /* Pods_HollySounds.framework */,
 			);
 			name = Frameworks;
@@ -203,6 +231,7 @@
 		E71A3D3A27F4CA2300F61045 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				5CDE511D295CA96200767056 /* Subscription */,
 				E7158F70291A63090009BD40 /* Splash */,
 				E71A3D3F27F4CA3900F61045 /* Root */,
 				E7922FBB280C122B00AE5AD0 /* Gallery */,
@@ -450,8 +479,10 @@
 				E7922FB8280C0EF700AE5AD0 /* DataManager.swift in Sources */,
 				E7E9C9A228511A75003BB788 /* AVAudioPCMBuffer+Extension.swift in Sources */,
 				E74816372802DBB80070DBB8 /* TouchPadView.swift in Sources */,
+				5CDE5120295CA97B00767056 /* SubscriptionView.swift in Sources */,
 				E707164228A0F6CF006805F8 /* SampleAnimationView.swift in Sources */,
 				E7922FB3280C0D9000AE5AD0 /* Settings.swift in Sources */,
+				5CDE5124295CB6A300767056 /* SubscriptionPlanView.swift in Sources */,
 				E7922FB6280C0EDA00AE5AD0 /* Package.swift in Sources */,
 				E7922FC3280C134D00AE5AD0 /* ProfileViewController.swift in Sources */,
 				E7FB904F280FC4F400144E07 /* Sound.swift in Sources */,
@@ -460,6 +491,7 @@
 				E7075AB428B8AD6D00161D49 /* GalleryHeaderView.swift in Sources */,
 				E7922FB0280C0D6200AE5AD0 /* TabBarView.swift in Sources */,
 				E70B4E5D27FC176A00C64624 /* SoundManager.swift in Sources */,
+				5CDE5122295CAA4E00767056 /* SubscriptionViewController.swift in Sources */,
 				E7104EF627F4C97F00A26F34 /* AppDelegate.swift in Sources */,
 				E71A3D4327F4CA5200F61045 /* PlayerViewController.swift in Sources */,
 				E748163B2802E7360070DBB8 /* Constants.swift in Sources */,
@@ -602,6 +634,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 25;
 				DEVELOPMENT_TEAM = U2464R58MS;
@@ -624,6 +657,7 @@
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.oomie.oomieapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -636,6 +670,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 25;
 				DEVELOPMENT_TEAM = U2464R58MS;
@@ -658,6 +693,7 @@
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.oomie.oomieapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

@@ -41,6 +41,12 @@ final class GalleryViewController: AFDefaultViewController {
         setupDataProvider()
         setupCollectionView()
         playVideo()
+      
+      DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        let vc = SubscriptionViewController()
+        vc.modalPresentationStyle = .overCurrentContext
+        self.present(vc, animated: true)
+      }
     }
     
     override func viewDidLayoutSubviews() {
