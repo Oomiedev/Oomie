@@ -8,6 +8,15 @@
         "branch" : "main",
         "revision" : "fa6eef34d13d0a4b0f4ef4175f31f2807119fdf7"
       }
+    },
+    {
+      "identity" : "oomieonboarding",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/NomadicWarrior/OomieOnboarding.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "cb280971f906b98d0853ebd8d34b4820c41b2493"
+      }
     }
   ],
   "version" : 2
