@@ -18,6 +18,14 @@ final class GalleryViewController: AFDefaultViewController {
     
     @IBOutlet private var collectionView: UICollectionView!
     @IBOutlet private var videoContainerView: UIView!
+  
+  private lazy var loaderView: UIActivityIndicatorView = {
+    let loader = UIActivityIndicatorView()
+    loader.translatesAutoresizingMaskIntoConstraints = false
+    loader.style = .large
+    loader.color = .systemOrange
+    return loader
+  }()
     
     /*
      MARK: -
@@ -34,18 +42,32 @@ final class GalleryViewController: AFDefaultViewController {
     /*
      MARK: -
      */
+  
+  var viewModel: GalleryViewModel!
+  
+  /*
+   MARK: -
+   */
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+      if !viewModel.isDecoded {
+        viewModel.decode()
+        startLoading()
+      }
         setupDataProvider()
         setupCollectionView()
         playVideo()
       
+<<<<<<< HEAD
       DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
         let vc = SubscriptionViewController()
         vc.modalPresentationStyle = .overCurrentContext
         self.present(vc, animated: true)
+=======
+      viewModel.updatUI = { [weak self] in
+        self?.loaderView.removeFromSuperview()
+>>>>>>> dev
       }
     }
     
@@ -56,6 +78,19 @@ final class GalleryViewController: AFDefaultViewController {
             value.frame = videoContainerView.bounds
         }
     }
+  
+  private func startLoading() {
+    view.addSubview(loaderView)
+    
+    NSLayoutConstraint.activate([
+      loaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+      loaderView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+      loaderView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+      loaderView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+    ])
+    
+    loaderView.startAnimating()
+  }
     
     func setupCollectionView() {
         
