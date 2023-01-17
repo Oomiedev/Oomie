@@ -13,7 +13,7 @@ protocol SoundPackService {
 }
 
 final class SoundPackServiceImpl {
-  let packsKeys: [String] = ["Sea Breeze", "Magic Forest", "Neon Ocean", "Desert Dawn"]
+  let packsKeys: [String] = ["Neon Ocean", "Desert Dawn"]
   
   var soundDatas: [SoundData] = []
   
