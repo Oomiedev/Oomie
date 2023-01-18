@@ -9,6 +9,7 @@ import UIKit
 import AFKit
 import AVFoundation
 import OomieOnboarding
+import StoreKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -22,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   var soundPackService: SoundPackServiceImpl?
   var archivingService: ArchivingServiceImpl?
   var decodeService: DecodingServiceImpl?
+  var subscriptionService: SubscriptionServiceImpl?
   
   var onboarding: OnboardingViewController?
   
@@ -52,6 +54,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       } else {
         self.isDecoded = true
         self.window?.rootViewController = self.sessionTracker.isFirstLaunch ? self.createOnboardingScreen() : self.createHomeScreen()
+        
+        if !self.sessionTracker.isFirstLaunch {
+          self.fetchSubscription()
+        }
       }
       self.soundPackService = nil
     }
@@ -98,6 +104,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let viewController = GalleryViewController()
     viewController.viewModel = viewModel
     return AFDefaultNavigationController(rootViewController: viewController)
+  }
+  
+  private func fetchSubscription() {
+    subscriptionService = SubscriptionServiceImpl()
+    subscriptionService?.fetchSubscriptions(identifiers: OomieProProucts.allCases)
+    
+    subscriptionService?.products = { [weak self] products in
+      guard let self = self else { return }
+      DispatchQueue.main.async {
+        let subscriptionScreen = self.createSubscriptionScreen(products: products)
+        subscriptionScreen.modalPresentationStyle = .overCurrentContext
+        self.window?.rootViewController?.present(subscriptionScreen, animated: false)
+        self.subscriptionService = nil
+      }
+    }
+  }
+  
+  private func createSubscriptionScreen(products: [SKProduct]) -> UIViewController {
+    return SubscriptionViewController(products: products)
   }
 }
 
