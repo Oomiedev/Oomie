@@ -154,7 +154,7 @@ private extension SubscriptionView {
     stackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -32).isActive = true
     stackView.bottomAnchor.constraint(lessThanOrEqualTo: continueButton.topAnchor, constant: -32).isActive = true
     
-    continueButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -80).isActive = true
+    continueButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -92).isActive = true
     continueButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 32).isActive = true
     continueButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -32).isActive = true
     continueButton.heightAnchor.constraint(equalToConstant: 68).isActive = true
