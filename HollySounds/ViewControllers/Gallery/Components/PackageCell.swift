@@ -9,6 +9,7 @@ import Foundation
 import AFKit
 import UIKit
 import RealmSwift
+import SDWebImage
 
 final class PackageCell: AFDefaultCollectionViewCell {
     
@@ -28,11 +29,8 @@ final class PackageCell: AFDefaultCollectionViewCell {
     
     @IBOutlet private var playButton: AFInteractiveView!
     @IBOutlet private var playButtonImageView: UIImageView!
-    
-    /*
-     MARK: -
-     */
-    
+    @IBOutlet weak var lockIcon: UIImageView!
+  
     var package: Package! {
         willSet {
             notificationToken?.invalidate()
@@ -108,7 +106,16 @@ final class PackageCell: AFDefaultCollectionViewCell {
             let data = try? Data(contentsOf: url)
         {
             imageView.image = UIImage(data: data)
+        } else {
+          if let serverImage = package.serverImageURLString {
+            imageView.sd_imageProgress = .current()
+            imageView.sd_setImage(with: URL(string: serverImage))
+          }
         }
+      
+      if self.package.isProPack {
+        lockIcon.isHidden = false
+      }
         
         /*
          */

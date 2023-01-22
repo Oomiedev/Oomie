@@ -9,6 +9,7 @@ import UIKit
 import AFKit
 import AVFoundation
 import OomieOnboarding
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -22,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   var soundPackService: SoundPackServiceImpl?
   var archivingService: ArchivingServiceImpl?
   var decodeService: DecodingServiceImpl?
+  var networkingService: NetworkingServiceImpl?
   
   var onboarding: OnboardingViewController?
   
@@ -41,7 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     soundPackService = SoundPackServiceImpl()
     
-    soundPackService?.setupPackage { [weak self] availability, data in
+    soundPackService?.setupPackage(packsKeys: ["Neon Ocean", "Desert Dawn"]) { [weak self] availability, data in
       guard let self = self else { return }
       if !availability, !data.isEmpty {
         self.isDecoded = false
@@ -50,10 +52,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.rootViewController = self.createOnboardingScreen()
         
       } else {
+        self.fetch()
         self.isDecoded = true
         self.window?.rootViewController = self.sessionTracker.isFirstLaunch ? self.createOnboardingScreen() : self.createHomeScreen()
       }
-      self.soundPackService = nil
+      //self.soundPackService = nil
     }
     
     /*
@@ -83,7 +86,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     archivingService = ArchivingServiceImpl()
     archivingService?.unzip(data: data) { [weak self] _ in
       self?.archivingService = nil
+      self?.fetch()
     }
+  }
+  
+  private func fetch() {
+    networkingService = NetworkingServiceImpl()
+    guard let url = URL(string: AppConstants.API.baseURL + AppConstants.API.Pack.list) else { return }
+    networkingService?.fetchServerPacks(url: url, completion: { [weak self] result in
+      switch result {
+      case .success(let packs):
+        DispatchQueue.main.async {
+          var packNames: [String:String] = [:]
+          
+          packs.data.forEach { model in
+            let url = AppConstants.API.baseURL + model.attributes.image.data.attributes.url
+            packNames = [model.attributes.title: url]
+          }
+          
+          self?.fetchPack(packs: packNames)
+        }
+      case .failure(let error):
+        print("1111-0 ", error.localizedDescription)
+      }
+    })
+  }
+  
+  private func fetchPack(packs: [String:String]) {
+    self.soundPackService?.setupServerPackage(packsKeys: packs, completion: { availability, serverData in
+      
+      print("1111-0 Status: ", availability)
+    })
   }
   
   private func createOnboardingScreen() -> UIViewController {

@@ -243,6 +243,10 @@ final class GalleryViewController: AFDefaultViewController {
         playerViewController = viewController
         
     }
+  
+  private func showSubsctiption() {
+    print("1111-0 Show Subscription")
+  }
     
     /*
      MARK: -
@@ -271,7 +275,7 @@ extension GalleryViewController: UICollectionViewDelegate, UICollectionViewDataS
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
-        return dataProvider.count + 4
+        return dataProvider.count
     }
     
     func collectionView(
@@ -310,7 +314,11 @@ extension GalleryViewController: UICollectionViewDelegate, UICollectionViewDataS
         if let cell = cell as? PackageCell {
             cell.package = package
             cell.selectAction = { [weak self] in
-                self?.showPlayer(for: package)
+              if cell.package.isProPack {
+                self?.showSubsctiption()
+                return
+              }
+              self?.showPlayer(for: package)
             }
         }
     }

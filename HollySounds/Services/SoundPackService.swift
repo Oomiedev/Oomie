@@ -9,11 +9,11 @@ import Foundation
 import RealmSwift
 
 protocol SoundPackService {
-  func setupPackage(completion: @escaping ((Bool, [SoundData]) -> Void))
+  func setupPackage(packsKeys: [String], completion: @escaping ((Bool, [SoundData]) -> Void))
+  func setupServerPackage(packsKeys: [String: String], completion: @escaping ((Bool, [SoundData]) -> Void))
 }
 
 final class SoundPackServiceImpl {
-  let packsKeys: [String] = ["Neon Ocean", "Desert Dawn"]
   
   var soundDatas: [SoundData] = []
   
@@ -22,8 +22,7 @@ final class SoundPackServiceImpl {
 }
 
 extension SoundPackServiceImpl: SoundPackService {
-  
-  func setupPackage(completion: @escaping ((Bool, [SoundData]) -> Void)) {
+  func setupPackage(packsKeys: [String], completion: @escaping ((Bool, [SoundData]) -> Void)) {
     do {
       let realm = try Realm()
       realm.beginWrite()
@@ -46,12 +45,57 @@ extension SoundPackServiceImpl: SoundPackService {
       }
       
       try! realm.commitWrite()
+      resetSamples()
       completion(packageStatus, soundDatas)
       
       
     } catch let error {
       print("Error: ", error.localizedDescription)
       completion(false, soundDatas)
+    }
+  }
+  
+  func setupServerPackage(packsKeys: [String : String], completion: @escaping ((Bool, [SoundData]) -> Void)) {
+    do {
+      let realm = try Realm()
+      realm.beginWrite()
+      var packageStatus: Bool = false
+      
+      for (_, value) in packsKeys.enumerated() {
+        if let test = realm.object(ofType: Package.self, forPrimaryKey: value.key) {
+          packageStatus = true
+          try! realm.commitWrite()
+          completion(packageStatus, soundDatas)
+          return
+        }
+        
+        print("1111-??")
+
+        let package = self.createServerPackage(value.key, img: value.value)
+        realm.add(package)
+        if let sourceURL = self.createSourceURL(with: value.key),
+           let destinationURL = self.createDestinationURL(with: value.key) {
+          
+          let soundData = SoundData(package: package, sourceURL: sourceURL, destinationURL: destinationURL)
+          self.soundDatas.append(soundData)
+        }
+      }
+      try! realm.commitWrite()
+      completion(packageStatus, soundDatas)
+      
+    } catch let error {
+      print("Error: ", error.localizedDescription)
+      completion(false, soundDatas)
+    }
+  }
+}
+
+private extension SoundPackServiceImpl {
+  private func resetSamples() {
+    let realm = try! Realm()
+    try? realm.safeWrite {
+        let sounds = realm.objects(Sound.self)
+        sounds.forEach { $0.state = .none }
     }
   }
   
@@ -68,18 +112,18 @@ extension SoundPackServiceImpl: SoundPackService {
     package.id = id
     package.dateCreated = Date().timeIntervalSince1970
     package.title = id
-    
+    package.isProPack = false
     return package
   }
   
-  private func resetSamples() {
-    let realm = try! Realm()
-    try? realm.safeWrite {
-        let sounds = realm.objects(Sound.self)
-        sounds.forEach {
-            $0.state = .none
-        }
-    }
+  private func createServerPackage(_ id: String, img: String) -> Package {
+    let package = Package()
+    package.id = id
+    package.dateCreated = Date().timeIntervalSince1970
+    package.title = id
+    package.serverImageURLString = img
+    package.isProPack = true
+    return package
   }
 }
 

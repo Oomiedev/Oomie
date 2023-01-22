@@ -14,4 +14,12 @@ enum AppConstants {
       static let launchedBefore = "sessionTracker.key.launchedBefore"
     }
   }
+  
+  enum API {
+    static let baseURL = "http://104.248.89.173:1337"
+    
+    enum Pack {
+      static let list = "/api/music-packs?populate=*"
+    }
+  }
 }
