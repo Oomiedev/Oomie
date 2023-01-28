@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C0890F629803AB500AD9E39 /* PackDownloadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0890F529803AB500AD9E39 /* PackDownloadingView.swift */; };
 		5C2C956D296B042C00B183AC /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2C956C296B042C00B183AC /* Storage.swift */; };
 		5C2C956F296B049F00B183AC /* UserDefaultsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2C956E296B049F00B183AC /* UserDefaultsStorage.swift */; };
 		5C2C9572296B052300B183AC /* SessionTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2C9571296B052300B183AC /* SessionTracker.swift */; };
@@ -15,6 +16,8 @@
 		5C3FA2FF2976E8A70071F801 /* Desert Dawn.zip in Resources */ = {isa = PBXBuildFile; fileRef = 5C3FA2FD2976E8A70071F801 /* Desert Dawn.zip */; };
 		5C46F4B629705A8100BEE14B /* ArchivingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C46F4B529705A8100BEE14B /* ArchivingService.swift */; };
 		5C46F4B8297063AA00BEE14B /* SoundPackService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C46F4B7297063AA00BEE14B /* SoundPackService.swift */; };
+		5C70062E297DB0EF00867DD6 /* DownloadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C70062D297DB0EF00867DD6 /* DownloadViewController.swift */; };
+		5C700630297DB10B00867DD6 /* DownloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C70062F297DB10B00867DD6 /* DownloadView.swift */; };
 		5C76DCB7297861CA008A79E4 /* NetworkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C76DCB6297861CA008A79E4 /* NetworkingService.swift */; };
 		5CDDDC592971BFA600CFC7C6 /* DecodingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDDDC582971BFA600CFC7C6 /* DecodingService.swift */; };
 		5CDDDC5B2971C14200CFC7C6 /* GalleryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDDDC5A2971C14200CFC7C6 /* GalleryViewModel.swift */; };
@@ -61,6 +64,7 @@
 
 /* Begin PBXFileReference section */
 		3D90BA51D61609455D7778F9 /* Pods-HollySounds.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HollySounds.release.xcconfig"; path = "Target Support Files/Pods-HollySounds/Pods-HollySounds.release.xcconfig"; sourceTree = "<group>"; };
+		5C0890F529803AB500AD9E39 /* PackDownloadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackDownloadingView.swift; sourceTree = "<group>"; };
 		5C2C956C296B042C00B183AC /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		5C2C956E296B049F00B183AC /* UserDefaultsStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsStorage.swift; sourceTree = "<group>"; };
 		5C2C9571296B052300B183AC /* SessionTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionTracker.swift; sourceTree = "<group>"; };
@@ -69,6 +73,8 @@
 		5C3FA2FD2976E8A70071F801 /* Desert Dawn.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "Desert Dawn.zip"; sourceTree = "<group>"; };
 		5C46F4B529705A8100BEE14B /* ArchivingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchivingService.swift; sourceTree = "<group>"; };
 		5C46F4B7297063AA00BEE14B /* SoundPackService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundPackService.swift; sourceTree = "<group>"; };
+		5C70062D297DB0EF00867DD6 /* DownloadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadViewController.swift; sourceTree = "<group>"; };
+		5C70062F297DB10B00867DD6 /* DownloadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadView.swift; sourceTree = "<group>"; };
 		5C76DCB6297861CA008A79E4 /* NetworkingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingService.swift; sourceTree = "<group>"; };
 		5CDDDC582971BFA600CFC7C6 /* DecodingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodingService.swift; sourceTree = "<group>"; };
 		5CDDDC5A2971C14200CFC7C6 /* GalleryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewModel.swift; sourceTree = "<group>"; };
@@ -174,6 +180,24 @@
 			path = ArchivingService;
 			sourceTree = "<group>";
 		};
+		5C70062B297DB0BC00867DD6 /* Download */ = {
+			isa = PBXGroup;
+			children = (
+				5C70062C297DB0D400867DD6 /* View */,
+				5C70062D297DB0EF00867DD6 /* DownloadViewController.swift */,
+			);
+			path = Download;
+			sourceTree = "<group>";
+		};
+		5C70062C297DB0D400867DD6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5C70062F297DB10B00867DD6 /* DownloadView.swift */,
+				5C0890F529803AB500AD9E39 /* PackDownloadingView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		5C76DCB5297861AE008A79E4 /* NetworkingService */ = {
 			isa = PBXGroup;
 			children = (
@@ -273,6 +297,7 @@
 		E71A3D3A27F4CA2300F61045 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				5C70062B297DB0BC00867DD6 /* Download */,
 				E7158F70291A63090009BD40 /* Splash */,
 				E71A3D3F27F4CA3900F61045 /* Root */,
 				E7922FBB280C122B00AE5AD0 /* Gallery */,
@@ -517,8 +542,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C46F4B8297063AA00BEE14B /* SoundPackService.swift in Sources */,
+				5C700630297DB10B00867DD6 /* DownloadView.swift in Sources */,
 				5CDDDC5B2971C14200CFC7C6 /* GalleryViewModel.swift in Sources */,
 				5C76DCB7297861CA008A79E4 /* NetworkingService.swift in Sources */,
+				5C0890F629803AB500AD9E39 /* PackDownloadingView.swift in Sources */,
 				E7922FBE280C132100AE5AD0 /* GalleryViewController.swift in Sources */,
 				E71A3D3D27F4CA3600F61045 /* RootViewController.swift in Sources */,
 				E7922FB8280C0EF700AE5AD0 /* DataManager.swift in Sources */,
@@ -544,6 +571,7 @@
 				E71A3D4327F4CA5200F61045 /* PlayerViewController.swift in Sources */,
 				E748163B2802E7360070DBB8 /* Constants.swift in Sources */,
 				E7922FC7280C150800AE5AD0 /* PackageCell.swift in Sources */,
+				5C70062E297DB0EF00867DD6 /* DownloadViewController.swift in Sources */,
 				E7158F73291A63200009BD40 /* SplashViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

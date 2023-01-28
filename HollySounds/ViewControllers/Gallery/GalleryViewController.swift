@@ -9,6 +9,7 @@ import UIKit
 import AFKit
 import RealmSwift
 import AVFoundation
+import SwiftUI
 
 final class GalleryViewController: AFDefaultViewController {
 
@@ -51,16 +52,17 @@ final class GalleryViewController: AFDefaultViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-      if !viewModel.isDecoded {
-        viewModel.decode()
-        startLoading()
-      }
         setupDataProvider()
         setupCollectionView()
         playVideo()
       
-      viewModel.updatUI = { [weak self] in
-        self?.loaderView.removeFromSuperview()
+      viewModel.updateUI = { [weak self] prossess in
+        if prossess {
+          self?.startLoading()
+        } else {
+          self?.loaderView.removeFromSuperview()
+        }
+        
       }
     }
     
@@ -173,8 +175,15 @@ final class GalleryViewController: AFDefaultViewController {
     }
     
     private func setupDataProvider() {
-        let realm = try! Realm()
+//        let realm = try! Realm()
+//        dataProvider = realm.objects(Package.self)
+      
+      do {
+        let realm = try Realm()
         dataProvider = realm.objects(Package.self)
+      } catch let error {
+        print("1111-0 Err: ", error)
+      }
     }
 
     private func showPlayer(for package: Package) {
@@ -244,8 +253,12 @@ final class GalleryViewController: AFDefaultViewController {
         
     }
   
-  private func showSubsctiption() {
-    print("1111-0 Show Subscription")
+  private func showSubsctiption(for package: Package) {
+    let viewModel = PackDownloadingViewModel()
+    viewModel.package = package
+    let vc = UIHostingController(rootView: PackDownloadingView(viewModel: viewModel))
+    vc.modalPresentationStyle = .overCurrentContext
+    present(vc, animated: true)
   }
     
     /*
@@ -315,7 +328,7 @@ extension GalleryViewController: UICollectionViewDelegate, UICollectionViewDataS
             cell.package = package
             cell.selectAction = { [weak self] in
               if cell.package.isProPack {
-                self?.showSubsctiption()
+                self?.showSubsctiption(for: package)
                 return
               }
               self?.showPlayer(for: package)

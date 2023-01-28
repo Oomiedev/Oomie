@@ -6,4 +6,5 @@ target 'HollySounds' do
   pod 'AFKit', :git => 'https://github.com/NomadicWarrior/oomie1.git'
   pod 'ZIPFoundation'
   pod 'SDWebImage', '~> 5.0'
+  pod 'SDWebImageSwiftUI'
 end

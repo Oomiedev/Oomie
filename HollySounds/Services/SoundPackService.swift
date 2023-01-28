@@ -9,6 +9,7 @@ import Foundation
 import RealmSwift
 
 protocol SoundPackService {
+  func clearOldPackages(complete: @escaping (() -> Void))
   func setupPackage(packsKeys: [String], completion: @escaping ((Bool, [SoundData]) -> Void))
   func setupServerPackage(packsKeys: [String: String], completion: @escaping ((Bool, [SoundData]) -> Void))
 }
@@ -19,9 +20,74 @@ final class SoundPackServiceImpl {
   
   let app = App(id: "oomie-nmqfg")
   var cloudRealm: Realm?
+  
+  init() {
+    setupRealm()
+  }
+  
+  func setupRealm(with completeAction: ((_ configuration: Realm.Configuration?) -> Void)? = nil) {
+      var realmConfig = Realm.Configuration.defaultConfiguration
+      realmConfig.schemaVersion = 0
+      realmConfig.migrationBlock = { migration, oldSchemaVersion in
+        if oldSchemaVersion < 1 {
+          
+        }
+      }
+    
+    realmConfig.deleteRealmIfMigrationNeeded = true
+    
+      realmConfig.shouldCompactOnLaunch = { totalBytes, usedBytes in
+          let limitBytes = 100 * 1024 * 1024
+          let value = (totalBytes > limitBytes) && (Double(usedBytes) / Double(totalBytes)) < 0.5
+          return value
+      }
+      
+      realmConfig.objectTypes = [
+          Settings.self,
+          Package.self,
+          Sound.self
+      ]
+      Realm.Configuration.defaultConfiguration = realmConfig
+  }
 }
 
 extension SoundPackServiceImpl: SoundPackService {
+  
+  func clearOldPackages(complete: @escaping (() -> Void)) {
+    let oldKeys = ["Sea Breeze", "Magic Forest", "Neon Ocean", "Desert Dawn"]
+    let fileManager = FileManager.default
+    
+    do {
+      let realm = try Realm()
+      realm.beginWrite()
+      
+      oldKeys.forEach { [weak self] key in
+        
+        if let oldPackage = realm.object(ofType: Package.self, forPrimaryKey: key) {
+          realm.delete(oldPackage)
+        }
+        
+        if let path = createDestinationURL(with: key) {
+          self?.removeDirectory(manager: fileManager, path: path)
+        }
+      }
+      try realm.commitWrite()
+      complete()
+      
+    } catch let error {
+      print(error.localizedDescription)
+      complete()
+    }
+  }
+  
+  private func removeDirectory(manager: FileManager, path: URL) {
+    do {
+      try manager.removeItem(at: path)
+    } catch let error {
+      print(error.localizedDescription)
+    }
+  }
+
   func setupPackage(packsKeys: [String], completion: @escaping ((Bool, [SoundData]) -> Void)) {
     do {
       let realm = try Realm()
@@ -62,14 +128,12 @@ extension SoundPackServiceImpl: SoundPackService {
       var packageStatus: Bool = false
       
       for (_, value) in packsKeys.enumerated() {
-        if let test = realm.object(ofType: Package.self, forPrimaryKey: value.key) {
+        if let _ = realm.object(ofType: Package.self, forPrimaryKey: value.key) {
           packageStatus = true
           try! realm.commitWrite()
           completion(packageStatus, soundDatas)
           return
         }
-        
-        print("1111-??")
 
         let package = self.createServerPackage(value.key, img: value.value)
         realm.add(package)
@@ -80,6 +144,8 @@ extension SoundPackServiceImpl: SoundPackService {
           self.soundDatas.append(soundData)
         }
       }
+      
+      packageStatus = true
       try! realm.commitWrite()
       completion(packageStatus, soundDatas)
       

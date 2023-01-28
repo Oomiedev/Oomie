@@ -20,8 +20,14 @@ final class DecodingServiceImpl {
 
 extension DecodingServiceImpl: DecodingService {
   func decodeLoops(packs: [SoundData], completion: @escaping ((Bool) -> Void)) {
+    let queue = DispatchQueue(label: "decode-queue", qos: .background, attributes: .concurrent)
+    var status: Bool = false
+    
+    defer {
+      completion(status)
+    }
+    
     for pack in packs {
-      
       let isInWriteTransaction = realm.isInWriteTransaction
       if isInWriteTransaction == false {
         realm.beginWrite()
@@ -29,8 +35,6 @@ extension DecodingServiceImpl: DecodingService {
       
       var timeInterval = Date().timeIntervalSince1970
       let decoder = OGGDecoder()
-      
-      let dispatchGroup = DispatchGroup()
       
       Ambience.allCases.forEach { ambience in
         
@@ -46,11 +50,12 @@ extension DecodingServiceImpl: DecodingService {
           .appendingPathExtension("wav")
         guard FileManager.default.fileExists(atPath: oggURL.path) else { return }
         
-          dispatchGroup.enter()
+        queue.async {
           decoder.decode(oggURL, into: wavURL) { result in
-            dispatchGroup.leave()
+            status = result
           }
-
+        }
+        
         let sound = Sound()
         sound.type = ambience.loopType ?? .loop1
         sound.soundFileName = ambience.stringValue
@@ -59,14 +64,12 @@ extension DecodingServiceImpl: DecodingService {
         
         timeInterval += 1
       }
-      
+
       if isInWriteTransaction == false {
         try? self.realm.commitWrite()
       }
-      
-      dispatchGroup.notify(queue: .main) {
-        completion(true)
-      }
     }
+    
   }
 }
+
