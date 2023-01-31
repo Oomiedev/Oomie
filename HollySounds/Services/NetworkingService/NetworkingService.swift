@@ -30,6 +30,7 @@ extension NetworkingServiceImpl: NetworkingService {
         let jsonData = try JSONDecoder().decode(ServerPack.self, from: data)
         completion(.success(jsonData))
       } catch let error {
+        print("1111-0 Err ", error)
         completion(.failure(error))
       }
     }
@@ -49,7 +50,6 @@ struct Attributes: Decodable {
   let title: String
   let content: Content
   let image: Content
-  let previewSound: Content
 }
 
 struct Content: Decodable {

@@ -11,7 +11,8 @@ import RealmSwift
 protocol SoundPackService {
   func clearOldPackages(complete: @escaping (() -> Void))
   func setupPackage(packsKeys: [String], completion: @escaping ((Bool, [SoundData]) -> Void))
-  func setupServerPackage(packsKeys: [String: String], completion: @escaping ((Bool, [SoundData]) -> Void))
+  func setupServerPackage(packsKeys: [PackURL], completion: @escaping ((Bool, [SoundData]) -> Void))
+  func setupSinglePackage(packKey: String, completion: @escaping ((Bool, URL) -> Void))
 }
 
 final class SoundPackServiceImpl {
@@ -121,24 +122,24 @@ extension SoundPackServiceImpl: SoundPackService {
     }
   }
   
-  func setupServerPackage(packsKeys: [String : String], completion: @escaping ((Bool, [SoundData]) -> Void)) {
+  func setupServerPackage(packsKeys: [PackURL], completion: @escaping ((Bool, [SoundData]) -> Void)) {
     do {
       let realm = try Realm()
       realm.beginWrite()
       var packageStatus: Bool = false
       
-      for (_, value) in packsKeys.enumerated() {
-        if let _ = realm.object(ofType: Package.self, forPrimaryKey: value.key) {
+      for packsKey in packsKeys {
+        if let _ = realm.object(ofType: Package.self, forPrimaryKey: packsKey.name) {
           packageStatus = true
           try! realm.commitWrite()
           completion(packageStatus, soundDatas)
           return
-        }
+      }
 
-        let package = self.createServerPackage(value.key, img: value.value)
+        let package = self.createServerPackage(packsKey.name, img: packsKey.imageURL, content: packsKey.contentURL)
         realm.add(package)
-        if let sourceURL = self.createSourceURL(with: value.key),
-           let destinationURL = self.createDestinationURL(with: value.key) {
+        if let sourceURL = self.createSourceURL(with: packsKey.name),
+           let destinationURL = self.createDestinationURL(with: packsKey.name) {
           
           let soundData = SoundData(package: package, sourceURL: sourceURL, destinationURL: destinationURL)
           self.soundDatas.append(soundData)
@@ -152,6 +153,12 @@ extension SoundPackServiceImpl: SoundPackService {
     } catch let error {
       print("Error: ", error.localizedDescription)
       completion(false, soundDatas)
+    }
+  }
+  
+  func setupSinglePackage(packKey: String, completion: @escaping ((Bool, URL) -> Void)) {
+    if let destinationURL = self.createDestinationURL(with: packKey) {
+      completion(true, destinationURL)
     }
   }
 }
@@ -182,19 +189,25 @@ private extension SoundPackServiceImpl {
     return package
   }
   
-  private func createServerPackage(_ id: String, img: String) -> Package {
+  private func createServerPackage(_ id: String, img: String, content: String) -> Package {
     let package = Package()
     package.id = id
     package.dateCreated = Date().timeIntervalSince1970
     package.title = id
     package.serverImageURLString = img
     package.isProPack = true
+    package.packDownloadURLString = content
     return package
   }
 }
 
 struct SoundData {
   let package: Package
+  let sourceURL: URL
+  let destinationURL: URL
+}
+
+struct FileUrl {
   let sourceURL: URL
   let destinationURL: URL
 }

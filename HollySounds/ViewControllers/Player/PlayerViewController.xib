@@ -18,6 +18,7 @@
                 <outlet property="autoPlayButton" destination="Z4d-Sf-B2l" id="QAv-CR-MQI"/>
                 <outlet property="autoPlayButtonImageView" destination="FAr-6T-Fbx" id="zfc-Xy-AnA"/>
                 <outlet property="backButton" destination="gs9-Ju-Jau" id="wmr-R1-3hj"/>
+                <outlet property="packNameLabel" destination="faS-u2-wLu" id="oL6-tt-KQW"/>
                 <outlet property="pageControl" destination="cuS-M2-Owt" id="bH0-Ky-BLj"/>
                 <outlet property="recordButton" destination="HUd-8g-ePX" id="JFw-d6-Uxh"/>
                 <outlet property="recordButtonImageView" destination="3LH-4G-LWs" id="gHb-pF-Gqy"/>
@@ -77,7 +78,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gs9-Ju-Jau" customClass="AFInteractiveView" customModule="AFKit">
                             <rect key="frame" x="0.0" y="48" width="64" height="56"/>
                             <subviews>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BackIcon" translatesAutoresizingMaskIntoConstraints="NO" id="lw4-Ds-CKq">
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Back" translatesAutoresizingMaskIntoConstraints="NO" id="lw4-Ds-CKq">
                                     <rect key="frame" x="16" y="12" width="32" height="32"/>
                                     <color key="tintColor" name="Color 2"/>
                                     <constraints>
@@ -94,10 +95,10 @@
                                 <constraint firstAttribute="height" constant="56" id="wgq-Og-BDU"/>
                             </constraints>
                         </view>
-                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HUd-8g-ePX" customClass="AFInteractiveView" customModule="AFKit">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HUd-8g-ePX" customClass="AFInteractiveView" customModule="AFKit">
                             <rect key="frame" x="175" y="48" width="64" height="56"/>
                             <subviews>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RecordButton" translatesAutoresizingMaskIntoConstraints="NO" id="3LH-4G-LWs">
+                                <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RecordButton" translatesAutoresizingMaskIntoConstraints="NO" id="3LH-4G-LWs">
                                     <rect key="frame" x="16" y="12" width="32" height="32"/>
                                     <color key="tintColor" name="Color 2"/>
                                     <constraints>
@@ -105,13 +106,21 @@
                                         <constraint firstAttribute="height" constant="32" id="bza-R6-wvj"/>
                                     </constraints>
                                 </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="faS-u2-wLu" userLabel="PackName">
+                                    <rect key="frame" x="32" y="28" width="0.0" height="0.0"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                    <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="3LH-4G-LWs" firstAttribute="centerY" secondItem="HUd-8g-ePX" secondAttribute="centerY" id="Dib-Rc-Vbl"/>
+                                <constraint firstItem="faS-u2-wLu" firstAttribute="centerY" secondItem="HUd-8g-ePX" secondAttribute="centerY" id="LUe-Ay-dBK"/>
                                 <constraint firstAttribute="height" constant="56" id="YLj-WP-ela"/>
                                 <constraint firstAttribute="width" constant="64" id="csS-NT-R5N"/>
                                 <constraint firstItem="3LH-4G-LWs" firstAttribute="centerX" secondItem="HUd-8g-ePX" secondAttribute="centerX" id="t5d-wu-FRC"/>
+                                <constraint firstItem="faS-u2-wLu" firstAttribute="centerX" secondItem="HUd-8g-ePX" secondAttribute="centerX" id="xb8-TY-DSt"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z4d-Sf-B2l" customClass="AFInteractiveView" customModule="AFKit">
@@ -169,7 +178,7 @@
         </view>
     </objects>
     <resources>
-        <image name="BackIcon" width="32" height="32"/>
+        <image name="Back" width="32" height="32"/>
         <image name="PlayIcon" width="32" height="32"/>
         <image name="RecordButton" width="32" height="32"/>
         <namedColor name="Color 1">

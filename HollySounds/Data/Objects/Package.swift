@@ -54,6 +54,9 @@ final class Package: Object {
   
   @Persisted
   var isProPack: Bool = false
+  
+  @Persisted
+  var packDownloadURLString: String?
     
     @Persisted
     var sounds = List<Sound>()

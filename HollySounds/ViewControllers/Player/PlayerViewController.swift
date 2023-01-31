@@ -38,7 +38,8 @@ final class PlayerViewController: AFDefaultViewController {
     @IBOutlet var soundContainer: UIView!
     @IBOutlet var ambientsContainer: UIView!
     
-    @IBOutlet var pageControl: UIPageControl!
+    @IBOutlet weak var packNameLabel: UILabel!
+  @IBOutlet var pageControl: UIPageControl!
     
     /*
      MARK: -
@@ -93,6 +94,7 @@ final class PlayerViewController: AFDefaultViewController {
         /*
          */
         
+      pageControl.isHidden = true
         setupBackButton()
         setupAutoplayButton()
         setupRecordButton()
@@ -162,6 +164,8 @@ final class PlayerViewController: AFDefaultViewController {
             forKeyPath: #keyPath(SoundManager.isAutoplayEnabled),
             context: nil
         )
+      
+      packNameLabel.text = package.title
     }
     
     override func observeValue(

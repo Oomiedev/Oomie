@@ -46,6 +46,18 @@ final class PackageCell: AFDefaultCollectionViewCell {
                     self?.notificationToken?.invalidate()
                 }
             })
+          
+          notificationToken = package.observe(keyPaths: [\Package.isProPack], on: .main, { [weak self] change in
+            
+            switch change {
+            case .error(let error):
+                print(error)
+            case .change(_, _):
+                self?.updateUI()
+            case .deleted:
+                self?.notificationToken?.invalidate()
+            }
+          })
             
             updateUI()
         }
@@ -115,6 +127,8 @@ final class PackageCell: AFDefaultCollectionViewCell {
       
       if self.package.isProPack {
         lockIcon.isHidden = false
+      } else {
+        lockIcon.isHidden = true
       }
         
         /*

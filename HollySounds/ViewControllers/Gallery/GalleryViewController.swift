@@ -45,6 +45,7 @@ final class GalleryViewController: AFDefaultViewController {
      */
   
   var viewModel: GalleryViewModel!
+  private var selectedProPackIndex: IndexPath?
   
   /*
    MARK: -
@@ -175,9 +176,6 @@ final class GalleryViewController: AFDefaultViewController {
     }
     
     private func setupDataProvider() {
-//        let realm = try! Realm()
-//        dataProvider = realm.objects(Package.self)
-      
       do {
         let realm = try Realm()
         dataProvider = realm.objects(Package.self)
@@ -254,9 +252,13 @@ final class GalleryViewController: AFDefaultViewController {
     }
   
   private func showSubsctiption(for package: Package) {
-    let viewModel = PackDownloadingViewModel()
-    viewModel.package = package
-    let vc = UIHostingController(rootView: PackDownloadingView(viewModel: viewModel))
+    let vc = DownloadViewController(package: package)
+    
+    vc.update = { [weak self] in
+      guard let index = self?.selectedProPackIndex else { return }
+      self?.collectionView.reloadItems(at: [index])
+    }
+    
     vc.modalPresentationStyle = .overCurrentContext
     present(vc, animated: true)
   }
@@ -328,6 +330,7 @@ extension GalleryViewController: UICollectionViewDelegate, UICollectionViewDataS
             cell.package = package
             cell.selectAction = { [weak self] in
               if cell.package.isProPack {
+                self?.selectedProPackIndex = indexPath
                 self?.showSubsctiption(for: package)
                 return
               }

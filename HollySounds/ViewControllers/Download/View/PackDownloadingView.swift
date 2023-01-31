@@ -10,7 +10,7 @@ import SDWebImageSwiftUI
 
 struct PackDownloadingView: View {
   
-  @StateObject var viewModel: PackDownloadingViewModel
+  @ObservedObject var viewModel: PackDownloadingViewModel
   @Environment(\.presentationMode) var presentationMode
   
     var body: some View {
@@ -23,6 +23,7 @@ struct PackDownloadingView: View {
             Spacer()
             Button {
               withAnimation {
+                viewModel.cancel()
                 presentationMode.wrappedValue.dismiss()
               }
             } label: {
@@ -57,19 +58,14 @@ struct PackDownloadingView: View {
           
           Spacer()
         }
-        
-      }.edgesIgnoringSafeArea(.all)
-        .onAppear {
-          DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            viewModel.barLimit = 20
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
-              viewModel.barLimit = 70
-              
-              
-            }
-          }
-        }
+      }
+      .edgesIgnoringSafeArea(.all)
+      .onAppear {
+        viewModel.download()
+      }
+      .onDisappear {
+        viewModel.remove?()
+      }
     }
 }
 
@@ -98,21 +94,47 @@ private extension PackDownloadingView {
   }
 }
 
-struct PackDownloadingView_Previews: PreviewProvider {
-    static var previews: some View {
-      PackDownloadingView(viewModel: PackDownloadingViewModel())
-    }
-}
 
-final class PackDownloadingViewModel: ObservableObject {
+final class PackDownloadingViewModel: NSObject, ObservableObject, URLSessionDownloadDelegate {
   
-  @Published var package: Package!
+  var package: Package!
   
-  @Published var barLimit: CGFloat = 5
+  @Published var barLimit: CGFloat = 0
+  
+  var downloadTaskSession: URLSessionDownloadTask?
+  
+  var remove: (() -> Void)?
+  
+  func download() {
+    guard let url = URL(string: "http://104.248.89.173:1337/uploads/Sea_Breeze_5bda00ae4e.zip") else { return }
+    
+    let session = URLSession(configuration: .default, delegate: self, delegateQueue: nil)
+    downloadTaskSession = session.downloadTask(with: url)
+    downloadTaskSession?.resume()
+    session.finishTasksAndInvalidate()
+  }
+  
+  func cancel() {
+    downloadTaskSession?.cancel()
+    downloadTaskSession = nil
+  }
   
   func calculatePercentage(value: Double, percentageVal: Double)-> Double {
       let val = value * percentageVal
       return val / 100.0
+  }
+  
+  func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
+    
+  }
+
+  func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
+    
+    let progress = CGFloat(totalBytesWritten) / CGFloat(totalBytesExpectedToWrite)
+    print(progress)
+    DispatchQueue.main.async {
+      self.barLimit = progress
+    }
   }
 }
 

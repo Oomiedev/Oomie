@@ -83,10 +83,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       switch result {
       case .success(let packs):
         DispatchQueue.main.async {
-          var packNames: [String:String] = [:]
+          var packNames: [PackURL] = []
           packs.data.forEach { model in
-            let url = AppConstants.API.baseURL + model.attributes.image.data.attributes.url
-            packNames = [model.attributes.title: url]
+            let imageURL = AppConstants.API.baseURL + model.attributes.image.data.attributes.url
+            let contentURL = AppConstants.API.baseURL + model.attributes.content.data.attributes.url
+            //let urls = PackURL(imageURL: imageURL, contentURL: contentURL)
+            let serverPack = PackURL(name: model.attributes.title,
+                                     imageURL: imageURL,
+                                     contentURL: contentURL)
+            packNames.append(serverPack)
           }
           
           self?.fetchPack(packs: packNames)
@@ -97,7 +102,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     })
   }
   
-  private func fetchPack(packs: [String:String]) {
+  private func fetchPack(packs: [PackURL]) {
     self.soundPackService?.setupServerPackage(packsKeys: packs, completion: {[weak self] _, _ in
       self?.soundPackService = nil
     })
@@ -150,3 +155,8 @@ extension AppDelegate: OnboardingViewControllerDelegate {
   }
 }
 
+struct PackURL {
+  let name: String
+  let imageURL: String
+  let contentURL: String
+}
