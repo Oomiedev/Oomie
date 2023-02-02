@@ -18,10 +18,12 @@
                 <outlet property="autoPlayButton" destination="Z4d-Sf-B2l" id="QAv-CR-MQI"/>
                 <outlet property="autoPlayButtonImageView" destination="FAr-6T-Fbx" id="zfc-Xy-AnA"/>
                 <outlet property="backButton" destination="gs9-Ju-Jau" id="wmr-R1-3hj"/>
+                <outlet property="looperLabel" destination="geI-yQ-1qv" id="Ay0-kP-XSR"/>
                 <outlet property="packNameLabel" destination="faS-u2-wLu" id="oL6-tt-KQW"/>
                 <outlet property="pageControl" destination="cuS-M2-Owt" id="bH0-Ky-BLj"/>
                 <outlet property="recordButton" destination="HUd-8g-ePX" id="JFw-d6-Uxh"/>
                 <outlet property="recordButtonImageView" destination="3LH-4G-LWs" id="gHb-pF-Gqy"/>
+                <outlet property="samplerLabel" destination="tT7-MB-STC" id="tfk-iV-Meo"/>
                 <outlet property="scrollView" destination="SUx-qF-jU6" id="Cl2-2n-e9w"/>
                 <outlet property="soundContainer" destination="Qv4-Cc-C6q" id="dfX-Oh-2d1"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -72,6 +74,18 @@
                     <color key="pageIndicatorTintColor" name="Color 4"/>
                     <color key="currentPageIndicatorTintColor" name="Color 2"/>
                 </pageControl>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Looper" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tT7-MB-STC">
+                    <rect key="frame" x="134.5" y="816.5" width="56.5" height="21.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sampler" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="geI-yQ-1qv">
+                    <rect key="frame" x="223" y="816.5" width="66.5" height="21.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2w5-9g-nrE">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="104"/>
                     <subviews>
@@ -158,6 +172,7 @@
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" name="Color 1"/>
             <constraints>
+                <constraint firstItem="tT7-MB-STC" firstAttribute="trailing" secondItem="cuS-M2-Owt" secondAttribute="centerX" constant="-16" id="4y1-3y-apQ"/>
                 <constraint firstAttribute="bottom" secondItem="SUx-qF-jU6" secondAttribute="bottom" id="CC6-Vh-YKk"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="2w5-9g-nrE" secondAttribute="trailing" id="E6R-0f-gS5"/>
                 <constraint firstItem="ZSo-n3-zCX" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Fcx-ed-z6N"/>
@@ -168,11 +183,14 @@
                 <constraint firstItem="2w5-9g-nrE" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Vd4-Xv-Qdh"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="cuS-M2-Owt" secondAttribute="trailing" constant="24" id="XxU-pw-L7E"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ZSo-n3-zCX" secondAttribute="trailing" id="aTe-vw-HBH"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="tT7-MB-STC" secondAttribute="bottom" constant="24" id="dFY-tu-XaS"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="SUx-qF-jU6" secondAttribute="trailing" id="gSP-xV-Xi5"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="cuS-M2-Owt" secondAttribute="bottom" constant="24" id="jAy-7o-15Y"/>
                 <constraint firstItem="SUx-qF-jU6" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="jfB-xv-ANP"/>
                 <constraint firstItem="cuS-M2-Owt" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="kUC-b5-G2b"/>
                 <constraint firstItem="2w5-9g-nrE" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="pX3-So-AgX"/>
+                <constraint firstItem="geI-yQ-1qv" firstAttribute="leading" secondItem="cuS-M2-Owt" secondAttribute="centerX" constant="16" id="sOP-it-1aY"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="geI-yQ-1qv" secondAttribute="bottom" constant="24" id="x9a-qz-7i9"/>
             </constraints>
             <point key="canvasLocation" x="137.68115942028987" y="152.67857142857142"/>
         </view>

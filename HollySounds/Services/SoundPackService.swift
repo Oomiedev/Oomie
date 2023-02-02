@@ -76,7 +76,7 @@ extension SoundPackServiceImpl: SoundPackService {
       complete()
       
     } catch let error {
-      print(error.localizedDescription)
+      print(error)
       complete()
     }
   }
@@ -85,7 +85,7 @@ extension SoundPackServiceImpl: SoundPackService {
     do {
       try manager.removeItem(at: path)
     } catch let error {
-      print(error.localizedDescription)
+      print(error)
     }
   }
 
