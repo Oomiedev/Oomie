@@ -15,15 +15,12 @@ PODS:
   - SDWebImage (5.13.4):
     - SDWebImage/Core (= 5.13.4)
   - SDWebImage/Core (5.13.4)
-  - SDWebImageSwiftUI (2.2.1):
-    - SDWebImage (~> 5.10)
   - Sodium (0.9.1)
   - ZIPFoundation (0.9.15)
 
 DEPENDENCIES:
   - AFKit (from `https://github.com/NomadicWarrior/oomie1.git`)
   - SDWebImage (~> 5.0)
-  - SDWebImageSwiftUI
   - ZIPFoundation
 
 SPEC REPOS:
@@ -33,7 +30,6 @@ SPEC REPOS:
     - Realm
     - RealmSwift
     - SDWebImage
-    - SDWebImageSwiftUI
     - Sodium
     - ZIPFoundation
 
@@ -53,10 +49,9 @@ SPEC CHECKSUMS:
   Realm: fd821b81e5479be497cc5bca2e020f707d8323eb
   RealmSwift: 8635e4cc524790916d72b0ffa51c1a91f4ec9668
   SDWebImage: e5cc87bf736e60f49592f307bdf9e157189298a3
-  SDWebImageSwiftUI: 2ecf5ab6f574526326b10ecb155e72a88059d0f0
   Sodium: 23d11554ecd556196d313cf6130d406dfe7ac6da
   ZIPFoundation: 063163dc828bf699c5be160eb4f58f676322d94f
 
-PODFILE CHECKSUM: d5c58799aba5cf10e9ed18b440ec2edc6207a02c
+PODFILE CHECKSUM: c4bf27ace66935d82fa857c7e15ec106c7667884
 
 COCOAPODS: 1.11.3
