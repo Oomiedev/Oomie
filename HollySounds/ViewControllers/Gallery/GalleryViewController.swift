@@ -9,6 +9,7 @@ import UIKit
 import AFKit
 import RealmSwift
 import AVFoundation
+import SwiftUI
 
 final class GalleryViewController: AFDefaultViewController {
 
@@ -44,6 +45,7 @@ final class GalleryViewController: AFDefaultViewController {
      */
   
   var viewModel: GalleryViewModel!
+  private var selectedProPackIndex: IndexPath?
   
   /*
    MARK: -
@@ -51,16 +53,17 @@ final class GalleryViewController: AFDefaultViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-      if !viewModel.isDecoded {
-        viewModel.decode()
-        startLoading()
-      }
         setupDataProvider()
         setupCollectionView()
         playVideo()
       
-      viewModel.updatUI = { [weak self] in
-        self?.loaderView.removeFromSuperview()
+      viewModel.updateUI = { [weak self] prossess in
+        if prossess {
+          self?.startLoading()
+        } else {
+          self?.loaderView.removeFromSuperview()
+        }
+        
       }
     }
     
@@ -173,8 +176,12 @@ final class GalleryViewController: AFDefaultViewController {
     }
     
     private func setupDataProvider() {
-        let realm = try! Realm()
+      do {
+        let realm = try Realm()
         dataProvider = realm.objects(Package.self)
+      } catch let error {
+        print("1111-0 Err: ", error)
+      }
     }
 
     private func showPlayer(for package: Package) {
@@ -243,6 +250,18 @@ final class GalleryViewController: AFDefaultViewController {
         playerViewController = viewController
         
     }
+  
+  private func showSubsctiption(for package: Package) {
+    let vc = DownloadViewController(package: package)
+    
+    vc.update = { [weak self] in
+      guard let index = self?.selectedProPackIndex else { return }
+      self?.collectionView.reloadItems(at: [index])
+    }
+    
+    vc.modalPresentationStyle = .overCurrentContext
+    present(vc, animated: true)
+  }
     
     /*
      MARK: -
@@ -271,7 +290,7 @@ extension GalleryViewController: UICollectionViewDelegate, UICollectionViewDataS
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
-        return dataProvider.count + 4
+        return dataProvider.count
     }
     
     func collectionView(
@@ -310,7 +329,12 @@ extension GalleryViewController: UICollectionViewDelegate, UICollectionViewDataS
         if let cell = cell as? PackageCell {
             cell.package = package
             cell.selectAction = { [weak self] in
-                self?.showPlayer(for: package)
+              if cell.package.isProPack {
+                self?.selectedProPackIndex = indexPath
+                self?.showSubsctiption(for: package)
+                return
+              }
+              self?.showPlayer(for: package)
             }
         }
     }

@@ -193,18 +193,24 @@ final class SoundManager: NSObject {
         /*
          TO-DO:
          */
+      
+      do {
         
-        let realm = try! Realm()
+        let realm = try Realm()
         let packages = realm.objects(Package.self)
-            .where {
-                $0.isPreviewPlaying == true
-            }
+          .where {
+            $0.isPreviewPlaying == true
+          }
         
-        try? realm.safeWrite {
-            for package in packages {
-                package.isPreviewPlaying = false
-            }
-        }
+        try realm.safeWrite({
+          for package in packages {
+            package.isPreviewPlaying = false
+          }
+        })
+        
+      } catch let error {
+        print("1111-0 ", error)
+      }
         
         /*
          */

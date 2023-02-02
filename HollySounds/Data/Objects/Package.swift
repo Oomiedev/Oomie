@@ -48,6 +48,15 @@ final class Package: Object {
     var previewURLString: String? {
         return Bundle.main.url(forResource: id + " Preview", withExtension: "wav")?.absoluteString
     }
+  
+  @Persisted
+    var serverImageURLString: String?
+  
+  @Persisted
+  var isProPack: Bool = false
+  
+  @Persisted
+  var packDownloadURLString: String?
     
     @Persisted
     var sounds = List<Sound>()

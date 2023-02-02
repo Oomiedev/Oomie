@@ -9,23 +9,18 @@ import Foundation
 
 final class GalleryViewModel {
   
-  var updatUI: (() -> ())?
+  private var proccessToken: NSKeyValueObservation?
   
-  let decodingService: DecodingService?
-  let isDecoded: Bool
-  let packs: [SoundData]
+  var updateUI: ((Bool) -> Void)?
   
-  init(decodingService: DecodingService? = nil, isDecoded: Bool, packs: [SoundData]) {
-    self.decodingService = decodingService
-    self.isDecoded = isDecoded
-    self.packs = packs
+  func observe(job: Job) {
+    proccessToken = job.observe(\.loadingProccess, options: [.new], changeHandler: { [weak self] job, change in
+      guard let jobProssess = change.newValue else { return }
+      self?.updateUI?(jobProssess)
+    })
   }
-  
-  func decode() {
-    decodingService?.decodeLoops(packs: packs) { [weak self] status in
-      if status {
-        self?.updatUI?()
-      }
-    }
-  }
+}
+
+final class Job: NSObject {
+  @objc dynamic var loadingProccess: Bool = false
 }

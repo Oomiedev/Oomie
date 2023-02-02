@@ -9,6 +9,7 @@ import UIKit
 import AFKit
 import AVFoundation
 import OomieOnboarding
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -22,16 +23,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   var soundPackService: SoundPackServiceImpl?
   var archivingService: ArchivingServiceImpl?
   var decodeService: DecodingServiceImpl?
+  var networkingService: NetworkingServiceImpl?
   
   var onboarding: OnboardingViewController?
-  
-  var isDecoded: Bool = false
+  let viewModel = GalleryViewModel()
+  let job = Job()
+
   var packs: [SoundData] = []
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    
-    /*
-     */
     
     window = UIWindow(frame: UIScreen.main.bounds)
     
@@ -41,48 +41,81 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     soundPackService = SoundPackServiceImpl()
     
-    soundPackService?.setupPackage { [weak self] availability, data in
-      guard let self = self else { return }
-      if !availability, !data.isEmpty {
-        self.isDecoded = false
-        self.createPack(data: data)
-        self.packs = data
-        self.window?.rootViewController = self.createOnboardingScreen()
-        
-      } else {
-        self.isDecoded = true
-        self.window?.rootViewController = self.sessionTracker.isFirstLaunch ? self.createOnboardingScreen() : self.createHomeScreen()
+    if sessionTracker.isFirstLaunch {
+      soundPackService?.clearOldPackages { [weak self] in
+        self?.setupPackage(service: self?.soundPackService)
       }
-      self.soundPackService = nil
+    } else {
+      self.setupPackage(service: self.soundPackService)
     }
     
-    /*
-     */
+    self.window?.rootViewController = self.sessionTracker.isFirstLaunch ? self.createOnboardingScreen() : self.createHomeScreen()
     
     SoundManager.shared.initialize()
-    
-    /*
-     */
-    
-    //DataManager.shared.initialize(with: nil)
-    
-    //        DataManager.shared.initialize { [weak self] in
-    //            guard let self = self else { return }
-    //            self.window?.layer.add(
-    //                CATransition(),
-    //                forKey: nil
-    //            )
-    //
-    //          self.window?.rootViewController = self.sessionTracker.isFirstLaunch ? self.createOnboardingScreen() : self.createHomeScreen()
-    //        }
-    
     return true
+  }
+  
+  private func setupPackage(service: SoundPackService?) {
+    service?.setupPackage(packsKeys: ["Neon Ocean", "Desert Dawn"], completion: { [weak self] available, soundData in
+      guard let self = self else { return }
+      if !available, !soundData.isEmpty {
+        self.packs.append(contentsOf: soundData)
+        self.fetch()
+        self.createPack(data: soundData)
+      } else {
+        self.fetch()
+      }
+    })
   }
   
   private func createPack(data: [SoundData]) {
     archivingService = ArchivingServiceImpl()
     archivingService?.unzip(data: data) { [weak self] _ in
       self?.archivingService = nil
+      self?.decode()
+    }
+  }
+  
+  private func fetch() {
+    networkingService = NetworkingServiceImpl()
+    guard let url = URL(string: AppConstants.API.baseURL + AppConstants.API.Pack.list) else { return }
+    networkingService?.fetchServerPacks(url: url, completion: { [weak self] result in
+      switch result {
+      case .success(let packs):
+        DispatchQueue.main.async {
+          var packNames: [PackURL] = []
+          packs.data.forEach { model in
+            let imageURL = AppConstants.API.baseURL + model.attributes.image.data.attributes.url
+            let contentURL = AppConstants.API.baseURL + model.attributes.content.data.attributes.url
+            //let urls = PackURL(imageURL: imageURL, contentURL: contentURL)
+            let serverPack = PackURL(name: model.attributes.title,
+                                     imageURL: imageURL,
+                                     contentURL: contentURL)
+            packNames.append(serverPack)
+          }
+          
+          self?.fetchPack(packs: packNames)
+        }
+      case .failure(let error):
+        print("1111-0 ", error.localizedDescription)
+      }
+    })
+  }
+  
+  private func fetchPack(packs: [PackURL]) {
+    self.soundPackService?.setupServerPackage(packsKeys: packs, completion: {[weak self] _, _ in
+      self?.soundPackService = nil
+    })
+  }
+  
+  private func decode() {
+    if !self.packs.isEmpty {
+      decodeService = DecodingServiceImpl()
+      viewModel.observe(job: job)
+      job.loadingProccess = true
+      decodeService?.decodeLoops(packs: self.packs, completion: {[weak self] _ in
+        self?.job.loadingProccess = false
+      })
     }
   }
   
@@ -93,8 +126,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
   
   private func createHomeScreen() -> UIViewController {
-    decodeService = DecodingServiceImpl()
-    let viewModel = GalleryViewModel(decodingService: decodeService, isDecoded: isDecoded, packs: packs)
     let viewController = GalleryViewController()
     viewController.viewModel = viewModel
     return AFDefaultNavigationController(rootViewController: viewController)
@@ -122,4 +153,10 @@ extension AppDelegate: OnboardingViewControllerDelegate {
     
     onboarding = nil
   }
+}
+
+struct PackURL {
+  let name: String
+  let imageURL: String
+  let contentURL: String
 }
