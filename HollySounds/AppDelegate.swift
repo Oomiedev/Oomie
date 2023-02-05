@@ -10,6 +10,7 @@ import AFKit
 import AVFoundation
 import OomieOnboarding
 import RealmSwift
+import StoreKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -24,12 +25,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   var archivingService: ArchivingServiceImpl?
   var decodeService: DecodingServiceImpl?
   var networkingService: NetworkingServiceImpl?
+  var subscriptionService: SubscriptionServiceImpl?
   
   var onboarding: OnboardingViewController?
   let viewModel = GalleryViewModel()
   let job = Job()
 
   var packs: [SoundData] = []
+  var products: [SKProduct] = []
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     
@@ -47,6 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       }
     } else {
       self.setupPackage(service: self.soundPackService)
+      self.fetchSubscription(animation: false)
     }
     
     self.window?.rootViewController = self.sessionTracker.isFirstLaunch ? self.createOnboardingScreen() : self.createHomeScreen()
@@ -87,7 +91,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
           packs.data.forEach { model in
             let imageURL = AppConstants.API.baseURL + model.attributes.image.data.attributes.url
             let contentURL = AppConstants.API.baseURL + model.attributes.content.data.attributes.url
-            //let urls = PackURL(imageURL: imageURL, contentURL: contentURL)
             let serverPack = PackURL(name: model.attributes.title,
                                      imageURL: imageURL,
                                      contentURL: contentURL)
@@ -105,6 +108,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   private func fetchPack(packs: [PackURL]) {
     self.soundPackService?.setupServerPackage(packsKeys: packs, completion: {[weak self] _, _ in
       self?.soundPackService = nil
+      if let vm = self?.viewModel, let job = self?.job {
+        vm.observe(job: job)
+        job.fetchingProcess = true
+      }
     })
   }
   
@@ -119,6 +126,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
   }
   
+  private func fetchSubscription(animation: Bool) {
+    
+    let status = checkForProPakage()
+    
+    if status {
+      subscriptionService = SubscriptionServiceImpl()
+      subscriptionService?.fetchSubscriptions(identifiers: OomieProProucts.allCases)
+      
+      subscriptionService?.products = { [weak self] products in
+        guard let self = self else { return }
+        self.products = products
+        DispatchQueue.main.async {
+          let subscriptionScreen = self.createSubscriptionScreen(products: products)
+          subscriptionScreen.modalPresentationStyle = .overCurrentContext
+          self.window?.rootViewController?.present(subscriptionScreen, animated: animation)
+          self.subscriptionService = nil
+        }
+      }
+    }
+  }
+  
+  func checkSubscription() {
+    if products.isEmpty {
+      fetchSubscription(animation: true)
+    } else {
+      let subscriptionScreen = self.createSubscriptionScreen(products: products)
+      subscriptionScreen.modalPresentationStyle = .overCurrentContext
+      self.window?.rootViewController?.present(subscriptionScreen, animated: true)
+      self.subscriptionService = nil
+    }
+  }
+  
   private func createOnboardingScreen() -> UIViewController {
     onboarding = OnboardingViewController()
     onboarding?.delegate = self
@@ -129,6 +168,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let viewController = GalleryViewController()
     viewController.viewModel = viewModel
     return AFDefaultNavigationController(rootViewController: viewController)
+  }
+  
+  private func createSubscriptionScreen(products: [SKProduct]) -> UIViewController {
+    let vc = SubscriptionViewController(products: products)
+    vc.completeWithSuccess = { [weak self] in
+      self?.viewModel.updateSubscription?()
+    }
+    return vc
+  }
+  
+  private func checkForProPakage() -> Bool {
+    var status: Bool = true
+    do {
+      let realm = try Realm()
+      let objects = realm.objects(Package.self)
+      
+      for obj in objects {
+        if obj.status == .pro {
+          status = true
+        } else {
+          status = false
+        }
+      }
+      
+    } catch let error {
+      print("Error: ", error)
+    }
+    
+    return status
   }
 }
 

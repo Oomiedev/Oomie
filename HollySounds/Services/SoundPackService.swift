@@ -185,7 +185,7 @@ private extension SoundPackServiceImpl {
     package.id = id
     package.dateCreated = Date().timeIntervalSince1970
     package.title = id
-    package.isProPack = false
+    package.status = .live
     return package
   }
   
@@ -195,7 +195,7 @@ private extension SoundPackServiceImpl {
     package.dateCreated = Date().timeIntervalSince1970
     package.title = id
     package.serverImageURLString = img
-    package.isProPack = true
+    package.status = .pro
     package.packDownloadURLString = content
     return package
   }

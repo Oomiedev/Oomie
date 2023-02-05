@@ -62,7 +62,6 @@ extension ArchivingServiceImpl: ArchivingService {
         createSound(note, octave, sample.destinationURL, fileName) { sound in
           guard let sound = sound else { return }
           try? self.realm.safeWrite({
-            sample.package.isProPack = false
             sample.package.sounds.append(sound)
           })
         }

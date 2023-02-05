@@ -120,6 +120,7 @@ final class PlayerViewController: AFDefaultViewController {
         /*
          */
         samplerLabel.textColor = .oomieWhite
+        addLineView(to: samplerLabel)
         pageControl.isHidden = true
         setupBackButton()
         setupAutoplayButton()
@@ -150,29 +151,6 @@ final class PlayerViewController: AFDefaultViewController {
             ambientsPadViews.append(touchPadView)
         }
       }
-      
-      /*
-        package.sounds.forEach { sound in
-            
-            /*
-             */
-            
-            if sound.type == .single {
-              print("1111-1 Name: \(sound.soundFileName!) Note: \(sound.noteNumber)")
-                let touchPadView = TouchPadView.fromNib()
-                touchPadView.translatesAutoresizingMaskIntoConstraints = false
-                touchPadView.sound = sound
-                soundContainer.addSubview(touchPadView)
-                soundsPadViews.append(touchPadView)
-            } else {
-                let touchPadView = TouchPadView.fromNib()
-                touchPadView.translatesAutoresizingMaskIntoConstraints = false
-                touchPadView.sound = sound
-                ambientsContainer.addSubview(touchPadView)
-                ambientsPadViews.append(touchPadView)
-            }
-        }
-      */
         
         /*
          */
@@ -195,6 +173,15 @@ final class PlayerViewController: AFDefaultViewController {
         
         /*
          */
+      
+      looperLabel.isUserInteractionEnabled = true
+      let loopTap = UITapGestureRecognizer(target: self, action: #selector(didTapLooper))
+      looperLabel.addGestureRecognizer(loopTap)
+      
+      samplerLabel.isUserInteractionEnabled = true
+      let sampleTap = UITapGestureRecognizer(target: self, action: #selector(didTapSampler))
+      samplerLabel.addGestureRecognizer(sampleTap)
+      
         
         NotificationCenter.default.addObserver(
             self,
@@ -500,16 +487,37 @@ final class PlayerViewController: AFDefaultViewController {
     @objc
     private func swipeLeftAction(_ gesture: UISwipeGestureRecognizer) {
         state = .sounds
-      samplerLabel.textColor = .oomieWhite.withAlphaComponent(0.5)
-      looperLabel.textColor = .oomieWhite
+      changePageController(state: .sounds)
     }
     
     @objc
     private func swipeRightAction(_ gesture: UISwipeGestureRecognizer) {
         state = .ambiences
+      changePageController(state: .ambiences)
+    }
+  
+  @objc private func didTapLooper() {
+    state = .sounds
+    changePageController(state: .sounds)
+  }
+  
+  @objc private func didTapSampler() {
+    state = .ambiences
+    changePageController(state: .ambiences)
+  }
+  
+  private func changePageController(state: PlayerState) {
+    switch state {
+    case .ambiences:
       samplerLabel.textColor = .oomieWhite
       looperLabel.textColor = .oomieWhite.withAlphaComponent(0.5)
+      addLineView(to: samplerLabel)
+    case .sounds:
+      samplerLabel.textColor = .oomieWhite.withAlphaComponent(0.5)
+      looperLabel.textColor = .oomieWhite
+      addLineView(to: looperLabel)
     }
+  }
     
     /*
      MARK: -
@@ -519,6 +527,21 @@ final class PlayerViewController: AFDefaultViewController {
     private func willEnterForegroundAction(_ notification: Notification) {
         queuePlayer.play()
     }
+  
+  private func addLineView(to parentView: UIView) {
+    shapeView.removeFromSuperview()
+    
+    
+    UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut) {
+      parentView.addSubview(self.shapeView)
+      self.shapeView.topAnchor.constraint(equalTo: parentView.bottomAnchor, constant: 3).isActive = true
+      self.shapeView.widthAnchor.constraint(equalTo: parentView.widthAnchor, multiplier: 1).isActive = true
+      self.shapeView.heightAnchor.constraint(equalToConstant: 1).isActive = true
+      
+      parentView.layoutIfNeeded()
+    }
+    
+  }
 
   private func addLineLayer(_ sublayer: CALayer) {
     self.shapeLayer.removeFromSuperlayer()

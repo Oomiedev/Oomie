@@ -16,6 +16,10 @@
 		5C70062E297DB0EF00867DD6 /* DownloadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C70062D297DB0EF00867DD6 /* DownloadViewController.swift */; };
 		5C700630297DB10B00867DD6 /* DownloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C70062F297DB10B00867DD6 /* DownloadView.swift */; };
 		5C76DCB7297861CA008A79E4 /* NetworkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C76DCB6297861CA008A79E4 /* NetworkingService.swift */; };
+		5CC17A9B298C21560068C2E9 /* SubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC17A9A298C21560068C2E9 /* SubscriptionView.swift */; };
+		5CC17A9D298C21C60068C2E9 /* PlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC17A9C298C21C60068C2E9 /* PlanView.swift */; };
+		5CC17AA0298C21FF0068C2E9 /* SubscriptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC17A9F298C21FF0068C2E9 /* SubscriptionService.swift */; };
+		5CC17AA2298C24170068C2E9 /* SubscriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC17AA1298C24170068C2E9 /* SubscriptionViewController.swift */; };
 		5CDDDC592971BFA600CFC7C6 /* DecodingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDDDC582971BFA600CFC7C6 /* DecodingService.swift */; };
 		5CDDDC5B2971C14200CFC7C6 /* GalleryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDDDC5A2971C14200CFC7C6 /* GalleryViewModel.swift */; };
 		5CED2A68296731A7009E3013 /* OomieOnboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 5CED2A67296731A7009E3013 /* OomieOnboarding */; };
@@ -73,6 +77,10 @@
 		5C70062D297DB0EF00867DD6 /* DownloadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadViewController.swift; sourceTree = "<group>"; };
 		5C70062F297DB10B00867DD6 /* DownloadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadView.swift; sourceTree = "<group>"; };
 		5C76DCB6297861CA008A79E4 /* NetworkingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingService.swift; sourceTree = "<group>"; };
+		5CC17A9A298C21560068C2E9 /* SubscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionView.swift; sourceTree = "<group>"; };
+		5CC17A9C298C21C60068C2E9 /* PlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanView.swift; sourceTree = "<group>"; };
+		5CC17A9F298C21FF0068C2E9 /* SubscriptionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionService.swift; sourceTree = "<group>"; };
+		5CC17AA1298C24170068C2E9 /* SubscriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionViewController.swift; sourceTree = "<group>"; };
 		5CDDDC582971BFA600CFC7C6 /* DecodingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodingService.swift; sourceTree = "<group>"; };
 		5CDDDC5A2971C14200CFC7C6 /* GalleryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewModel.swift; sourceTree = "<group>"; };
 		5CF52E142988121B006D0E58 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
@@ -137,6 +145,7 @@
 		5C2C956A296B03FC00B183AC /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				5CC17A9E298C21EF0068C2E9 /* SubscriptionService */,
 				5C76DCB5297861AE008A79E4 /* NetworkingService */,
 				5C46F4B429705A6400BEE14B /* ArchivingService */,
 				5C2C9570296B050B00B183AC /* SessionTracker */,
@@ -203,6 +212,32 @@
 				5C76DCB6297861CA008A79E4 /* NetworkingService.swift */,
 			);
 			path = NetworkingService;
+			sourceTree = "<group>";
+		};
+		5CC17A98298C21320068C2E9 /* Subscription */ = {
+			isa = PBXGroup;
+			children = (
+				5CC17A99298C21380068C2E9 /* View */,
+				5CC17AA1298C24170068C2E9 /* SubscriptionViewController.swift */,
+			);
+			path = Subscription;
+			sourceTree = "<group>";
+		};
+		5CC17A99298C21380068C2E9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5CC17A9A298C21560068C2E9 /* SubscriptionView.swift */,
+				5CC17A9C298C21C60068C2E9 /* PlanView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5CC17A9E298C21EF0068C2E9 /* SubscriptionService */ = {
+			isa = PBXGroup;
+			children = (
+				5CC17A9F298C21FF0068C2E9 /* SubscriptionService.swift */,
+			);
+			path = SubscriptionService;
 			sourceTree = "<group>";
 		};
 		5F5F202B23E90047975FCB2F /* Pods */ = {
@@ -296,6 +331,7 @@
 		E71A3D3A27F4CA2300F61045 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				5CC17A98298C21320068C2E9 /* Subscription */,
 				5C70062B297DB0BC00867DD6 /* Download */,
 				E7158F70291A63090009BD40 /* Splash */,
 				E71A3D3F27F4CA3900F61045 /* Root */,
@@ -547,16 +583,19 @@
 				5CDDDC5B2971C14200CFC7C6 /* GalleryViewModel.swift in Sources */,
 				5C76DCB7297861CA008A79E4 /* NetworkingService.swift in Sources */,
 				E7922FBE280C132100AE5AD0 /* GalleryViewController.swift in Sources */,
+				5CC17AA0298C21FF0068C2E9 /* SubscriptionService.swift in Sources */,
 				E71A3D3D27F4CA3600F61045 /* RootViewController.swift in Sources */,
 				E7922FB8280C0EF700AE5AD0 /* DataManager.swift in Sources */,
 				5CDDDC592971BFA600CFC7C6 /* DecodingService.swift in Sources */,
 				E7E9C9A228511A75003BB788 /* AVAudioPCMBuffer+Extension.swift in Sources */,
 				E74816372802DBB80070DBB8 /* TouchPadView.swift in Sources */,
+				5CC17A9D298C21C60068C2E9 /* PlanView.swift in Sources */,
 				E707164228A0F6CF006805F8 /* SampleAnimationView.swift in Sources */,
 				E7922FB3280C0D9000AE5AD0 /* Settings.swift in Sources */,
 				E7922FB6280C0EDA00AE5AD0 /* Package.swift in Sources */,
 				5C2C9572296B052300B183AC /* SessionTracker.swift in Sources */,
 				5C2C956D296B042C00B183AC /* Storage.swift in Sources */,
+				5CC17AA2298C24170068C2E9 /* SubscriptionViewController.swift in Sources */,
 				E7922FC3280C134D00AE5AD0 /* ProfileViewController.swift in Sources */,
 				5C2C956F296B049F00B183AC /* UserDefaultsStorage.swift in Sources */,
 				E7FB904F280FC4F400144E07 /* Sound.swift in Sources */,
@@ -564,6 +603,7 @@
 				E77B9B0328A7DC2A0031BC67 /* LoopAnimationView.swift in Sources */,
 				E7075AB428B8AD6D00161D49 /* GalleryHeaderView.swift in Sources */,
 				E7922FB0280C0D6200AE5AD0 /* TabBarView.swift in Sources */,
+				5CC17A9B298C21560068C2E9 /* SubscriptionView.swift in Sources */,
 				E70B4E5D27FC176A00C64624 /* SoundManager.swift in Sources */,
 				E7104EF627F4C97F00A26F34 /* AppDelegate.swift in Sources */,
 				5C2C9575296B05F100B183AC /* AppConstants.swift in Sources */,

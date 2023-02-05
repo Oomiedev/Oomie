@@ -141,8 +141,6 @@ final class TouchPadView: AFDefaultView {
         
         sampleHighlightedView?.color = sound.type.color
         loopHighlightedView?.color = sound.type.color
-      
-      timeLabel.text = sound.soundFileName
     }
     
     private func animateUI() {

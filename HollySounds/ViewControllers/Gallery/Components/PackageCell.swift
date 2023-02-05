@@ -47,16 +47,17 @@ final class PackageCell: AFDefaultCollectionViewCell {
                 }
             })
           
-          notificationToken = package.observe(keyPaths: [\Package.isProPack], on: .main, { [weak self] change in
+          notificationToken = package.observe(keyPaths: [\Package.status], on: .main, { [weak self] change in
             
             switch change {
             case .error(let error):
-                print(error)
+              print("Observing Package Error: ", error)
             case .change(_, _):
-                self?.updateUI()
+              self?.updateUI()
             case .deleted:
-                self?.notificationToken?.invalidate()
+              self?.notificationToken?.invalidate()
             }
+            
           })
             
             updateUI()
@@ -125,10 +126,15 @@ final class PackageCell: AFDefaultCollectionViewCell {
           }
         }
       
-      if self.package.isProPack {
-        lockIcon.isHidden = false
-      } else {
-        lockIcon.isHidden = true
+      print("1111-0 Name: \(package.title)/n Status: \(package.status)")
+      
+      switch package.status {
+      case .live:
+        lockIcon.image = nil
+      case .pro:
+        lockIcon.image = UIImage(named: "lock")
+      case .downloaded:
+        lockIcon.image = UIImage(named: "download")
       }
         
         /*

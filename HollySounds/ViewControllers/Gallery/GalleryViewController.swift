@@ -63,7 +63,14 @@ final class GalleryViewController: AFDefaultViewController {
         } else {
           self?.loaderView.removeFromSuperview()
         }
-        
+      }
+      
+      viewModel.updateUIWithFetchedPackage = { [weak self] in
+        self?.collectionView.reloadData()
+      }
+      
+      viewModel.updateSubscription = { [weak self] in
+        self?.collectionView.reloadData()
       }
     }
     
@@ -251,9 +258,12 @@ final class GalleryViewController: AFDefaultViewController {
         
     }
   
-  private func showSubsctiption(for package: Package) {
+  private func showSubsctiption() {
+    appDelegate.checkSubscription()
+  }
+  
+  private func showDownload(for package: Package) {
     let vc = DownloadViewController(package: package)
-    
     vc.update = { [weak self] in
       guard let index = self?.selectedProPackIndex else { return }
       self?.collectionView.reloadItems(at: [index])
@@ -329,12 +339,15 @@ extension GalleryViewController: UICollectionViewDelegate, UICollectionViewDataS
         if let cell = cell as? PackageCell {
             cell.package = package
             cell.selectAction = { [weak self] in
-              if cell.package.isProPack {
+              switch cell.package.status {
+              case .live:
+                self?.showPlayer(for: package)
+              case .pro:
+                self?.showSubsctiption()
+              case .downloaded:
+                self?.showDownload(for: package)
                 self?.selectedProPackIndex = indexPath
-                self?.showSubsctiption(for: package)
-                return
               }
-              self?.showPlayer(for: package)
             }
         }
     }
@@ -348,4 +361,10 @@ extension GalleryViewController: UICollectionViewDelegate, UICollectionViewDataS
 //        let package = dataProvider[indexPath.item]
 //        showPlayer(for: package)
 //    }
+}
+
+extension UIViewController {
+    var appDelegate: AppDelegate {
+    return UIApplication.shared.delegate as! AppDelegate
+   }
 }
