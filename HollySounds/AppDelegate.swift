@@ -141,8 +141,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
           let subscriptionScreen = self.createSubscriptionScreen(products: products)
           subscriptionScreen.modalPresentationStyle = .overCurrentContext
           self.window?.rootViewController?.present(subscriptionScreen, animated: animation)
-          self.subscriptionService = nil
         }
+      }
+      
+      subscriptionService?.paymentComplete = { [weak self] status in
+        if status {
+          self?.viewModel.updateSubscription?()
+        }
+        
+        self?.subscriptionService = nil
       }
     }
   }
@@ -154,7 +161,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       let subscriptionScreen = self.createSubscriptionScreen(products: products)
       subscriptionScreen.modalPresentationStyle = .overCurrentContext
       self.window?.rootViewController?.present(subscriptionScreen, animated: true)
-      self.subscriptionService = nil
     }
   }
   
@@ -172,9 +178,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   private func createSubscriptionScreen(products: [SKProduct]) -> UIViewController {
     let vc = SubscriptionViewController(products: products)
-    vc.completeWithSuccess = { [weak self] in
-      self?.viewModel.updateSubscription?()
+    
+    vc.selectProduct = { [weak self] product in
+      self?.subscriptionService?.buy(product: product)
     }
+    
+    vc.hasClosed = { [weak self] in
+      self?.subscriptionService?.viewDismissed()
+    }
+    
+    subscriptionService?.dismissView = {
+      vc.dismiss(animated: true)
+    }
+    
     return vc
   }
   
