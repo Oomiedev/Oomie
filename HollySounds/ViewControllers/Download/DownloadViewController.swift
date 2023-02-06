@@ -15,6 +15,7 @@ final class DownloadViewController: UIViewController {
   
   var downloadTaskSession: URLSessionDownloadTask?
   
+  var push: (() -> Void)?
   var update: (() -> Void)?
   
   init(package: Package) {
@@ -140,6 +141,7 @@ extension DownloadViewController: URLSessionDownloadDelegate {
   private func decode(data: SoundData) {
     let decodeService = DecodingServiceImpl()
     decodeService.decodeLoops(packs: [data]) { [weak self] finish in
+      self?.push?()
       self?.dismiss(animated: true, completion: {[weak self] in
         self?.update?()
       })

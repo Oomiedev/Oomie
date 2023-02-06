@@ -264,6 +264,11 @@ final class GalleryViewController: AFDefaultViewController {
   
   private func showDownload(for package: Package) {
     let vc = DownloadViewController(package: package)
+    
+    vc.push = { [weak self] in
+      self?.showPlayer(for: package)
+    }
+    
     vc.update = { [weak self] in
       guard let index = self?.selectedProPackIndex else { return }
       self?.collectionView.reloadItems(at: [index])
