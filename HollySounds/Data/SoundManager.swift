@@ -25,6 +25,8 @@ final class SoundManager: NSObject {
      */
     
     var previewPlayer: AVAudioPlayer?
+  
+  var didFinishPreview: ((Bool) -> Void)?
     
     /*
      */
@@ -173,12 +175,12 @@ final class SoundManager: NSObject {
      MARK: -
      */
     
-    func playPreview(for package: Package) {
+  func playPreview(for package: Package, completion: @escaping ((Float64) -> Void)) {
         guard let url = URL(string: package.previewURLString ?? "" ) else { return }
         
         previewPlayer = try? AVAudioPlayer(contentsOf: url)
         previewPlayer?.volume = 0
-        previewPlayer?.numberOfLoops = -1
+        previewPlayer?.numberOfLoops = 0
         previewPlayer?.play()
         
         previewPlayer?.setVolume(1, fadeDuration: 3)
@@ -186,7 +188,16 @@ final class SoundManager: NSObject {
         try! package.realm?.safeWrite {
             package.isPreviewPlaying = true
         }
+      
+      let audioAsset = AVURLAsset(url: url)
+      let duration = audioAsset.duration
+      let durationInSeconds = CMTimeGetSeconds(duration)
+      previewPlayer?.delegate = self
+      
+      completion(durationInSeconds)
     }
+  
+  
     
     func stopCurrentPreview() {
         
@@ -739,4 +750,11 @@ final class SoundManager: NSObject {
         
         isAutoplayEnabled = false
     }
+}
+
+extension SoundManager: AVAudioPlayerDelegate {
+  func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+    stopCurrentPreview()
+    didFinishPreview?(flag)
+  }
 }

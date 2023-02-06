@@ -148,8 +148,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if status {
           self?.viewModel.updateSubscription?()
         }
-        
-        self?.subscriptionService = nil
       }
     }
   }
@@ -233,6 +231,10 @@ extension AppDelegate: OnboardingViewControllerDelegate {
       }
     } else {
       transition()
+    }
+    
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+      self.fetchSubscription(animation: true)
     }
     
     onboarding = nil

@@ -46,6 +46,7 @@ final class GalleryViewController: AFDefaultViewController {
   
   var viewModel: GalleryViewModel!
   private var selectedProPackIndex: IndexPath?
+  private var currentPlayingIndex: IndexPath?
   
   /*
    MARK: -
@@ -307,15 +308,19 @@ extension GalleryViewController: UICollectionViewDelegate, UICollectionViewDataS
         return dataProvider.count
     }
     
-    func collectionView(
-        _ collectionView: UICollectionView,
-        cellForItemAt indexPath: IndexPath
-    ) -> UICollectionViewCell {
-        return collectionView.dequeueReusableCell(
-            withReuseIdentifier: PackageCell.CellID,
-            for: indexPath
-        )
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    
+    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PackageCell.CellID, for: indexPath) as? PackageCell else { fatalError() }
+    
+    cell.setIndex(index: indexPath)
+    
+    cell.previewCell = { [weak self] index in
+      self?.resetPreview()
+      self?.currentPlayingIndex = index
     }
+    
+    return cell
+  }
     
     func collectionView(
         _ collectionView: UICollectionView,
@@ -345,6 +350,7 @@ extension GalleryViewController: UICollectionViewDelegate, UICollectionViewDataS
             cell.selectAction = { [weak self] in
               switch cell.package.status {
               case .live:
+                self?.resetPreview()
                 self?.showPlayer(for: package)
               case .pro:
                 self?.showSubsctiption()
@@ -355,6 +361,14 @@ extension GalleryViewController: UICollectionViewDelegate, UICollectionViewDataS
             }
         }
     }
+  
+  private func resetPreview() {
+    if let oldCellIndex = currentPlayingIndex {
+      if let oldCell = collectionView.cellForItem(at: oldCellIndex) as? PackageCell {
+        oldCell.resetPreview()
+      }
+    }
+  }
     
 //    func collectionView(
 //        _ collectionView: UICollectionView,
