@@ -68,6 +68,8 @@ extension DownloadViewController: URLSessionDownloadDelegate {
     
     guard let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
     
+    rootView.closeButton.isEnabled = false
+    
     if #available(iOS 16.0, *) {
       let destinationURL = path.appending(component: url.lastPathComponent)
       try? FileManager.default.removeItem(at: destinationURL)
@@ -82,6 +84,7 @@ extension DownloadViewController: URLSessionDownloadDelegate {
         
       } catch let error {
         print("Please try again later ", error.localizedDescription)
+        rootView.closeButton.isEnabled = true
       }
       
     } else {
@@ -98,6 +101,7 @@ extension DownloadViewController: URLSessionDownloadDelegate {
         
       } catch let error {
         print("Please try again later ", error.localizedDescription)
+        rootView.closeButton.isEnabled = true
       }
     }
     
@@ -141,10 +145,12 @@ extension DownloadViewController: URLSessionDownloadDelegate {
   private func decode(data: SoundData) {
     let decodeService = DecodingServiceImpl()
     decodeService.decodeLoops(packs: [data]) { [weak self] finish in
-      self?.push?()
-      self?.dismiss(animated: true, completion: {[weak self] in
-        self?.update?()
-      })
+      DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+        self?.push?()
+        self?.dismiss(animated: true, completion: {[weak self] in
+          self?.update?()
+        })
+      }
     }
   }
 }
