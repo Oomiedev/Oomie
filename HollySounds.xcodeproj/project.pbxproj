@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C2A1C50299147C6002C5434 /* Video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 5C2A1C4F299147C6002C5434 /* Video.mp4 */; };
+		5C2A1C522991485C002C5434 /* Kaleidoscope Preview.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5C2A1C512991485C002C5434 /* Kaleidoscope Preview.wav */; };
+		5C2A1C54299149C8002C5434 /* Bedtime Story Preview.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5C2A1C53299149C8002C5434 /* Bedtime Story Preview.wav */; };
 		5C2C956D296B042C00B183AC /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2C956C296B042C00B183AC /* Storage.swift */; };
 		5C2C956F296B049F00B183AC /* UserDefaultsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2C956E296B049F00B183AC /* UserDefaultsStorage.swift */; };
 		5C2C9572296B052300B183AC /* SessionTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2C9571296B052300B183AC /* SessionTracker.swift */; };
@@ -45,7 +48,6 @@
 		E71A3D3E27F4CA3600F61045 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E71A3D3C27F4CA3600F61045 /* RootViewController.xib */; };
 		E71A3D4327F4CA5200F61045 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71A3D4127F4CA5200F61045 /* PlayerViewController.swift */; };
 		E71A3D4427F4CA5200F61045 /* PlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E71A3D4227F4CA5200F61045 /* PlayerViewController.xib */; };
-		E741167B28A973E5002BF4E6 /* Video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E741167A28A973E5002BF4E6 /* Video.mp4 */; };
 		E74816372802DBB80070DBB8 /* TouchPadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74816362802DBB80070DBB8 /* TouchPadView.swift */; };
 		E74816392802DD040070DBB8 /* TouchPadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E74816382802DD040070DBB8 /* TouchPadView.xib */; };
 		E748163B2802E7360070DBB8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E748163A2802E7360070DBB8 /* Constants.swift */; };
@@ -68,6 +70,9 @@
 
 /* Begin PBXFileReference section */
 		3D90BA51D61609455D7778F9 /* Pods-HollySounds.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HollySounds.release.xcconfig"; path = "Target Support Files/Pods-HollySounds/Pods-HollySounds.release.xcconfig"; sourceTree = "<group>"; };
+		5C2A1C4F299147C6002C5434 /* Video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Video.mp4; sourceTree = "<group>"; };
+		5C2A1C512991485C002C5434 /* Kaleidoscope Preview.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Kaleidoscope Preview.wav"; sourceTree = "<group>"; };
+		5C2A1C53299149C8002C5434 /* Bedtime Story Preview.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Bedtime Story Preview.wav"; sourceTree = "<group>"; };
 		5C2C956C296B042C00B183AC /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		5C2C956E296B049F00B183AC /* UserDefaultsStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsStorage.swift; sourceTree = "<group>"; };
 		5C2C9571296B052300B183AC /* SessionTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionTracker.swift; sourceTree = "<group>"; };
@@ -108,7 +113,6 @@
 		E71A3D3C27F4CA3600F61045 /* RootViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
 		E71A3D4127F4CA5200F61045 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		E71A3D4227F4CA5200F61045 /* PlayerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerViewController.xib; sourceTree = "<group>"; };
-		E741167A28A973E5002BF4E6 /* Video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Video.mp4; sourceTree = "<group>"; };
 		E74816362802DBB80070DBB8 /* TouchPadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchPadView.swift; sourceTree = "<group>"; };
 		E74816382802DD040070DBB8 /* TouchPadView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TouchPadView.xib; sourceTree = "<group>"; };
 		E748163A2802E7360070DBB8 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -275,8 +279,10 @@
 				E71332B028E6F87F00FDAE94 /* Magic Forest Preview.wav */,
 				E71332AF28E6F87F00FDAE94 /* Neon Ocean Preview.wav */,
 				E71332B128E6F88000FDAE94 /* Sea Breeze Preview.wav */,
+				5C2A1C512991485C002C5434 /* Kaleidoscope Preview.wav */,
+				5C2A1C53299149C8002C5434 /* Bedtime Story Preview.wav */,
 				E71332A528E6E34000FDAE94 /* GalleryBackgroundTop.mp4 */,
-				E741167A28A973E5002BF4E6 /* Video.mp4 */,
+				5C2A1C4F299147C6002C5434 /* Video.mp4 */,
 				5CFD7895298847D000D82BC5 /* Neon Ocean.zip */,
 				5CFD7897298847DA00D82BC5 /* Desert Dawn.zip */,
 			);
@@ -509,6 +515,7 @@
 			files = (
 				E7922FC4280C134D00AE5AD0 /* ProfileViewController.xib in Resources */,
 				E7158F74291A63200009BD40 /* SplashViewController.xib in Resources */,
+				5C2A1C54299149C8002C5434 /* Bedtime Story Preview.wav in Resources */,
 				E7104F0227F4C98100A26F34 /* LaunchScreen.storyboard in Resources */,
 				E7922FBF280C132100AE5AD0 /* GalleryViewController.xib in Resources */,
 				E71A3D4427F4CA5200F61045 /* PlayerViewController.xib in Resources */,
@@ -518,13 +525,14 @@
 				E74816392802DD040070DBB8 /* TouchPadView.xib in Resources */,
 				E71332B628E6F88000FDAE94 /* Desert Dawn Preview.wav in Resources */,
 				5CFD7896298847D000D82BC5 /* Neon Ocean.zip in Resources */,
+				5C2A1C522991485C002C5434 /* Kaleidoscope Preview.wav in Resources */,
+				5C2A1C50299147C6002C5434 /* Video.mp4 in Resources */,
 				E71332B328E6F88000FDAE94 /* Neon Ocean Preview.wav in Resources */,
 				E71332A628E6E34000FDAE94 /* GalleryBackgroundTop.mp4 in Resources */,
 				E71332B528E6F88000FDAE94 /* Sea Breeze Preview.wav in Resources */,
 				E71332B428E6F88000FDAE94 /* Magic Forest Preview.wav in Resources */,
 				E7075AB528B8AD6D00161D49 /* GalleryHeaderView.xib in Resources */,
 				E71A3D3E27F4CA3600F61045 /* RootViewController.xib in Resources */,
-				E741167B28A973E5002BF4E6 /* Video.mp4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -751,7 +759,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = U2464R58MS;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HollySounds/Info.plist;
@@ -785,7 +793,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = U2464R58MS;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HollySounds/Info.plist;

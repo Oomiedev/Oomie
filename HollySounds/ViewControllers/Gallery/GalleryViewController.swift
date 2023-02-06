@@ -192,9 +192,6 @@ final class GalleryViewController: AFDefaultViewController {
     }
 
     private func showPlayer(for package: Package) {
-      
-      print("1111-1 Name: \(package.title)/n Status: \(package.status)")
-        
         /*
          */
         
@@ -268,9 +265,6 @@ final class GalleryViewController: AFDefaultViewController {
     let vc = DownloadViewController(package: package)
     
     vc.push = { [weak self] in
-      print("1111-0 Package ", package.status)
-      
-      
       self?.showPlayer(for: package)
     }
     
