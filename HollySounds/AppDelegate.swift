@@ -181,8 +181,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       self?.subscriptionService?.buy(product: product)
     }
     
-    vc.hasClosed = { [weak self] in
-      self?.subscriptionService?.viewDismissed()
+    vc.hasClosed = { [weak self] status in
+      self?.subscriptionService?.viewDismissed(status: status)
     }
     
     subscriptionService?.dismissView = {

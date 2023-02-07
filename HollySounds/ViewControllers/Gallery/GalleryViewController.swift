@@ -121,12 +121,7 @@ final class GalleryViewController: AFDefaultViewController {
         /*
          */
         
-        let item = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(0.5),
-                heightDimension: .estimated(100)
-            )
-        )
+      let item = NSCollectionLayoutItem( layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .estimated(100)))
         
         item.contentInsets = NSDirectionalEdgeInsets(
             top: 12 * SizeFactor,

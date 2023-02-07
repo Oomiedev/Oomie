@@ -12,11 +12,10 @@ import RealmSwift
 protocol SubscriptionService: AnyObject {
   func fetchSubscriptions(identifiers: [OomieProProucts])
   func buy(product: SKProduct)
-  func viewDismissed()
+  func viewDismissed(status: Bool)
 }
 
 final class SubscriptionServiceImpl: NSObject, SubscriptionService {
-  
   var products: (([SKProduct]) -> Void)?
   var paymentComplete: ((Bool) -> Void)?
   var dismissView: (() -> Void)?
@@ -36,8 +35,9 @@ final class SubscriptionServiceImpl: NSObject, SubscriptionService {
     SKPaymentQueue.default().add(payment)
   }
   
-  func viewDismissed() {
-    isDismissed = true
+  func viewDismissed(status: Bool) {
+    isDismissed = status
+    print("1111-0 Status ", status)
   }
   
   private func getPackages() {

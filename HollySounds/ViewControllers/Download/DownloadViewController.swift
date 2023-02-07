@@ -68,7 +68,9 @@ extension DownloadViewController: URLSessionDownloadDelegate {
     
     guard let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
     
-    rootView.closeButton.isEnabled = false
+    DispatchQueue.main.async {
+      self.rootView.closeButton.isEnabled = false
+    }
     
     if #available(iOS 16.0, *) {
       let destinationURL = path.appending(component: url.lastPathComponent)
@@ -84,7 +86,9 @@ extension DownloadViewController: URLSessionDownloadDelegate {
         
       } catch let error {
         print("Please try again later ", error.localizedDescription)
-        rootView.closeButton.isEnabled = true
+        DispatchQueue.main.async {
+          self.rootView.closeButton.isEnabled = true
+        }
       }
       
     } else {
@@ -101,7 +105,9 @@ extension DownloadViewController: URLSessionDownloadDelegate {
         
       } catch let error {
         print("Please try again later ", error.localizedDescription)
-        rootView.closeButton.isEnabled = true
+        DispatchQueue.main.async {
+          self.rootView.closeButton.isEnabled = true
+        }
       }
     }
     

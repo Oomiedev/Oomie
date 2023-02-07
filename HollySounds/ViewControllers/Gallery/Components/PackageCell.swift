@@ -200,7 +200,6 @@ final class PackageCell: AFDefaultCollectionViewCell {
       
       if let _ = package {
           playButton.isHidden = false
-          //playButtonImageView.image = UIImage(named: package.isPreviewPlaying ? "PauseButton" : "PlayButton")
       } else {
           playButton.isHidden = true
       }

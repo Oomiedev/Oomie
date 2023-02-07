@@ -16,7 +16,7 @@ final class SubscriptionViewController: UIViewController {
   let rootView = SubscriptionView()
   
   var selectProduct: ((SKProduct) -> Void)?
-  var hasClosed: (() -> Void)?
+  var hasClosed: ((Bool) -> Void)?
   
   private var purchaseCompletionHandler: PurchaseCompletionHandler?
   
@@ -38,6 +38,7 @@ final class SubscriptionViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    hasClosed?(false)
     bindView()
   }
 
@@ -53,7 +54,7 @@ final class SubscriptionViewController: UIViewController {
   
   @objc private func didTapCloseButton() {
     dismiss(animated: true) {
-      self.hasClosed?()
+      self.hasClosed?(true)
       self.hasClosed = nil
     }
   }
