@@ -75,16 +75,14 @@ final class PlayerViewController: AFDefaultViewController {
     
     private var playerLooper: AVPlayerLooper!
     private var queuePlayer: AVQueuePlayer!
+  
+    var sessionTracker: SessionTracker!
     
     private var soundsPadViews: [TouchPadView] = []
     private var ambientsPadViews: [TouchPadView] = []
     
     private var state: PlayerState = .ambiences {
         didSet {
-            
-            /*
-             */
-            
             let contentOffset: CGPoint = CGPoint(
                 x: state == .ambiences ? 0 : scrollView.bounds.width,
                 y: 0
@@ -93,20 +91,6 @@ final class PlayerViewController: AFDefaultViewController {
                 contentOffset,
                 animated: true
             )
-            
-            /*
-             */
-            
-            pageControl.currentPage = state.rawValue
-          
-          switch state {
-          case .ambiences:
-           // addLineLayer(samplerLabel.layer)
-            break
-          case .sounds:
-            // addLineLayer(looperLabel.layer)
-            break
-          }
         }
     }
     
@@ -139,12 +123,14 @@ final class PlayerViewController: AFDefaultViewController {
       sortedSounds.forEach { sound in
         if sound.type == .single {
             let touchPadView = TouchPadView.fromNib()
+          touchPadView.sessionTracker = sessionTracker
             touchPadView.translatesAutoresizingMaskIntoConstraints = false
             touchPadView.sound = sound
             soundContainer.addSubview(touchPadView)
           soundsPadViews.insert(touchPadView, at: 0)
         } else {
             let touchPadView = TouchPadView.fromNib()
+          touchPadView.sessionTracker = sessionTracker
             touchPadView.translatesAutoresizingMaskIntoConstraints = false
             touchPadView.sound = sound
             ambientsContainer.addSubview(touchPadView)
@@ -245,7 +231,20 @@ final class PlayerViewController: AFDefaultViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+      if !sessionTracker.isFirstPlay {
         SoundManager.shared.isAutoplayEnabled = true
+      } else {
+        let tutorialVC = TutorialViewController()
+        tutorialVC.modalPresentationStyle = .overCurrentContext
+        tutorialVC.rootView.finishTutorial = { [weak self] in
+          self?.sessionTracker.isFirstPlay = false
+          self?.sessionTracker = nil
+          tutorialVC.dismiss(animated: false) {
+            SoundManager.shared.isAutoplayEnabled = true
+          }
+        }
+        present(tutorialVC, animated: false)
+      }
     }
     
     override func viewDidLayoutSubviews() {

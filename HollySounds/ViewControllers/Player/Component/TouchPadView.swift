@@ -35,6 +35,7 @@ final class TouchPadView: AFDefaultView {
             updateUI()
         }
     }
+    var sessionTracker: SessionTracker?
     
     /*
      MARK: -
@@ -243,7 +244,7 @@ final class TouchPadView: AFDefaultView {
         var velocity = ((location.x - center.x) * (location.x - center.x) + (location.y - center.y) * (location.y - center.y)).squareRoot()
         velocity = 127 * (1 - velocity / (bounds.width * 1.5))
         
-        
+      if sessionTracker?.isFirstPlay == false {
         if sound.type != .single {
             SoundManager.shared.isAutoplayEnabled = false
         }
@@ -252,6 +253,7 @@ final class TouchPadView: AFDefaultView {
             sound: sound,
             velocity: UInt8(velocity)
         )
+      }
         
         /*
          */

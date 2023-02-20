@@ -19,12 +19,16 @@
 		5C70062E297DB0EF00867DD6 /* DownloadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C70062D297DB0EF00867DD6 /* DownloadViewController.swift */; };
 		5C700630297DB10B00867DD6 /* DownloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C70062F297DB10B00867DD6 /* DownloadView.swift */; };
 		5C76DCB7297861CA008A79E4 /* NetworkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C76DCB6297861CA008A79E4 /* NetworkingService.swift */; };
+		5C7AB55E2997D43500460EFB /* TutorialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7AB55D2997D43500460EFB /* TutorialView.swift */; };
+		5C7AB5602997D45A00460EFB /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7AB55F2997D45A00460EFB /* TutorialViewController.swift */; };
 		5CC17A9B298C21560068C2E9 /* SubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC17A9A298C21560068C2E9 /* SubscriptionView.swift */; };
 		5CC17A9D298C21C60068C2E9 /* PlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC17A9C298C21C60068C2E9 /* PlanView.swift */; };
 		5CC17AA0298C21FF0068C2E9 /* SubscriptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC17A9F298C21FF0068C2E9 /* SubscriptionService.swift */; };
 		5CC17AA2298C24170068C2E9 /* SubscriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC17AA1298C24170068C2E9 /* SubscriptionViewController.swift */; };
 		5CDDDC592971BFA600CFC7C6 /* DecodingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDDDC582971BFA600CFC7C6 /* DecodingService.swift */; };
 		5CDDDC5B2971C14200CFC7C6 /* GalleryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDDDC5A2971C14200CFC7C6 /* GalleryViewModel.swift */; };
+		5CDEC11E29A1214200693713 /* TutorialContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDEC11D29A1214200693713 /* TutorialContentView.swift */; };
+		5CDEC12029A32F3500693713 /* TutorialPadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDEC11F29A32F3500693713 /* TutorialPadView.swift */; };
 		5CED2A68296731A7009E3013 /* OomieOnboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 5CED2A67296731A7009E3013 /* OomieOnboarding */; };
 		5CF52E152988121B006D0E58 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF52E142988121B006D0E58 /* UIView+Extension.swift */; };
 		5CFD7896298847D000D82BC5 /* Neon Ocean.zip in Resources */ = {isa = PBXBuildFile; fileRef = 5CFD7895298847D000D82BC5 /* Neon Ocean.zip */; };
@@ -82,12 +86,16 @@
 		5C70062D297DB0EF00867DD6 /* DownloadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadViewController.swift; sourceTree = "<group>"; };
 		5C70062F297DB10B00867DD6 /* DownloadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadView.swift; sourceTree = "<group>"; };
 		5C76DCB6297861CA008A79E4 /* NetworkingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingService.swift; sourceTree = "<group>"; };
+		5C7AB55D2997D43500460EFB /* TutorialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialView.swift; sourceTree = "<group>"; };
+		5C7AB55F2997D45A00460EFB /* TutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		5CC17A9A298C21560068C2E9 /* SubscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionView.swift; sourceTree = "<group>"; };
 		5CC17A9C298C21C60068C2E9 /* PlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanView.swift; sourceTree = "<group>"; };
 		5CC17A9F298C21FF0068C2E9 /* SubscriptionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionService.swift; sourceTree = "<group>"; };
 		5CC17AA1298C24170068C2E9 /* SubscriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionViewController.swift; sourceTree = "<group>"; };
 		5CDDDC582971BFA600CFC7C6 /* DecodingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodingService.swift; sourceTree = "<group>"; };
 		5CDDDC5A2971C14200CFC7C6 /* GalleryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewModel.swift; sourceTree = "<group>"; };
+		5CDEC11D29A1214200693713 /* TutorialContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialContentView.swift; sourceTree = "<group>"; };
+		5CDEC11F29A32F3500693713 /* TutorialPadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialPadView.swift; sourceTree = "<group>"; };
 		5CF52E142988121B006D0E58 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		5CFD7895298847D000D82BC5 /* Neon Ocean.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "Neon Ocean.zip"; sourceTree = "<group>"; };
 		5CFD7897298847DA00D82BC5 /* Desert Dawn.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "Desert Dawn.zip"; sourceTree = "<group>"; };
@@ -218,6 +226,25 @@
 			path = NetworkingService;
 			sourceTree = "<group>";
 		};
+		5C7AB55B2997D40800460EFB /* Tutorial */ = {
+			isa = PBXGroup;
+			children = (
+				5C7AB55C2997D41400460EFB /* View */,
+				5C7AB55F2997D45A00460EFB /* TutorialViewController.swift */,
+			);
+			path = Tutorial;
+			sourceTree = "<group>";
+		};
+		5C7AB55C2997D41400460EFB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5C7AB55D2997D43500460EFB /* TutorialView.swift */,
+				5CDEC11D29A1214200693713 /* TutorialContentView.swift */,
+				5CDEC11F29A32F3500693713 /* TutorialPadView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		5CC17A98298C21320068C2E9 /* Subscription */ = {
 			isa = PBXGroup;
 			children = (
@@ -337,6 +364,7 @@
 		E71A3D3A27F4CA2300F61045 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				5C7AB55B2997D40800460EFB /* Tutorial */,
 				5CC17A98298C21320068C2E9 /* Subscription */,
 				5C70062B297DB0BC00867DD6 /* Download */,
 				E7158F70291A63090009BD40 /* Splash */,
@@ -589,13 +617,16 @@
 				5C46F4B8297063AA00BEE14B /* SoundPackService.swift in Sources */,
 				5C700630297DB10B00867DD6 /* DownloadView.swift in Sources */,
 				5CDDDC5B2971C14200CFC7C6 /* GalleryViewModel.swift in Sources */,
+				5CDEC12029A32F3500693713 /* TutorialPadView.swift in Sources */,
 				5C76DCB7297861CA008A79E4 /* NetworkingService.swift in Sources */,
 				E7922FBE280C132100AE5AD0 /* GalleryViewController.swift in Sources */,
 				5CC17AA0298C21FF0068C2E9 /* SubscriptionService.swift in Sources */,
 				E71A3D3D27F4CA3600F61045 /* RootViewController.swift in Sources */,
+				5C7AB5602997D45A00460EFB /* TutorialViewController.swift in Sources */,
 				E7922FB8280C0EF700AE5AD0 /* DataManager.swift in Sources */,
 				5CDDDC592971BFA600CFC7C6 /* DecodingService.swift in Sources */,
 				E7E9C9A228511A75003BB788 /* AVAudioPCMBuffer+Extension.swift in Sources */,
+				5CDEC11E29A1214200693713 /* TutorialContentView.swift in Sources */,
 				E74816372802DBB80070DBB8 /* TouchPadView.swift in Sources */,
 				5CC17A9D298C21C60068C2E9 /* PlanView.swift in Sources */,
 				E707164228A0F6CF006805F8 /* SampleAnimationView.swift in Sources */,
@@ -611,6 +642,7 @@
 				E77B9B0328A7DC2A0031BC67 /* LoopAnimationView.swift in Sources */,
 				E7075AB428B8AD6D00161D49 /* GalleryHeaderView.swift in Sources */,
 				E7922FB0280C0D6200AE5AD0 /* TabBarView.swift in Sources */,
+				5C7AB55E2997D43500460EFB /* TutorialView.swift in Sources */,
 				5CC17A9B298C21560068C2E9 /* SubscriptionView.swift in Sources */,
 				E70B4E5D27FC176A00C64624 /* SoundManager.swift in Sources */,
 				E7104EF627F4C97F00A26F34 /* AppDelegate.swift in Sources */,
@@ -759,7 +791,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_TEAM = U2464R58MS;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HollySounds/Info.plist;
@@ -793,7 +825,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_TEAM = U2464R58MS;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HollySounds/Info.plist;

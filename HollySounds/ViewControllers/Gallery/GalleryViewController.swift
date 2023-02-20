@@ -48,6 +48,8 @@ final class GalleryViewController: AFDefaultViewController {
   private var selectedProPackIndex: IndexPath?
   private var currentPlayingIndex: IndexPath?
   
+  var sessionTracker: SessionTracker!
+  
   /*
    MARK: -
    */
@@ -208,6 +210,7 @@ final class GalleryViewController: AFDefaultViewController {
         
         let viewController = PlayerViewController()
         viewController.package = package
+        viewController.sessionTracker = sessionTracker
         
         rootViewController.addChild(viewController)
         viewController.view.frame = rootViewController.view.frame

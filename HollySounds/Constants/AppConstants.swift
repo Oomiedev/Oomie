@@ -12,6 +12,7 @@ enum AppConstants {
   enum SessionTracker {
     enum Key {
       static let launchedBefore = "sessionTracker.key.launchedBefore"
+      static let playedBefore = "sessionTracker.key.playedBefore"
     }
   }
   

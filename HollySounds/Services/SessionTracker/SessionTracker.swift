@@ -9,6 +9,7 @@ import Foundation
 
 protocol SessionTracker: AnyObject {
   var isFirstLaunch: Bool { get set }
+  var isFirstPlay: Bool { get set }
 }
 
 final class SessionTrackerImpl {
@@ -27,6 +28,15 @@ extension SessionTrackerImpl: SessionTracker {
     }
     set {
       storage.set(!newValue, for: AppConstants.SessionTracker.Key.launchedBefore)
+    }
+  }
+  
+  var isFirstPlay: Bool {
+    get {
+      !storage.bool(for: AppConstants.SessionTracker.Key.playedBefore)
+    }
+    set {
+      storage.set(!newValue, for: AppConstants.SessionTracker.Key.playedBefore)
     }
   }
 }
