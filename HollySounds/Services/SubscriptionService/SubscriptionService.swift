@@ -37,7 +37,6 @@ final class SubscriptionServiceImpl: NSObject, SubscriptionService {
   
   func viewDismissed(status: Bool) {
     isDismissed = status
-    print("1111-0 Status ", status)
   }
   
   private func getPackages() {
