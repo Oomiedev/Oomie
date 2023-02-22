@@ -8,6 +8,10 @@
 import Foundation
 import RealmSwift
 
+enum PackageStatus: Int, PersistableEnum {
+  case live, pro, downloaded
+}
+
 final class Package: Object {
     
     /*
@@ -48,6 +52,21 @@ final class Package: Object {
     var previewURLString: String? {
         return Bundle.main.url(forResource: id + " Preview", withExtension: "wav")?.absoluteString
     }
+  
+  @Persisted
+    var serverImageURLString: String?
+  
+  @Persisted
+  var isProPack: Bool = false
+  
+  @Persisted
+  var isDownloaded: Bool = true
+  
+  @Persisted
+  var packDownloadURLString: String?
+  
+  @Persisted
+  var status: PackageStatus = .live
     
     @Persisted
     var sounds = List<Sound>()
