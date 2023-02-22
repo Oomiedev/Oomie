@@ -38,9 +38,27 @@ final class PlayerViewController: AFDefaultViewController {
     @IBOutlet var soundContainer: UIView!
     @IBOutlet var ambientsContainer: UIView!
     
-    @IBOutlet var pageControl: UIPageControl!
+    @IBOutlet weak var packNameLabel: UILabel!
+  @IBOutlet var pageControl: UIPageControl!
     
-    /*
+  @IBOutlet weak var samplerLabel: UILabel!
+  @IBOutlet weak var looperLabel: UILabel!
+  
+  private let shapeLayer: CALayer = {
+    let shapeLayer = CALayer()
+    shapeLayer.backgroundColor = UIColor.oomieWhite.cgColor
+    shapeLayer.bounds = CGRect(x: 0, y: 0, width: 68, height: 1)
+    return shapeLayer
+  }()
+  
+  private let shapeView: UIView = {
+    let view = UIView()
+    view.translatesAutoresizingMaskIntoConstraints = false
+    view.backgroundColor = .oomieWhite
+    return view
+  }()
+  
+  /*
      MARK: -
      */
     
@@ -61,27 +79,13 @@ final class PlayerViewController: AFDefaultViewController {
     private var soundsPadViews: [TouchPadView] = []
     private var ambientsPadViews: [TouchPadView] = []
     
-    private var state: PlayerState = .ambiences {
-        didSet {
-            
-            /*
-             */
-            
-            let contentOffset: CGPoint = CGPoint(
-                x: state == .ambiences ? 0 : scrollView.bounds.width,
-                y: 0
-            )
-            scrollView.setContentOffset(
-                contentOffset,
-                animated: true
-            )
-            
-            /*
-             */
-            
-            pageControl.currentPage = state.rawValue
-        }
+  private var state: PlayerState = .ambiences {
+    didSet {
+      let contentOffset: CGPoint = CGPoint(x: state == .ambiences ? 0 : scrollView.bounds.width, y: 0)
+      scrollView.setContentOffset(contentOffset, animated: true)
+      pageControl.currentPage = state.rawValue
     }
+  }
     
     /*
      MARK: -
@@ -92,7 +96,9 @@ final class PlayerViewController: AFDefaultViewController {
 
         /*
          */
-        
+        samplerLabel.textColor = .oomieWhite
+        addLineView(to: samplerLabel)
+        pageControl.isHidden = true
         setupBackButton()
         setupAutoplayButton()
         setupRecordButton()
@@ -104,26 +110,24 @@ final class PlayerViewController: AFDefaultViewController {
         
         /*
          */
-        
-        package.sounds.forEach { sound in
-            
-            /*
-             */
-            
-            if sound.type == .single {
-                let touchPadView = TouchPadView.fromNib()
-                touchPadView.translatesAutoresizingMaskIntoConstraints = false
-                touchPadView.sound = sound
-                soundContainer.addSubview(touchPadView)
-                soundsPadViews.append(touchPadView)
-            } else {
-                let touchPadView = TouchPadView.fromNib()
-                touchPadView.translatesAutoresizingMaskIntoConstraints = false
-                touchPadView.sound = sound
-                ambientsContainer.addSubview(touchPadView)
-                ambientsPadViews.append(touchPadView)
-            }
+      
+      let sortedSounds = package.sounds.sorted(by: { $0.noteNumber > $1.noteNumber })
+      
+      sortedSounds.forEach { sound in
+        if sound.type == .single {
+            let touchPadView = TouchPadView.fromNib()
+            touchPadView.translatesAutoresizingMaskIntoConstraints = false
+            touchPadView.sound = sound
+            soundContainer.addSubview(touchPadView)
+          soundsPadViews.insert(touchPadView, at: 0)
+        } else {
+            let touchPadView = TouchPadView.fromNib()
+            touchPadView.translatesAutoresizingMaskIntoConstraints = false
+            touchPadView.sound = sound
+            ambientsContainer.addSubview(touchPadView)
+            ambientsPadViews.append(touchPadView)
         }
+      }
         
         /*
          */
@@ -146,6 +150,15 @@ final class PlayerViewController: AFDefaultViewController {
         
         /*
          */
+      
+      looperLabel.isUserInteractionEnabled = true
+      let loopTap = UITapGestureRecognizer(target: self, action: #selector(didTapLooper))
+      looperLabel.addGestureRecognizer(loopTap)
+      
+      samplerLabel.isUserInteractionEnabled = true
+      let sampleTap = UITapGestureRecognizer(target: self, action: #selector(didTapSampler))
+      samplerLabel.addGestureRecognizer(sampleTap)
+      
         
         NotificationCenter.default.addObserver(
             self,
@@ -162,6 +175,8 @@ final class PlayerViewController: AFDefaultViewController {
             forKeyPath: #keyPath(SoundManager.isAutoplayEnabled),
             context: nil
         )
+      
+      packNameLabel.text = package.title
     }
     
     override func observeValue(
@@ -449,12 +464,37 @@ final class PlayerViewController: AFDefaultViewController {
     @objc
     private func swipeLeftAction(_ gesture: UISwipeGestureRecognizer) {
         state = .sounds
+      changePageController(state: .sounds)
     }
     
     @objc
     private func swipeRightAction(_ gesture: UISwipeGestureRecognizer) {
         state = .ambiences
+      changePageController(state: .ambiences)
     }
+  
+  @objc private func didTapLooper() {
+    state = .sounds
+    changePageController(state: .sounds)
+  }
+  
+  @objc private func didTapSampler() {
+    state = .ambiences
+    changePageController(state: .ambiences)
+  }
+  
+  private func changePageController(state: PlayerState) {
+    switch state {
+    case .ambiences:
+      samplerLabel.textColor = .oomieWhite
+      looperLabel.textColor = .oomieWhite.withAlphaComponent(0.5)
+      addLineView(to: samplerLabel)
+    case .sounds:
+      samplerLabel.textColor = .oomieWhite.withAlphaComponent(0.5)
+      looperLabel.textColor = .oomieWhite
+      addLineView(to: looperLabel)
+    }
+  }
     
     /*
      MARK: -
@@ -464,5 +504,33 @@ final class PlayerViewController: AFDefaultViewController {
     private func willEnterForegroundAction(_ notification: Notification) {
         queuePlayer.play()
     }
+  
+  private func addLineView(to parentView: UIView) {
+    shapeView.removeFromSuperview()
+    
+    
+    UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut) {
+      parentView.addSubview(self.shapeView)
+      self.shapeView.topAnchor.constraint(equalTo: parentView.bottomAnchor, constant: 3).isActive = true
+      self.shapeView.widthAnchor.constraint(equalTo: parentView.widthAnchor, multiplier: 1).isActive = true
+      self.shapeView.heightAnchor.constraint(equalToConstant: 1).isActive = true
+      
+      parentView.layoutIfNeeded()
+    }
+    
+  }
 
+  private func addLineLayer(_ sublayer: CALayer) {
+    self.shapeLayer.removeFromSuperlayer()
+    UIView.animate(withDuration: 0.4) {
+      
+      self.shapeLayer.position = CGPoint(x: sublayer.bounds.midX,
+                                         y: sublayer.bounds.maxY + 3)
+      
+      
+      
+      sublayer.addSublayer(self.shapeLayer)
+      self.looperLabel.layoutIfNeeded()
+    }
+  }
 }

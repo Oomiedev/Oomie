@@ -9,6 +9,7 @@ import UIKit
 import AFKit
 import RealmSwift
 import AVFoundation
+import SwiftUI
 
 final class GalleryViewController: AFDefaultViewController {
 
@@ -44,6 +45,8 @@ final class GalleryViewController: AFDefaultViewController {
      */
   
   var viewModel: GalleryViewModel!
+  private var selectedProPackIndex: IndexPath?
+  private var currentPlayingIndex: IndexPath?
   
   /*
    MARK: -
@@ -51,16 +54,24 @@ final class GalleryViewController: AFDefaultViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-      if !viewModel.isDecoded {
-        viewModel.decode()
-        startLoading()
-      }
         setupDataProvider()
         setupCollectionView()
         playVideo()
       
-      viewModel.updatUI = { [weak self] in
-        self?.loaderView.removeFromSuperview()
+      viewModel.updateUI = { [weak self] prossess in
+        if prossess {
+          self?.startLoading()
+        } else {
+          self?.loaderView.removeFromSuperview()
+        }
+      }
+      
+      viewModel.updateUIWithFetchedPackage = { [weak self] in
+        self?.collectionView.reloadData()
+      }
+      
+      viewModel.updateSubscription = { [weak self] in
+        self?.collectionView.reloadData()
       }
     }
     
@@ -110,12 +121,7 @@ final class GalleryViewController: AFDefaultViewController {
         /*
          */
         
-        let item = NSCollectionLayoutItem(
-            layoutSize: NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(0.5),
-                heightDimension: .estimated(100)
-            )
-        )
+      let item = NSCollectionLayoutItem( layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .estimated(100)))
         
         item.contentInsets = NSDirectionalEdgeInsets(
             top: 12 * SizeFactor,
@@ -173,12 +179,15 @@ final class GalleryViewController: AFDefaultViewController {
     }
     
     private func setupDataProvider() {
-        let realm = try! Realm()
+      do {
+        let realm = try Realm()
         dataProvider = realm.objects(Package.self)
+      } catch let error {
+        print("1111-0 Err: ", error)
+      }
     }
 
     private func showPlayer(for package: Package) {
-        
         /*
          */
         
@@ -243,6 +252,26 @@ final class GalleryViewController: AFDefaultViewController {
         playerViewController = viewController
         
     }
+  
+  private func showSubsctiption() {
+    appDelegate.checkSubscription()
+  }
+  
+  private func showDownload(for package: Package) {
+    let vc = DownloadViewController(package: package)
+    
+    vc.push = { [weak self] in
+      self?.showPlayer(for: package)
+    }
+    
+    vc.update = { [weak self] in
+      guard let index = self?.selectedProPackIndex else { return }
+      self?.collectionView.reloadItems(at: [index])
+    }
+    
+    vc.modalPresentationStyle = .overCurrentContext
+    present(vc, animated: true)
+  }
     
     /*
      MARK: -
@@ -271,18 +300,22 @@ extension GalleryViewController: UICollectionViewDelegate, UICollectionViewDataS
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
-        return dataProvider.count + 4
+        return dataProvider.count
     }
     
-    func collectionView(
-        _ collectionView: UICollectionView,
-        cellForItemAt indexPath: IndexPath
-    ) -> UICollectionViewCell {
-        return collectionView.dequeueReusableCell(
-            withReuseIdentifier: PackageCell.CellID,
-            for: indexPath
-        )
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    
+    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PackageCell.CellID, for: indexPath) as? PackageCell else { fatalError() }
+    
+    cell.setIndex(index: indexPath)
+    
+    cell.previewCell = { [weak self] index in
+      self?.resetPreview()
+      self?.currentPlayingIndex = index
     }
+    
+    return cell
+  }
     
     func collectionView(
         _ collectionView: UICollectionView,
@@ -310,10 +343,27 @@ extension GalleryViewController: UICollectionViewDelegate, UICollectionViewDataS
         if let cell = cell as? PackageCell {
             cell.package = package
             cell.selectAction = { [weak self] in
+              switch cell.package.status {
+              case .live:
+                self?.resetPreview()
                 self?.showPlayer(for: package)
+              case .pro:
+                self?.showSubsctiption()
+              case .downloaded:
+                self?.showDownload(for: package)
+                self?.selectedProPackIndex = indexPath
+              }
             }
         }
     }
+  
+  private func resetPreview() {
+    if let oldCellIndex = currentPlayingIndex {
+      if let oldCell = collectionView.cellForItem(at: oldCellIndex) as? PackageCell {
+        oldCell.resetPreview()
+      }
+    }
+  }
     
 //    func collectionView(
 //        _ collectionView: UICollectionView,
@@ -324,4 +374,10 @@ extension GalleryViewController: UICollectionViewDelegate, UICollectionViewDataS
 //        let package = dataProvider[indexPath.item]
 //        showPlayer(for: package)
 //    }
+}
+
+extension UIViewController {
+    var appDelegate: AppDelegate {
+    return UIApplication.shared.delegate as! AppDelegate
+   }
 }
