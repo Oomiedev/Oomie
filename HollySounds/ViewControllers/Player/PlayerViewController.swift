@@ -79,36 +79,13 @@ final class PlayerViewController: AFDefaultViewController {
     private var soundsPadViews: [TouchPadView] = []
     private var ambientsPadViews: [TouchPadView] = []
     
-    private var state: PlayerState = .ambiences {
-        didSet {
-            
-            /*
-             */
-            
-            let contentOffset: CGPoint = CGPoint(
-                x: state == .ambiences ? 0 : scrollView.bounds.width,
-                y: 0
-            )
-            scrollView.setContentOffset(
-                contentOffset,
-                animated: true
-            )
-            
-            /*
-             */
-            
-            pageControl.currentPage = state.rawValue
-          
-          switch state {
-          case .ambiences:
-           // addLineLayer(samplerLabel.layer)
-            break
-          case .sounds:
-            // addLineLayer(looperLabel.layer)
-            break
-          }
-        }
+  private var state: PlayerState = .ambiences {
+    didSet {
+      let contentOffset: CGPoint = CGPoint(x: state == .ambiences ? 0 : scrollView.bounds.width, y: 0)
+      scrollView.setContentOffset(contentOffset, animated: true)
+      pageControl.currentPage = state.rawValue
     }
+  }
     
     /*
      MARK: -
