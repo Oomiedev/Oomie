@@ -66,21 +66,10 @@ final class DataManager {
             /*
              */
             
-            if
-                package == nil,
-                let sourceURL = Bundle.main.url(
-                    forResource: id,
-                    withExtension: "zip"
-                ),
-                let destinationURL = URL.packeges?.appendingPathComponent(id)
-            {
-                /*
-                 */
-                
+            if package == nil, let sourceURL = Bundle.main.url(forResource: id, withExtension: "zip"),
+                let destinationURL = URL.packeges?.appendingPathComponent(id) {
+
                 dispatchGroup.enter()
-                
-                /*
-                 */
                 
                 do {
 
@@ -91,18 +80,12 @@ final class DataManager {
                     print("Extraction of ZIP archive failed with error:\(error)")
                 }
                 
-                /*
-                 */
-                
                 package = Package()
                 package?.id = id
                 package?.dateCreated = Date().timeIntervalSince1970
                 package?.title = id
                 
                 realm.add(package!)
-                
-                /*
-                 */
                 
                 self.parseSamples(
                     to: package!,
