@@ -86,6 +86,8 @@ final class PlayerViewController: AFDefaultViewController {
       pageControl.currentPage = state.rawValue
     }
   }
+  
+  var sessionTracker: SessionTracker!
     
     /*
      MARK: -
@@ -222,7 +224,9 @@ final class PlayerViewController: AFDefaultViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+      if !sessionTracker.isPlayedBefore {
         SoundManager.shared.isAutoplayEnabled = true
+      }
     }
     
     override func viewDidLayoutSubviews() {

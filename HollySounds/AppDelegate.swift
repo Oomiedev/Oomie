@@ -170,6 +170,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   private func createHomeScreen() -> UIViewController {
     let viewController = GalleryViewController()
+    viewController.sessionTracker = sessionTracker
     viewController.viewModel = viewModel
     return AFDefaultNavigationController(rootViewController: viewController)
   }
