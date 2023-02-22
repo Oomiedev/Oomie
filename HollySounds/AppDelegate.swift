@@ -64,7 +64,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       guard let self = self else { return }
       if !available, !soundData.isEmpty {
         self.packs.append(contentsOf: soundData)
-        self.fetch()
         self.createPack(data: soundData)
       } else {
         self.fetch()
@@ -76,6 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     archivingService = ArchivingServiceImpl()
     archivingService?.unzip(data: data) { [weak self] _ in
       self?.archivingService = nil
+      self?.fetch()
       self?.decode()
     }
   }
