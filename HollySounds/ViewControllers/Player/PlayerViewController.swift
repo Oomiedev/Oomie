@@ -520,7 +520,6 @@ final class PlayerViewController: AFDefaultViewController {
               self?.buttonLayer2 = nil
               self?.buttonLayer3?.removeFromSuperlayer()
               self?.buttonLayer3 = nil
-              self?.sessionTracker.isPlayedBefore = true
             }
           }
         }
@@ -798,98 +797,6 @@ final class PlayerViewController: AFDefaultViewController {
         layer1.opacity = 0
         layer1.layoutIfNeeded()
       }
-    }
-  }
-  
-  @objc private func startTimer2() {
-    guard let layer1 = buttonLayer1, let layer2 = buttonLayer2, let layer3 = buttonLayer3 else { return }
-   
-    DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-      UIView.animate(withDuration: 0, delay: 0) {
-        layer3.opacity = 0
-        layer3.layoutIfNeeded()
-      }
-      
-      DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-        UIView.animate(withDuration: 0, delay: 0) {
-          layer2.opacity = 0
-          layer2.layoutIfNeeded()
-        }
-      }
-      
-      DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-        UIView.animate(withDuration: 0, delay: 0) {
-          layer1.opacity = 0
-          layer1.layoutIfNeeded()
-        }
-      }
-    }
-  }
-  
-  @objc private func animateLayer1() {
-    print("1111-1")
-    guard let layer1 = buttonLayer1 else { return }
-    UIView.animate(withDuration: 0, delay: 0, usingSpringWithDamping: 0, initialSpringVelocity: 0) {
-      if layer1.opacity != 0 {
-        layer1.opacity = 0
-      } else {
-        layer1.opacity = 0.65
-      }
-    }
-  }
-  
-  @objc private func animateLayer2() {
-    print("1111-2")
-    guard let layer2 = buttonLayer2 else { return }
-    UIView.animate(withDuration: 0, delay: 0, usingSpringWithDamping: 0, initialSpringVelocity: 0) {
-      if layer2.opacity != 0 {
-        layer2.opacity = 0
-      } else {
-        layer2.opacity = 0.35
-      }
-    }
-  }
-  
-  @objc private func animateLayer3() {
-    print("1111-3")
-    guard let layer3 = buttonLayer3 else { return }
-    UIView.animate(withDuration: 0, delay: 0, usingSpringWithDamping: 0, initialSpringVelocity: 0) {
-      if layer3.opacity != 0 {
-        layer3.opacity = 0
-      } else {
-        layer3.opacity = 0.15
-      }
-    }
-  }
-  
-  
-  @objc private func animateBtn() {
-    
-    guard let layer1 = buttonLayer1, let layer2 = buttonLayer2, let layer3 = buttonLayer3 else { return }
-    
-    UIView.animate(withDuration: 0, delay: 0.3, options: .curveLinear) {
-      if layer2.opacity == 0 && layer3.opacity == 0 && layer1.opacity == 0 {
-        layer1.opacity = 0.65
-        layer2.opacity = 0
-        layer3.opacity = 0
-      } else if layer2.opacity == 0 && layer1.opacity != 0 && layer3.opacity == 0 {
-        layer1.opacity = 0
-        layer2.opacity = 0.35
-        layer3.opacity = 0
-      } else if layer2.opacity != 0 && layer1.opacity == 0 && layer3.opacity == 0 {
-        layer1.opacity = 0
-        layer2.opacity = 0
-        layer3.opacity = 0.15
-      } else if layer2.opacity == 0 && layer1.opacity == 0 && layer3.opacity != 0 {
-        layer1.opacity = 0.65
-        layer2.opacity = 0
-        layer3.opacity = 0
-      }
-      
-      layer1.layoutIfNeeded()
-      layer2.layoutIfNeeded()
-      layer3.layoutIfNeeded()
-      self.autoPlayButton.layoutIfNeeded()
     }
   }
 }
