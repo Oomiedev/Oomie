@@ -19,6 +19,7 @@
 		5C70062E297DB0EF00867DD6 /* DownloadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C70062D297DB0EF00867DD6 /* DownloadViewController.swift */; };
 		5C700630297DB10B00867DD6 /* DownloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C70062F297DB10B00867DD6 /* DownloadView.swift */; };
 		5C76DCB7297861CA008A79E4 /* NetworkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C76DCB6297861CA008A79E4 /* NetworkingService.swift */; };
+		5C9670FD29BCC331007366FB /* TutorialInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9670FC29BCC331007366FB /* TutorialInfoView.swift */; };
 		5CC17A9B298C21560068C2E9 /* SubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC17A9A298C21560068C2E9 /* SubscriptionView.swift */; };
 		5CC17A9D298C21C60068C2E9 /* PlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC17A9C298C21C60068C2E9 /* PlanView.swift */; };
 		5CC17AA0298C21FF0068C2E9 /* SubscriptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC17A9F298C21FF0068C2E9 /* SubscriptionService.swift */; };
@@ -82,6 +83,7 @@
 		5C70062D297DB0EF00867DD6 /* DownloadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadViewController.swift; sourceTree = "<group>"; };
 		5C70062F297DB10B00867DD6 /* DownloadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadView.swift; sourceTree = "<group>"; };
 		5C76DCB6297861CA008A79E4 /* NetworkingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingService.swift; sourceTree = "<group>"; };
+		5C9670FC29BCC331007366FB /* TutorialInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialInfoView.swift; sourceTree = "<group>"; };
 		5CC17A9A298C21560068C2E9 /* SubscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionView.swift; sourceTree = "<group>"; };
 		5CC17A9C298C21C60068C2E9 /* PlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanView.swift; sourceTree = "<group>"; };
 		5CC17A9F298C21FF0068C2E9 /* SubscriptionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionService.swift; sourceTree = "<group>"; };
@@ -373,6 +375,7 @@
 			children = (
 				E74816362802DBB80070DBB8 /* TouchPadView.swift */,
 				E74816382802DD040070DBB8 /* TouchPadView.xib */,
+				5C9670FC29BCC331007366FB /* TutorialInfoView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -597,6 +600,7 @@
 				5CDDDC592971BFA600CFC7C6 /* DecodingService.swift in Sources */,
 				E7E9C9A228511A75003BB788 /* AVAudioPCMBuffer+Extension.swift in Sources */,
 				E74816372802DBB80070DBB8 /* TouchPadView.swift in Sources */,
+				5C9670FD29BCC331007366FB /* TutorialInfoView.swift in Sources */,
 				5CC17A9D298C21C60068C2E9 /* PlanView.swift in Sources */,
 				E707164228A0F6CF006805F8 /* SampleAnimationView.swift in Sources */,
 				E7922FB3280C0D9000AE5AD0 /* Settings.swift in Sources */,
