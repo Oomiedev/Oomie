@@ -268,6 +268,29 @@ extension AppDelegate: OnboardingViewControllerDelegate {
       let subscriptionScreen = self.createSubscriptionScreen(products: products, isFromOnboarding: true)
       onboarding?.navigationController?.pushViewController(subscriptionScreen, animated: true)
       onboarding = nil
+    } else {
+      openMainScreen()
+      onboarding = nil
+    }
+  }
+  
+  private func openMainScreen() {
+    guard let window = self.window else { return }
+    let transition: () -> Void = { [weak self] in
+      window.rootViewController = self?.createHomeScreen()
+    }
+    
+    if let previousController = window.rootViewController {
+      UIView.transition(with: window, duration: 0.5, options: [.beginFromCurrentState, .transitionFlipFromRight], animations: transition)
+      previousController.dismiss(animated: false) {
+        previousController.view.removeFromSuperview()
+      }
+    } else {
+      transition()
+    }
+    
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+      self.fetchSubscription(animation: true)
     }
   }
 }

@@ -281,7 +281,9 @@ final class TouchPadView: AFDefaultView {
         
         
         if sound.type != .single {
+          if SoundManager.shared.isAutoplayEnabled == true {
             SoundManager.shared.isAutoplayEnabled = false
+          }
         }
         
       if isPlayable {

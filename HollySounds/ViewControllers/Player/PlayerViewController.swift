@@ -39,7 +39,7 @@ final class PlayerViewController: AFDefaultViewController {
     @IBOutlet var ambientsContainer: UIView!
     
     @IBOutlet weak var packNameLabel: UILabel!
-  @IBOutlet var pageControl: UIPageControl!
+    @IBOutlet var pageControl: UIPageControl!
     
   @IBOutlet weak var samplerLabel: UILabel!
   @IBOutlet weak var looperLabel: UILabel!
@@ -103,6 +103,9 @@ final class PlayerViewController: AFDefaultViewController {
   var buttonLayer1: CALayer?
   var buttonLayer2: CALayer?
   var buttonLayer3: CALayer?
+  
+  private var snakBar = SnackView()
+  private var snakTopConstraint: NSLayoutConstraint!
 
     
     /*
@@ -135,9 +138,11 @@ final class PlayerViewController: AFDefaultViewController {
         if sound.type == .single {
             let touchPadView = TouchPadView.fromNib()
             touchPadView.translatesAutoresizingMaskIntoConstraints = false
+            touchPadView.isFinishTutorial = true
+            touchPadView.isPlayable = true
             touchPadView.sound = sound
             soundContainer.addSubview(touchPadView)
-          soundsPadViews.insert(touchPadView, at: 0)
+            soundsPadViews.insert(touchPadView, at: 0)
         } else {
             let touchPadView = TouchPadView.fromNib()
             touchPadView.isFinishTutorial = sessionTracker.isPlayedBefore
@@ -231,6 +236,15 @@ final class PlayerViewController: AFDefaultViewController {
         )
       
       packNameLabel.text = package.title
+      
+      snakBar.translatesAutoresizingMaskIntoConstraints = false
+      view.addSubview(snakBar)
+      snakBar.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.55).isActive = true
+      snakBar.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+      snakBar.heightAnchor.constraint(equalToConstant: 40).isActive = true
+      snakTopConstraint = snakBar.centerYAnchor.constraint(equalTo: autoPlayButton.centerYAnchor, constant: -68)
+      snakTopConstraint.isActive = true
+      snakBar.alpha = 0
     }
     
     override func observeValue(
@@ -245,6 +259,10 @@ final class PlayerViewController: AFDefaultViewController {
             
             autoPlayButtonImageView.layer.add(CATransition(), forKey: nil)
             autoPlayButtonImageView.image = UIImage(named: SoundManager.shared.isAutoplayEnabled ? "PauseIcon" : "PlayIcon")
+          if sessionTracker.isPlayedBefore == true {
+            animateSnakView(state: SoundManager.shared.isAutoplayEnabled)
+            snakBar.viewState(state: SoundManager.shared.isAutoplayEnabled)
+          }
             
             /*
              */
@@ -507,9 +525,11 @@ final class PlayerViewController: AFDefaultViewController {
     private func setupAutoplayButton() {
         autoPlayButton.didTouchAction = { [weak self] in
           if self?.sessionTracker.isPlayedBefore == true || self?.tutorial == .thirdScreen {
-            SoundManager.shared.isAutoplayEnabled.toggle()
+            DispatchQueue.main.async {
+              SoundManager.shared.isAutoplayEnabled.toggle()
+            }
+            
             if self?.tutorial == .thirdScreen {
-              self?.sessionTracker.isPlayedBefore = true
               self?.handImageView.removeFromSuperview()
               self?.tutorialView.removeFromSuperview()
               self?.timer?.invalidate()
@@ -520,10 +540,35 @@ final class PlayerViewController: AFDefaultViewController {
               self?.buttonLayer2 = nil
               self?.buttonLayer3?.removeFromSuperlayer()
               self?.buttonLayer3 = nil
+              
+              self?.ambientsPadViews.forEach {
+                $0.isPlayable = true
+              }
+              
+              DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self?.sessionTracker.isPlayedBefore = true
+              }
             }
           }
         }
     }
+  
+  private func animateSnakView(state: Bool) {
+    
+    UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut) {
+      self.snakTopConstraint.constant = 0
+      self.snakBar.alpha = 1
+      self.view.layoutIfNeeded()
+    }
+    
+    DispatchQueue.main.asyncAfter(deadline: .now() + 1.4) {
+      UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut) {
+        self.snakTopConstraint.constant = -68
+        self.snakBar.alpha = 0
+        self.view.layoutIfNeeded()
+      }
+    }
+  }
     
     private func setupRecordButton() {
         recordButton.didTouchAction = {
@@ -835,5 +880,45 @@ enum Tutorial: CaseIterable {
     case .thirdScreen:
       return .init(width: 320, height: 168)
     }
+  }
+}
+
+final class SnackView: UIView {
+  
+  private let textLabel: UILabel = {
+    let label = UILabel()
+    label.translatesAutoresizingMaskIntoConstraints = false
+    label.textAlignment = .center
+    label.textColor = .oomieWhite
+    label.font = .systemFont(ofSize: 15, weight: .regular)
+    return label
+  }()
+  
+  override init(frame: CGRect) {
+    super.init(frame: frame)
+    setupView()
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
+  override func layoutSubviews() {
+    super.layoutSubviews()
+    layer.cornerRadius = 8
+    layer.cornerCurve = .continuous
+    layer.borderWidth = 1
+    layer.borderColor = UIColor.buttonPrimary.cgColor
+  }
+  
+  private func setupView() {
+    backgroundColor = .black.withAlphaComponent(1)
+    addSubview(textLabel)
+    textLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+    textLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+  }
+  
+  func viewState(state: Bool) {
+    textLabel.text = state ? "Autoplay On" : "Autoplay Off"
   }
 }
