@@ -17,14 +17,17 @@ final class SubscriptionViewController: UIViewController {
   
   var selectProduct: ((SKProduct) -> Void)?
   var hasClosed: ((Bool) -> Void)?
+  var dismissed: (() -> Void)?
   
   private var purchaseCompletionHandler: PurchaseCompletionHandler?
   
   private var product: SKProduct?
   private var products: [SKProduct]
+  private var isFromOnboarding: Bool
   
-  init(products: [SKProduct]) {
+  init(products: [SKProduct], isFromOnboarding: Bool) {
     self.products = products
+    self.isFromOnboarding = isFromOnboarding
     super.init(nibName: nil, bundle: nil)
   }
   
@@ -42,6 +45,10 @@ final class SubscriptionViewController: UIViewController {
     bindView()
   }
 
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    navigationController?.setNavigationBarHidden(true, animated: animated)
+  }
   
   private func bindView() {
     rootView.closeButton.addTarget(self, action: #selector(didTapCloseButton), for: .touchUpInside)
@@ -53,9 +60,26 @@ final class SubscriptionViewController: UIViewController {
   }
   
   @objc private func didTapCloseButton() {
-    dismiss(animated: true) {
+    if !isFromOnboarding {
+      dismiss(animated: true) {
+        self.hasClosed?(true)
+        self.hasClosed = nil
+      }
+    } else {
       self.hasClosed?(true)
       self.hasClosed = nil
+      dismiss()
     }
+  }
+  
+  func dismiss() {
+    let transition: CATransition = CATransition()
+    transition.duration = 0.5
+    transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+    transition.type = CATransitionType.reveal
+    transition.subtype = CATransitionSubtype.fromBottom
+    self.view.window!.layer.add(transition, forKey: nil)
+    self.dismiss(animated: false, completion: nil)
+    dismissed?()
   }
 }

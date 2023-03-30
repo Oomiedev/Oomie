@@ -33,6 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   var packs: [SoundData] = []
   var products: [SKProduct] = []
+  var purchaseStatus: Bool?
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     
@@ -45,8 +46,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     soundPackService = SoundPackServiceImpl()
     
     if sessionTracker.isFirstLaunch {
+      purchaseStatus = false
       soundPackService?.clearOldPackages { [weak self] in
         self?.setupPackage(service: self?.soundPackService)
+        self?.subscribe()
       }
     } else {
       self.setupPackage(service: self.soundPackService)
@@ -57,6 +60,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     SoundManager.shared.initialize()
     return true
+  }
+  
+  private func subscribe() {
+    subscriptionService = SubscriptionServiceImpl()
+    subscriptionService?.fetchSubscriptions(identifiers: OomieProProucts.allCases)
+    
+    subscriptionService?.products = { [weak self] products in
+      guard let self = self else { return }
+      DispatchQueue.main.async {
+        self.products = products
+      }
+    }
+    
+    subscriptionService?.paymentComplete = { [weak self] status in
+      if status {
+        self?.purchaseStatus = true
+      }
+    }
   }
   
   private func setupPackage(service: SoundPackService?) {
@@ -138,7 +159,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         guard let self = self else { return }
         self.products = products
         DispatchQueue.main.async {
-          let subscriptionScreen = self.createSubscriptionScreen(products: products)
+          let subscriptionScreen = self.createSubscriptionScreen(products: products, isFromOnboarding: false)
           subscriptionScreen.modalPresentationStyle = .overCurrentContext
           self.window?.rootViewController?.present(subscriptionScreen, animated: animation)
         }
@@ -156,7 +177,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     if products.isEmpty {
       fetchSubscription(animation: true)
     } else {
-      let subscriptionScreen = self.createSubscriptionScreen(products: products)
+      let subscriptionScreen = self.createSubscriptionScreen(products: products, isFromOnboarding: false)
       subscriptionScreen.modalPresentationStyle = .overCurrentContext
       self.window?.rootViewController?.present(subscriptionScreen, animated: true)
     }
@@ -165,17 +186,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   private func createOnboardingScreen() -> UIViewController {
     onboarding = OnboardingViewController()
     onboarding?.delegate = self
-    return onboarding!
+    return UINavigationController(rootViewController: onboarding!)
   }
   
   private func createHomeScreen() -> UIViewController {
     let viewController = GalleryViewController()
+    viewController.sessionTracker = sessionTracker
     viewController.viewModel = viewModel
     return AFDefaultNavigationController(rootViewController: viewController)
   }
   
-  private func createSubscriptionScreen(products: [SKProduct]) -> UIViewController {
-    let vc = SubscriptionViewController(products: products)
+  private func createSubscriptionScreen(products: [SKProduct], isFromOnboarding: Bool) -> UIViewController {
+    let vc = SubscriptionViewController(products: products, isFromOnboarding: isFromOnboarding)
     
     vc.selectProduct = { [weak self] product in
       self?.subscriptionService?.buy(product: product)
@@ -185,11 +207,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       self?.subscriptionService?.viewDismissed(status: status)
     }
     
+    vc.dismissed = { [weak self] in
+      self?.updateView()
+    }
+    
     subscriptionService?.dismissView = {
-      vc.dismiss(animated: true)
+      vc.dismiss()
     }
     
     return vc
+  }
+  
+  private func updateView() {
+    guard let window = self.window else { return }
+    let transition: () -> Void = { [weak self] in
+      window.rootViewController = self?.createHomeScreen()
+    }
+    
+    if let previousController = window.rootViewController {
+      previousController.dismiss(animated: false) {
+        previousController.view.removeFromSuperview()
+        transition()
+      }
+    } else {
+      transition()
+    }
+    
+    if purchaseStatus ?? false {
+      viewModel.updateSubscription?()
+    }
   }
   
   private func checkForProPakage() -> Bool {
@@ -216,10 +262,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate: OnboardingViewControllerDelegate {
   func finishOnboarding() {
-    guard let window = self.window else { return }
-    
     sessionTracker.isFirstLaunch = false
-    
+    sessionTracker.isPlayedBefore = false
+    if !products.isEmpty {
+      let subscriptionScreen = self.createSubscriptionScreen(products: products, isFromOnboarding: true)
+      onboarding?.navigationController?.pushViewController(subscriptionScreen, animated: true)
+      onboarding = nil
+    } else {
+      openMainScreen()
+      onboarding = nil
+    }
+  }
+  
+  private func openMainScreen() {
+    guard let window = self.window else { return }
     let transition: () -> Void = { [weak self] in
       window.rootViewController = self?.createHomeScreen()
     }
@@ -236,8 +292,6 @@ extension AppDelegate: OnboardingViewControllerDelegate {
     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
       self.fetchSubscription(animation: true)
     }
-    
-    onboarding = nil
   }
 }
 

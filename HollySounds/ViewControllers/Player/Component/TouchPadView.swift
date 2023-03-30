@@ -49,6 +49,11 @@ final class TouchPadView: AFDefaultView {
     
     private var sampleHighlightedView: SampleAnimationView!
     private var loopHighlightedView: LoopAnimationView!
+  
+    var isPlayable: Bool = false
+    var isFinishTutorial: Bool = false
+    var didTapPlay: (() -> Void)?
+    var timer: Timer?
     
     /*
      MARK: -
@@ -138,10 +143,27 @@ final class TouchPadView: AFDefaultView {
         shapeLayer.lineDashPattern = sound.type.lineDashPattern
         
         shapeLayer.strokeColor = sound.type.color?.cgColor
+        shapeLayer.shadowColor = isFinishTutorial ? UIColor(named: "Color 2")?.cgColor : UIColor.clear.cgColor
         
         sampleHighlightedView?.color = sound.type.color
         loopHighlightedView?.color = sound.type.color
+      
+      if !isFinishTutorial && isPlayable {
+        fireTimer()
+      }
     }
+  
+  func fireTimer() {
+    timer?.invalidate()
+    timer = nil
+    timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(startTimer), userInfo: nil, repeats: true)
+  }
+  
+  func stopTimer() {
+    timer?.invalidate()
+    timer = nil
+    shapeLayer.strokeColor = sound.type.color?.cgColor
+  }
     
     private func animateUI() {
         
@@ -226,6 +248,20 @@ final class TouchPadView: AFDefaultView {
             }
         }
     }
+  
+  @objc private func startTimer() {
+    if shapeLayer.strokeColor == sound.type.color?.cgColor {
+      UIView.animate(withDuration: 0.5, delay: 0) {
+        self.shapeLayer.strokeColor = UIColor(named: "Color 7")?.cgColor
+        self.shapeLayer.layoutIfNeeded()
+      }
+    } else {
+      UIView.animate(withDuration: 0.5, delay: 0) {
+        self.shapeLayer.strokeColor = self.sound.type.color?.cgColor
+        self.shapeLayer.layoutIfNeeded()
+      }
+    }
+  }
     
     /*
      MARK: -
@@ -245,13 +281,20 @@ final class TouchPadView: AFDefaultView {
         
         
         if sound.type != .single {
+          if SoundManager.shared.isAutoplayEnabled == true {
             SoundManager.shared.isAutoplayEnabled = false
+          }
         }
         
-        SoundManager.shared.play(
-            sound: sound,
-            velocity: UInt8(velocity)
-        )
+      if isPlayable {
+        let _ = self.layer.sublayers?.filter { $0.name == "DashBorder" }.map { $0.removeFromSuperlayer() }
+        
+        SoundManager.shared.play(sound: sound,velocity: UInt8(velocity))
+        
+        if !isFinishTutorial {
+          didTapPlay?()
+        }
+      }
         
         /*
          */
@@ -262,7 +305,9 @@ final class TouchPadView: AFDefaultView {
         /*
          */
         
+      if isPlayable {
         loopHighlightedView?.highlight()
+      }
     }
     
     override func touchesCancelled(

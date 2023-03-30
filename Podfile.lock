@@ -1,22 +1,22 @@
 PODS:
-  - AFKit (0.1.32):
+  - AFKit (0.1.33):
     - DeviceKit
     - Player
-    - Realm
-    - RealmSwift
+    - Realm (~> 10.37)
+    - RealmSwift (~> 10)
     - Sodium
-  - DeviceKit (4.7.0)
+  - DeviceKit (5.0.0)
   - Player (0.14.0)
-  - Realm (10.32.1):
-    - Realm/Headers (= 10.32.1)
-  - Realm/Headers (10.32.1)
-  - RealmSwift (10.32.1):
-    - Realm (= 10.32.1)
-  - SDWebImage (5.13.4):
-    - SDWebImage/Core (= 5.13.4)
-  - SDWebImage/Core (5.13.4)
+  - Realm (10.37.0):
+    - Realm/Headers (= 10.37.0)
+  - Realm/Headers (10.37.0)
+  - RealmSwift (10.37.0):
+    - Realm (= 10.37.0)
+  - SDWebImage (5.15.5):
+    - SDWebImage/Core (= 5.15.5)
+  - SDWebImage/Core (5.15.5)
   - Sodium (0.9.1)
-  - ZIPFoundation (0.9.15)
+  - ZIPFoundation (0.9.16)
 
 DEPENDENCIES:
   - AFKit (from `https://github.com/NomadicWarrior/oomie1.git`)
@@ -39,19 +39,19 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   AFKit:
-    :commit: 9989dd460442f85fbfd0c91f8f010ef74cf73568
+    :commit: 768d1fe3af6163777e142c2adc8de7929122594a
     :git: https://github.com/NomadicWarrior/oomie1.git
 
 SPEC CHECKSUMS:
-  AFKit: 0d1691e09c86a0467114b60c039d45fc4ee9214f
-  DeviceKit: c870c34f7c0e0ac4caa6f052e6efe7ef1472c5a1
+  AFKit: 923badf2049e9c1f62bd48753376e607de9ee01a
+  DeviceKit: 0fd016a2cb67aca17c33dc23171cac270131eb88
   Player: 37e0acc16ea1495fc241df88fe9f089367513331
-  Realm: fd821b81e5479be497cc5bca2e020f707d8323eb
-  RealmSwift: 8635e4cc524790916d72b0ffa51c1a91f4ec9668
-  SDWebImage: e5cc87bf736e60f49592f307bdf9e157189298a3
+  Realm: 9c5fc6f8f5cb70b299f2e3064d2b9f6cb0f1523d
+  RealmSwift: 7be7bb45911c16400dd1bfce3a01764ecb4cae7a
+  SDWebImage: fd7e1a22f00303e058058278639bf6196ee431fe
   Sodium: 23d11554ecd556196d313cf6130d406dfe7ac6da
-  ZIPFoundation: 063163dc828bf699c5be160eb4f58f676322d94f
+  ZIPFoundation: d170fa8e270b2a32bef9dcdcabff5b8f1a5deced
 
 PODFILE CHECKSUM: c4bf27ace66935d82fa857c7e15ec106c7667884
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.12.0

@@ -521,7 +521,7 @@ final class SoundManager: NSObject {
         do {
             try sampler.loadAudioFiles(at: urls)
         } catch {
-            print("Error")
+          print("Error: ", error.localizedDescription)
         }
     }
     
