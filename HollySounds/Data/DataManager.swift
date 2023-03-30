@@ -346,23 +346,22 @@ final class DataManager {
                 email: Email,
                 password: Password
             )
-        ) { [weak self] result in
+        ) { result in
             // Completion handlers are not necessarily called on the UI thread.
             // This call to DispatchQueue.main.async ensures that any changes to the UI,
             // namely disabling the loading indicator and navigating to the next page,
             // are handled on the UI thread:
             DispatchQueue.main.async {
                 switch result {
-                case .failure(let error):
+                case .failure(_):
                     completeAction?(nil)
                     return
                 case .success(let user):
                     let configuration = user.configuration(partitionValue: "user=\(user.id)")
-                    Realm.asyncOpen(configuration: configuration) { [weak self] result  in
+                    Realm.asyncOpen(configuration: configuration) { result  in
                         DispatchQueue.main.async {
-                            
                             switch result {
-                            case .failure(let error):
+                            case .failure(_):
                                 completeAction?(nil)
                             case .success:
                                 completeAction?(configuration)
