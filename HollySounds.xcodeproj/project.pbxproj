@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5C2A1C50299147C6002C5434 /* Video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 5C2A1C4F299147C6002C5434 /* Video.mp4 */; };
+		5C05788229D5EF50004194FB /* 01.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 5C05788129D5EF50004194FB /* 01.mp4 */; };
+		5C05788429D5F038004194FB /* 02.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 5C05788329D5F038004194FB /* 02.mp4 */; };
+		5C05788629D5F041004194FB /* 03.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 5C05788529D5F041004194FB /* 03.mp4 */; };
 		5C2A1C522991485C002C5434 /* Kaleidoscope Preview.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5C2A1C512991485C002C5434 /* Kaleidoscope Preview.wav */; };
 		5C2A1C54299149C8002C5434 /* Bedtime Story Preview.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5C2A1C53299149C8002C5434 /* Bedtime Story Preview.wav */; };
 		5C2C956D296B042C00B183AC /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2C956C296B042C00B183AC /* Storage.swift */; };
@@ -19,6 +21,7 @@
 		5C70062E297DB0EF00867DD6 /* DownloadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C70062D297DB0EF00867DD6 /* DownloadViewController.swift */; };
 		5C700630297DB10B00867DD6 /* DownloadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C70062F297DB10B00867DD6 /* DownloadView.swift */; };
 		5C76DCB7297861CA008A79E4 /* NetworkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C76DCB6297861CA008A79E4 /* NetworkingService.swift */; };
+		5C9670FD29BCC331007366FB /* TutorialInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9670FC29BCC331007366FB /* TutorialInfoView.swift */; };
 		5CC17A9B298C21560068C2E9 /* SubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC17A9A298C21560068C2E9 /* SubscriptionView.swift */; };
 		5CC17A9D298C21C60068C2E9 /* PlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC17A9C298C21C60068C2E9 /* PlanView.swift */; };
 		5CC17AA0298C21FF0068C2E9 /* SubscriptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC17A9F298C21FF0068C2E9 /* SubscriptionService.swift */; };
@@ -70,7 +73,9 @@
 
 /* Begin PBXFileReference section */
 		3D90BA51D61609455D7778F9 /* Pods-HollySounds.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HollySounds.release.xcconfig"; path = "Target Support Files/Pods-HollySounds/Pods-HollySounds.release.xcconfig"; sourceTree = "<group>"; };
-		5C2A1C4F299147C6002C5434 /* Video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Video.mp4; sourceTree = "<group>"; };
+		5C05788129D5EF50004194FB /* 01.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 01.mp4; sourceTree = "<group>"; };
+		5C05788329D5F038004194FB /* 02.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 02.mp4; sourceTree = "<group>"; };
+		5C05788529D5F041004194FB /* 03.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 03.mp4; sourceTree = "<group>"; };
 		5C2A1C512991485C002C5434 /* Kaleidoscope Preview.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Kaleidoscope Preview.wav"; sourceTree = "<group>"; };
 		5C2A1C53299149C8002C5434 /* Bedtime Story Preview.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Bedtime Story Preview.wav"; sourceTree = "<group>"; };
 		5C2C956C296B042C00B183AC /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
@@ -82,6 +87,7 @@
 		5C70062D297DB0EF00867DD6 /* DownloadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadViewController.swift; sourceTree = "<group>"; };
 		5C70062F297DB10B00867DD6 /* DownloadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadView.swift; sourceTree = "<group>"; };
 		5C76DCB6297861CA008A79E4 /* NetworkingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingService.swift; sourceTree = "<group>"; };
+		5C9670FC29BCC331007366FB /* TutorialInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialInfoView.swift; sourceTree = "<group>"; };
 		5CC17A9A298C21560068C2E9 /* SubscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionView.swift; sourceTree = "<group>"; };
 		5CC17A9C298C21C60068C2E9 /* PlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanView.swift; sourceTree = "<group>"; };
 		5CC17A9F298C21FF0068C2E9 /* SubscriptionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionService.swift; sourceTree = "<group>"; };
@@ -282,9 +288,11 @@
 				5C2A1C512991485C002C5434 /* Kaleidoscope Preview.wav */,
 				5C2A1C53299149C8002C5434 /* Bedtime Story Preview.wav */,
 				E71332A528E6E34000FDAE94 /* GalleryBackgroundTop.mp4 */,
-				5C2A1C4F299147C6002C5434 /* Video.mp4 */,
 				5CFD7895298847D000D82BC5 /* Neon Ocean.zip */,
 				5CFD7897298847DA00D82BC5 /* Desert Dawn.zip */,
+				5C05788129D5EF50004194FB /* 01.mp4 */,
+				5C05788329D5F038004194FB /* 02.mp4 */,
+				5C05788529D5F041004194FB /* 03.mp4 */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -373,6 +381,7 @@
 			children = (
 				E74816362802DBB80070DBB8 /* TouchPadView.swift */,
 				E74816382802DD040070DBB8 /* TouchPadView.xib */,
+				5C9670FC29BCC331007366FB /* TutorialInfoView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -523,15 +532,17 @@
 				E7922FC9280C155C00AE5AD0 /* PackageCell.xib in Resources */,
 				5CFD7898298847DA00D82BC5 /* Desert Dawn.zip in Resources */,
 				E74816392802DD040070DBB8 /* TouchPadView.xib in Resources */,
+				5C05788229D5EF50004194FB /* 01.mp4 in Resources */,
 				E71332B628E6F88000FDAE94 /* Desert Dawn Preview.wav in Resources */,
 				5CFD7896298847D000D82BC5 /* Neon Ocean.zip in Resources */,
 				5C2A1C522991485C002C5434 /* Kaleidoscope Preview.wav in Resources */,
-				5C2A1C50299147C6002C5434 /* Video.mp4 in Resources */,
 				E71332B328E6F88000FDAE94 /* Neon Ocean Preview.wav in Resources */,
 				E71332A628E6E34000FDAE94 /* GalleryBackgroundTop.mp4 in Resources */,
+				5C05788429D5F038004194FB /* 02.mp4 in Resources */,
 				E71332B528E6F88000FDAE94 /* Sea Breeze Preview.wav in Resources */,
 				E71332B428E6F88000FDAE94 /* Magic Forest Preview.wav in Resources */,
 				E7075AB528B8AD6D00161D49 /* GalleryHeaderView.xib in Resources */,
+				5C05788629D5F041004194FB /* 03.mp4 in Resources */,
 				E71A3D3E27F4CA3600F61045 /* RootViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -597,6 +608,7 @@
 				5CDDDC592971BFA600CFC7C6 /* DecodingService.swift in Sources */,
 				E7E9C9A228511A75003BB788 /* AVAudioPCMBuffer+Extension.swift in Sources */,
 				E74816372802DBB80070DBB8 /* TouchPadView.swift in Sources */,
+				5C9670FD29BCC331007366FB /* TutorialInfoView.swift in Sources */,
 				5CC17A9D298C21C60068C2E9 /* PlanView.swift in Sources */,
 				E707164228A0F6CF006805F8 /* SampleAnimationView.swift in Sources */,
 				E7922FB3280C0D9000AE5AD0 /* Settings.swift in Sources */,
@@ -759,7 +771,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 18;
 				DEVELOPMENT_TEAM = U2464R58MS;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HollySounds/Info.plist;
@@ -767,11 +779,10 @@
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "App needs this to record your sound.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -780,9 +791,12 @@
 				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.oomie.oomieapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -793,7 +807,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 18;
 				DEVELOPMENT_TEAM = U2464R58MS;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HollySounds/Info.plist;
@@ -801,11 +815,10 @@
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "App needs this to record your sound.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -814,9 +827,12 @@
 				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.oomie.oomieapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

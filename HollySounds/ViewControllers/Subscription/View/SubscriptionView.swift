@@ -163,7 +163,7 @@ private extension SubscriptionView {
     continueButton.heightAnchor.constraint(equalToConstant: 68).isActive = true
     
     
-    buttonBottom = continueButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -80)
+    buttonBottom = continueButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -92)
     buttonBottom.isActive = true
     
     if UIScreen.main.bounds.height <= 667 {

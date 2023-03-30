@@ -55,7 +55,7 @@ final class SoundPackServiceImpl {
 extension SoundPackServiceImpl: SoundPackService {
   
   func clearOldPackages(complete: @escaping (() -> Void)) {
-    let oldKeys = ["Sea Breeze", "Magic Forest", "Neon Ocean", "Desert Dawn"]
+    let oldKeys = ["Sea Breeze", "Magic Forest", "Neon Ocean", "Desert Dawn", "Kaleidoscope", "Bedtime Story"]
     let fileManager = FileManager.default
     
     do {
