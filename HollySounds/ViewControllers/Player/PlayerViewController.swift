@@ -69,7 +69,9 @@ final class PlayerViewController: AFDefaultViewController {
      MARK: -
      */
     
-    private let url = Bundle.main.url(forResource: "Video", withExtension: "mp4")
+    private let videoNames: [String] = ["01", "02", "03"]
+  
+    private var url = Bundle.main.url(forResource: "01", withExtension: "mp4")
     
     private var playerLayer: AVPlayerLayer!
     
@@ -78,14 +80,6 @@ final class PlayerViewController: AFDefaultViewController {
     
     private var soundsPadViews: [TouchPadView] = []
     private var ambientsPadViews: [TouchPadView] = []
-    
-  private var state: PlayerState = .ambiences {
-    didSet {
-      let contentOffset: CGPoint = CGPoint(x: state == .ambiences ? 0 : scrollView.bounds.width, y: 0)
-      scrollView.setContentOffset(contentOffset, animated: true)
-      pageControl.currentPage = state.rawValue
-    }
-  }
   
   var sessionTracker: SessionTracker!
   
@@ -106,14 +100,14 @@ final class PlayerViewController: AFDefaultViewController {
   
   private var snakBar = SnackView()
   private var snakTopConstraint: NSLayoutConstraint!
-
-    
     /*
      MARK: -
      */
     
     override func viewDidLoad() {
         super.viewDidLoad()
+      
+      url = Bundle.main.url(forResource: videoNames.randomElement(), withExtension: "mp4")
 
         /*
          */
@@ -267,7 +261,6 @@ final class PlayerViewController: AFDefaultViewController {
             /*
              */
             
-            state = .ambiences
         } else if keyPath == #keyPath(SoundManager.isRecordingEnabled) {
             
             /*
@@ -583,7 +576,6 @@ final class PlayerViewController: AFDefaultViewController {
     @objc
   private func swipeLeftAction(_ gesture: UISwipeGestureRecognizer) {
     if sessionTracker.isPlayedBefore {
-      state = .sounds
       changePageController(state: .sounds)
     }
   }
@@ -591,21 +583,18 @@ final class PlayerViewController: AFDefaultViewController {
     @objc
     private func swipeRightAction(_ gesture: UISwipeGestureRecognizer) {
       if sessionTracker.isPlayedBefore {
-        state = .ambiences
         changePageController(state: .ambiences)
       }
     }
   
   @objc private func didTapLooper() {
     if sessionTracker.isPlayedBefore {
-      state = .sounds
       changePageController(state: .sounds)
     }
   }
   
   @objc private func didTapSampler() {
     if sessionTracker.isPlayedBefore {
-      state = .ambiences
       changePageController(state: .ambiences)
     }
   }
@@ -621,6 +610,10 @@ final class PlayerViewController: AFDefaultViewController {
       looperLabel.textColor = .oomieWhite
       addLineView(to: looperLabel)
     }
+    
+    let contentOffset: CGPoint = CGPoint(x: state == .ambiences ? 0 : scrollView.bounds.width, y: 0)
+    scrollView.setContentOffset(contentOffset, animated: true)
+    pageControl.currentPage = state.rawValue
   }
     
     /*
