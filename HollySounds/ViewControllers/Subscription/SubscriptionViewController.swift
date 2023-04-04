@@ -79,9 +79,8 @@ final class SubscriptionViewController: UIViewController {
     transition.type = CATransitionType.reveal
     transition.subtype = CATransitionSubtype.fromBottom
     if let window = view.window {
-      window.layer.add(transition, forKey: nibName)
+      window.layer.add(transition, forKey: kCATransition)
     }
-    
     self.dismiss(animated: false, completion: nil)
     dismissed?()
   }
