@@ -78,7 +78,10 @@ final class SubscriptionViewController: UIViewController {
     transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
     transition.type = CATransitionType.reveal
     transition.subtype = CATransitionSubtype.fromBottom
-    self.view.window!.layer.add(transition, forKey: nil)
+    if let window = view.window {
+      window.layer.add(transition, forKey: nibName)
+    }
+    
     self.dismiss(animated: false, completion: nil)
     dismissed?()
   }
