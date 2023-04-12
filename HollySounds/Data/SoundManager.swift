@@ -70,14 +70,6 @@ final class SoundManager: NSObject {
         var soundsToStart: [Sound] = []
         var soundsToSkip: [Sound] = []
         
-        // MARK: - Check for sounds empty
-        defer {
-            if soundsToStart.isEmpty {
-                print("1111-0 Empty")
-                addSoundForAutoplay()
-            }
-        }
-        
         /*
          Select and play loops for autoplay.
          */
@@ -94,6 +86,8 @@ final class SoundManager: NSObject {
             }) == false
         {
             soundsToStart.append(sound)
+        } else {
+            addSoundForAutoplay()
         }
         
         /*
