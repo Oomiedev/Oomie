@@ -59,73 +59,80 @@ final class SoundManager: NSObject {
                         }
                     }
                 
-                /*
-                 Select and play loops for autoplay.
-                 */
-                
-                var soundsToStart: [Sound] = []
-                var soundsToSkip: [Sound] = []
-                var type = SoundType.loop1
-                
-                if
-                    let sound = package.sounds
-                        .filter({ $0.type == type })
-                        .shuffled()
-                        .first,
-                    stackLoops.contains(where: { (key: Sound, value: AVAudioPlayerNode) in
-                        key.soundFileName == sound.soundFileName
-                    }) == false
-                {
-                    soundsToStart.append(sound)
-                }
-                
-                /*
-                 */
-                
-                type = SoundType.loop3
-                
-                if
-                    let sound = package.sounds
-                        .filter({ $0.type == type })
-                        .shuffled()
-                        .first,
-                    stackLoops.contains(where: { (key: Sound, value: AVAudioPlayerNode) in
-                        key.soundFileName == sound.soundFileName
-                    }) == false
-                {
-                    soundsToStart.append(sound)
-                }
-                
-                /*
-                 */
-                
-                type = SoundType.loop2
-                
-                if
-                    let sound = package.sounds
-                        .filter({ $0.type == type })
-                        .shuffled()
-                        .first,
-                    stackLoops.contains(where: { (key: Sound, value: AVAudioPlayerNode) in
-                        key.soundFileName == sound.soundFileName
-                    }) == false
-                {
-                    soundsToSkip.append(sound)
-                }
-                
-                /*
-                 */
-                
-                soundsToStart.forEach { sound in
-                    playAndScheduleNext(sound)
-                }
-                
-                soundsToSkip.forEach { sound in
-                    playAndScheduleNext(sound, false)
-                }
+                addSoundForAutoplay()
             } else {
                 NSObject.cancelPreviousPerformRequests(withTarget: self)
             }
+        }
+    }
+    
+    private func addSoundForAutoplay() {
+        var soundsToStart: [Sound] = []
+        var soundsToSkip: [Sound] = []
+        
+        /*
+         Select and play loops for autoplay.
+         */
+        
+        var type = SoundType.loop1
+        
+        if
+            let sound = package.sounds
+                .filter({ $0.type == type })
+                .shuffled()
+                .first,
+            stackLoops.contains(where: { (key: Sound, value: AVAudioPlayerNode) in
+                key.soundFileName == sound.soundFileName
+            }) == false
+        {
+            soundsToStart.append(sound)
+        } else {
+            addSoundForAutoplay()
+        }
+        
+        /*
+         */
+        
+        type = SoundType.loop3
+        
+        if
+            let sound = package.sounds
+                .filter({ $0.type == type })
+                .shuffled()
+                .first,
+            stackLoops.contains(where: { (key: Sound, value: AVAudioPlayerNode) in
+                key.soundFileName == sound.soundFileName
+            }) == false
+        {
+            soundsToStart.append(sound)
+        }
+        
+        /*
+         */
+        
+        type = SoundType.loop2
+        
+        if
+            let sound = package.sounds
+                .filter({ $0.type == type })
+                .shuffled()
+                .first,
+            stackLoops.contains(where: { (key: Sound, value: AVAudioPlayerNode) in
+                key.soundFileName == sound.soundFileName
+            }) == false
+        {
+            soundsToSkip.append(sound)
+        }
+        
+        /*
+         */
+        
+        soundsToStart.forEach { sound in
+            playAndScheduleNext(sound)
+        }
+        
+        soundsToSkip.forEach { sound in
+            playAndScheduleNext(sound, false)
         }
     }
     
