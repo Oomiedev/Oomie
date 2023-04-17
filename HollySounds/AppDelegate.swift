@@ -71,6 +71,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 resignInteruption()
                 SoundManager.shared.resume()
             }
+            
+            if SoundManager.shared.playingInBackground {
+                SoundManager.shared.resume()
+            }
         }
     }
     
@@ -100,8 +104,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let options = AVAudioSession.InterruptionOptions(rawValue: optionsValue)
                 if options.contains(.shouldResume) {
                     SoundManager.shared.resume()
-                } else {
-                    SoundManager.shared.pause()
+                }
+                else {
+                    SoundManager.shared.resume()
                 }
             }
         }

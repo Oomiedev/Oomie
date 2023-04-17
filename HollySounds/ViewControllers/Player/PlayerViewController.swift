@@ -255,6 +255,16 @@ final class PlayerViewController: AFDefaultViewController {
       snakBar.alpha = 0
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        UIApplication.shared.isIdleTimerDisabled = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        UIApplication.shared.isIdleTimerDisabled = false
+    }
+    
     private func setupRemoteTransportControl() {
         let commandCenter = MPRemoteCommandCenter.shared
         commandCenter().playCommand.addTarget { event in
