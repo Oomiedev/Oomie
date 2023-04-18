@@ -27,6 +27,19 @@ final class SoundManager: NSObject {
     var previewPlayer: AVAudioPlayer?
   
   var didFinishPreview: ((Bool) -> Void)?
+    var isPlayingNow: Bool {
+        return audioEngine.isRunning
+    }
+    
+    var playingInBackground: Bool = false {
+        didSet {
+            inBackground?(playingInBackground)
+        }
+    }
+    
+    var pausedViaControlCenter: Bool = false
+    
+    var inBackground: ((Bool) -> Void)?
     
     /*
      */
@@ -136,6 +149,20 @@ final class SoundManager: NSObject {
         }
     }
     
+    func pause() {
+        if audioEngine.isRunning {
+            audioEngine.pause()
+        }
+    }
+    
+    func resume() {
+        do {
+            try audioEngine.start()
+        } catch let error {
+            print("Can not resume Audio Engine, ", error.localizedDescription)
+        }
+    }
+    
     /*
      */
     
@@ -166,17 +193,10 @@ final class SoundManager: NSObject {
      */
     
     func initialize() {
-        
-        /*
-         */
-        
-        try! AVAudioSession.sharedInstance().setCategory(.playback)
-//        try! AVAudioSession.sharedInstance().setActive(true)
-        
-//        UIApplication.shared.beginReceivingRemoteControlEvents()
-        
         stopCurrentPreview()
     }
+    
+    
     
     /*
      MARK: -
