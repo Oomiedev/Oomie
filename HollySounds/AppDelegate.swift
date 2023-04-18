@@ -61,6 +61,60 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     SoundManager.shared.initialize()
     return true
   }
+    
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        if SoundManager.shared.isPlayingNow {
+            resignInteruption()
+            SoundManager.shared.playingInBackground = false
+        } else {
+            if SoundManager.shared.pausedViaControlCenter {
+                resignInteruption()
+                SoundManager.shared.resume()
+            }
+            
+            if SoundManager.shared.playingInBackground {
+                SoundManager.shared.resume()
+            }
+        }
+    }
+    
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        if SoundManager.shared.isPlayingNow {
+            observeInteruption()
+            SoundManager.shared.playingInBackground = true
+        }
+    }
+    
+    private func observeInteruption() {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(interuption), name: AVAudioSession.interruptionNotification, object: nil)
+    }
+    
+    @objc private func interuption(notification: Notification) {
+        guard let userInfo = notification.userInfo,
+              let typeValue = userInfo[AVAudioSessionInterruptionTypeKey] as? UInt,
+              let type = AVAudioSession.InterruptionType(rawValue: typeValue) else {
+            return
+        }
+        
+        if type == .began {
+            SoundManager.shared.pause()
+        } else if type == .ended {
+            if let optionsValue = userInfo[AVAudioSessionInterruptionOptionKey] as? UInt {
+                let options = AVAudioSession.InterruptionOptions(rawValue: optionsValue)
+                if options.contains(.shouldResume) {
+                    SoundManager.shared.resume()
+                }
+                else {
+                    SoundManager.shared.resume()
+                }
+            }
+        }
+    }
+    
+    private func resignInteruption() {
+        NotificationCenter.default.removeObserver(self)
+    }
   
   private func subscribe() {
     subscriptionService = SubscriptionServiceImpl()

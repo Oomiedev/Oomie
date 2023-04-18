@@ -8,6 +8,7 @@
 import UIKit
 import AFKit
 import AVFoundation
+import MediaPlayer
 
 fileprivate enum PlayerState: Int {
     case ambiences, sounds
@@ -100,13 +101,26 @@ final class PlayerViewController: AFDefaultViewController {
   
   private var snakBar = SnackView()
   private var snakTopConstraint: NSLayoutConstraint!
-    /*
-     MARK: -
-     */
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-      
+        let audioSession = AVAudioSession.sharedInstance()
+        do {
+            try audioSession.setCategory(AVAudioSession.Category.playback, mode: .default, options: [.allowAirPlay, .defaultToSpeaker])
+            try audioSession.setActive(true)
+        } catch let error {
+            print(error.localizedDescription)
+        }
+        
+        SoundManager.shared.inBackground = { [weak self] mode in
+            if mode { self?.playerLayer.player?.pause() }
+            else { self?.playerLayer.player?.play() }
+        }
+        
+        
+      setupRemoteTransportControl()
+        
       url = Bundle.main.url(forResource: videoNames.randomElement(), withExtension: "mp4")
 
         /*
@@ -241,6 +255,44 @@ final class PlayerViewController: AFDefaultViewController {
       snakBar.alpha = 0
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        UIApplication.shared.isIdleTimerDisabled = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        UIApplication.shared.isIdleTimerDisabled = false
+    }
+    
+    private func setupRemoteTransportControl() {
+        let commandCenter = MPRemoteCommandCenter.shared
+        commandCenter().playCommand.addTarget { event in
+            if !SoundManager.shared.isPlayingNow {
+                SoundManager.shared.resume()
+                SoundManager.shared.pausedViaControlCenter = false
+                return .success
+            }
+            
+            return .commandFailed
+        }
+        
+        commandCenter().pauseCommand.addTarget { event in
+            if SoundManager.shared.isPlayingNow {
+                SoundManager.shared.pause()
+                SoundManager.shared.pausedViaControlCenter = true
+                return .success
+            }
+            
+            return .commandFailed
+            
+        }
+        
+        var nowPlayingInfo = [String : Any]()
+        nowPlayingInfo[MPMediaItemPropertyTitle] = package.title
+        MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
+    }
+    
     override func observeValue(
         forKeyPath keyPath: String?,
         of object: Any?,
@@ -297,23 +349,15 @@ final class PlayerViewController: AFDefaultViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
-        /*
-         */
-        
-        playerLayer.frame = view.bounds
-        playerLayer.transform = CATransform3DScale(
-            playerLayer.transform,
-            1.5,
-            1.5,
-            1
-        )
-        
-        
-        /*
-         */
-        
-         var positionsMap: [CGPoint] = [
+        if !SoundManager.shared.playingInBackground {
+            
+            playerLayer.frame = view.bounds
+            playerLayer.transform = CATransform3DScale(playerLayer.transform,
+                                                       1.5,
+                                                       1.5,
+                                                       1)
+            
+            var positionsMap: [CGPoint] = [
             CGPoint(
                 x: OffsetX,
                 y: -OffsetY * 0.5
@@ -327,135 +371,126 @@ final class PlayerViewController: AFDefaultViewController {
                 y: -OffsetY * 0.5
             )
         ]
-        var position = CGPoint(
-            x: 0,
-            y: OffsetY * 1.5
-        )
-        soundsPadViews.enumerated().forEach { [weak self] index, touchPadView in
-            guard let self = self else { return }
             
-            /*
-             */
-            
-            touchPadView.removeConstraints(touchPadView.constraints)
-            
-            /*
-             */
-            
-            let topConstraint = touchPadView.topAnchor
-                .constraint(
-                    equalTo: self.soundContainer.topAnchor,
-                    constant: self.view.bounds.midY + position.y - TouchPadViewSize.width / 2
-                )
-            let leadingConstraint = touchPadView.leadingAnchor
-                .constraint(
-                    equalTo: self.soundContainer.leadingAnchor,
-                    constant: self.view.bounds.midX + position.x - TouchPadViewSize.height / 2
-                )
-            
-            let widthConstraint = touchPadView.widthAnchor
-                .constraint(equalToConstant: TouchPadViewSize.width)
-            let heightConstraint = touchPadView.heightAnchor
-                .constraint(equalToConstant: TouchPadViewSize.height)
-            
-            topConstraint.isActive = true
-            leadingConstraint.isActive = true
-            widthConstraint.isActive = true
-            heightConstraint.isActive = true
-            
-            /*
-             */
-            
-            let offset = positionsMap[index % positionsMap.count]
-            position.x += offset.x
-            position.y += offset.y
-        }
-        
-        /*
-         */
-        
-        positionsMap = [
-           CGPoint(
-                x: -OffsetX,
-                y: -OffsetY * 0.5
-           ),
-           CGPoint(
-                x: OffsetX,
-                y: -OffsetX * 0.5
-           ),
-           CGPoint(
-                x: OffsetX,
-                y: OffsetY * 0.5
-           ),
-           CGPoint(
+            var position = CGPoint(
                 x: 0,
-                y: OffsetY * 1.2
-           ),
-           CGPoint(
-                x: -OffsetX,
-                y: OffsetY * 0.5
-           ),
-           CGPoint(
-                x: -OffsetX,
-                y: -OffsetY * 0.5
-           ),
-           CGPoint(
+                y: OffsetY * 1.5
+            )
+            
+            soundsPadViews.enumerated().forEach { [weak self] index, touchPadView in
+                guard let self = self else { return }
+                
+                /*
+                 */
+                
+                touchPadView.removeConstraints(touchPadView.constraints)
+                
+                /*
+                 */
+                
+                let topConstraint = touchPadView.topAnchor
+                    .constraint(
+                        equalTo: self.soundContainer.topAnchor,
+                        constant: self.view.bounds.midY + position.y - TouchPadViewSize.width / 2
+                    )
+                let leadingConstraint = touchPadView.leadingAnchor
+                    .constraint(
+                        equalTo: self.soundContainer.leadingAnchor,
+                        constant: self.view.bounds.midX + position.x - TouchPadViewSize.height / 2
+                    )
+                
+                let widthConstraint = touchPadView.widthAnchor
+                    .constraint(equalToConstant: TouchPadViewSize.width)
+                let heightConstraint = touchPadView.heightAnchor
+                    .constraint(equalToConstant: TouchPadViewSize.height)
+                
+                topConstraint.isActive = true
+                leadingConstraint.isActive = true
+                widthConstraint.isActive = true
+                heightConstraint.isActive = true
+                
+                /*
+                 */
+                
+                let offset = positionsMap[index % positionsMap.count]
+                position.x += offset.x
+                position.y += offset.y
+            }
+            
+            positionsMap = [
+               CGPoint(
+                    x: -OffsetX,
+                    y: -OffsetY * 0.5
+               ),
+               CGPoint(
+                    x: OffsetX,
+                    y: -OffsetX * 0.5
+               ),
+               CGPoint(
+                    x: OffsetX,
+                    y: OffsetY * 0.5
+               ),
+               CGPoint(
+                    x: 0,
+                    y: OffsetY * 1.2
+               ),
+               CGPoint(
+                    x: -OffsetX,
+                    y: OffsetY * 0.5
+               ),
+               CGPoint(
+                    x: -OffsetX,
+                    y: -OffsetY * 0.5
+               ),
+               CGPoint(
+                    x: 0,
+                    y: -OffsetY * 2.4
+               ),
+               CGPoint(
+                    x: OffsetX,
+                    y: -OffsetY * 0.5
+               ),
+               CGPoint(
+                    x: OffsetX,
+                    y: OffsetY * 0.5
+               )
+           ]
+            
+            position = CGPoint(
                 x: 0,
-                y: -OffsetY * 2.4
-           ),
-           CGPoint(
-                x: OffsetX,
-                y: -OffsetY * 0.5
-           ),
-           CGPoint(
-                x: OffsetX,
                 y: OffsetY * 0.5
-           )
-       ]
-        
-        position = CGPoint(
-            x: 0,
-            y: OffsetY * 0.5
-        )
-        
-        ambientsPadViews.enumerated().forEach { [weak self] index, touchPadView in
-            guard let self = self else { return }
+            )
             
-            /*
-             */
-            
-            touchPadView.removeConstraints(touchPadView.constraints)
-            
-            /*
-             */
-            
-            let topConstraint = touchPadView.topAnchor
-                .constraint(
-                    equalTo: self.ambientsContainer.topAnchor,
-                    constant: self.view.bounds.midY + position.y - TouchPadViewSize.width / 2
-                )
-            let leadingConstraint = touchPadView.leadingAnchor
-                .constraint(
-                    equalTo: self.ambientsContainer.leadingAnchor,
-                    constant: self.view.bounds.midX + position.x - TouchPadViewSize.height / 2
-                )
-            
-            let widthConstraint = touchPadView.widthAnchor
-                .constraint(equalToConstant: TouchPadViewSize.width)
-            let heightConstraint = touchPadView.heightAnchor
-                .constraint(equalToConstant: TouchPadViewSize.height)
-            
-            topConstraint.isActive = true
-            leadingConstraint.isActive = true
-            widthConstraint.isActive = true
-            heightConstraint.isActive = true
-            
-            /*
-             */
-            
-            let offset = positionsMap[index % positionsMap.count]
-            position.x += offset.x
-            position.y += offset.y
+            ambientsPadViews.enumerated().forEach { [weak self] index, touchPadView in
+                guard let self = self else { return }
+                
+                touchPadView.removeConstraints(touchPadView.constraints)
+                
+                let topConstraint = touchPadView.topAnchor
+                    .constraint(
+                        equalTo: self.ambientsContainer.topAnchor,
+                        constant: self.view.bounds.midY + position.y - TouchPadViewSize.width / 2
+                    )
+                let leadingConstraint = touchPadView.leadingAnchor
+                    .constraint(
+                        equalTo: self.ambientsContainer.leadingAnchor,
+                        constant: self.view.bounds.midX + position.x - TouchPadViewSize.height / 2
+                    )
+                
+                let widthConstraint = touchPadView.widthAnchor
+                    .constraint(equalToConstant: TouchPadViewSize.width)
+                let heightConstraint = touchPadView.heightAnchor
+                    .constraint(equalToConstant: TouchPadViewSize.height)
+                
+                topConstraint.isActive = true
+                leadingConstraint.isActive = true
+                widthConstraint.isActive = true
+                heightConstraint.isActive = true
+                
+                let offset = positionsMap[index % positionsMap.count]
+                position.x += offset.x
+                position.y += offset.y
+            }
         }
     }
     
