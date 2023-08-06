@@ -258,11 +258,14 @@ final class PlayerViewController: AFDefaultViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.shared.isIdleTimerDisabled = true
+      SoundManager.shared.playingInBackground = false
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         UIApplication.shared.isIdleTimerDisabled = false
+      UIApplication.shared.endReceivingRemoteControlEvents()
+      MPNowPlayingInfoCenter.default().nowPlayingInfo = [:]
     }
     
     private func setupRemoteTransportControl() {
@@ -290,7 +293,31 @@ final class PlayerViewController: AFDefaultViewController {
         
         var nowPlayingInfo = [String : Any]()
         nowPlayingInfo[MPMediaItemPropertyTitle] = package.title
-        MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
+        nowPlayingInfo[MPMediaItemPropertyArtist] = "Oomie"
+      
+      if !package.isProPack {
+        if let imageURLString = package.imageURLString, let url = URL(string: imageURLString), let data = try? Data(contentsOf: url) {
+          guard let image = UIImage(data: data) else { return }
+          nowPlayingInfo[MPMediaItemPropertyArtwork] = MPMediaItemArtwork(boundsSize: image.size, requestHandler: { size in
+            return image
+          })
+        }
+      } else {
+        if let imageURLString = package.serverImageURLString, let url = URL(string: imageURLString) {
+          let queue = DispatchQueue.global(qos: .background)
+          queue.async {
+            guard let data = try? Data(contentsOf: url) else { return }
+            DispatchQueue.main.async {
+              guard let image = UIImage(data: data) else { return }
+              nowPlayingInfo[MPMediaItemPropertyArtwork] = MPMediaItemArtwork(boundsSize: image.size, requestHandler: { size in
+                return image
+              })
+            }
+          }
+        }
+      }
+      
+      MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
     }
     
     override func observeValue(
