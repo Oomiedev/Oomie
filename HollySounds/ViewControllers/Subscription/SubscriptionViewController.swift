@@ -55,8 +55,12 @@ final class SubscriptionViewController: UIViewController {
     rootView.set(products: products)
     
     rootView.onSelectSubscription = { [weak self] product in
+      self?.rootView.showIndicator()
       self?.selectProduct?(product)
     }
+    
+    rootView.privacyButton.addTarget(self, action: #selector(didTapPrivacy), for: .touchUpInside)
+    rootView.termsButton.addTarget(self, action: #selector(didTapTerms), for: .touchUpInside)
   }
   
   @objc private func didTapCloseButton() {
@@ -72,6 +76,18 @@ final class SubscriptionViewController: UIViewController {
     }
   }
   
+  @objc private func didTapTerms() {
+    if let url = URL(string: "https://power-number-72e.notion.site/Terms-of-Service-0e6d1500c827458c868b9aa2a680588c") {
+        UIApplication.shared.open(url)
+    }
+  }
+  
+  @objc private func didTapPrivacy() {
+    if let url = URL(string: "https://power-number-72e.notion.site/Privacy-Policy-89e4eb1a32974156944c8ac554253052") {
+        UIApplication.shared.open(url)
+    }
+  }
+  
   func dismiss() {
     let transition: CATransition = CATransition()
     transition.duration = 0.5
@@ -83,5 +99,9 @@ final class SubscriptionViewController: UIViewController {
     }
     self.dismiss(animated: false, completion: nil)
     dismissed?()
+  }
+  
+  func removeIndicator() {
+    rootView.removeIndicator()
   }
 }

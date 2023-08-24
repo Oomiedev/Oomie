@@ -7,11 +7,11 @@ PODS:
     - Sodium
   - DeviceKit (5.0.0)
   - Player (0.14.0)
-  - Realm (10.37.0):
-    - Realm/Headers (= 10.37.0)
-  - Realm/Headers (10.37.0)
-  - RealmSwift (10.37.0):
-    - Realm (= 10.37.0)
+  - Realm (10.38.0):
+    - Realm/Headers (= 10.38.0)
+  - Realm/Headers (10.38.0)
+  - RealmSwift (10.38.0):
+    - Realm (= 10.38.0)
   - SDWebImage (5.15.5):
     - SDWebImage/Core (= 5.15.5)
   - SDWebImage/Core (5.15.5)
@@ -46,8 +46,8 @@ SPEC CHECKSUMS:
   AFKit: 923badf2049e9c1f62bd48753376e607de9ee01a
   DeviceKit: 0fd016a2cb67aca17c33dc23171cac270131eb88
   Player: 37e0acc16ea1495fc241df88fe9f089367513331
-  Realm: 9c5fc6f8f5cb70b299f2e3064d2b9f6cb0f1523d
-  RealmSwift: 7be7bb45911c16400dd1bfce3a01764ecb4cae7a
+  Realm: 5902885dd1d5e71b0b020830caab937ecdf5bf07
+  RealmSwift: 0fc037d6c32c7c4fc9362892380f380114ecdcf0
   SDWebImage: fd7e1a22f00303e058058278639bf6196ee431fe
   Sodium: 23d11554ecd556196d313cf6130d406dfe7ac6da
   ZIPFoundation: d170fa8e270b2a32bef9dcdcabff5b8f1a5deced

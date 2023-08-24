@@ -269,6 +269,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       vc.dismiss()
     }
     
+    subscriptionService?.paymentComplete = { status in
+      if !status {
+        vc.removeIndicator()
+      }
+    }
+    
     return vc
   }
   
