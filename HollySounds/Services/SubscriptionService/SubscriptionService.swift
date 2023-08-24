@@ -78,7 +78,6 @@ extension SubscriptionServiceImpl: SKPaymentTransactionObserver {
     
     for transaction in transactions {
       switch transaction.transactionState {
-        
       case .purchasing, .deferred:
         print(transaction.transactionState.rawValue)
         break
@@ -107,9 +106,9 @@ enum OomieProProucts: String, CaseIterable {
   var title: String {
     switch self {
     case .oneYear:
-      return "1 year  5$"
+      return "1 year  4.99$"
     case .monthly:
-      return "1 month  1$"
+      return "1 month  0.99$"
     }
   }
   

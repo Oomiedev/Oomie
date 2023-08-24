@@ -70,6 +70,36 @@ final class SubscriptionView: UIView {
     return view
   }()
   
+  let termsButton: UIButton = {
+    let button = UIButton(type: .system)
+    button.setTitle("Terms of Service", for: .normal)
+    button.setTitleColor(.oomieWhite, for: .normal)
+    button.translatesAutoresizingMaskIntoConstraints = false
+    button.titleLabel?.font = .systemFont(ofSize: 13, weight: .regular)
+    return button
+  }()
+  
+  let privacyButton: UIButton = {
+    let button = UIButton(type: .system)
+    button.setTitle("Privacy Policy", for: .normal)
+    button.setTitleColor(.oomieWhite, for: .normal)
+    button.translatesAutoresizingMaskIntoConstraints = false
+    button.titleLabel?.font = .systemFont(ofSize: 13, weight: .regular)
+    return button
+  }()
+  
+  private let andLable: UILabel = {
+    let label = UILabel()
+    label.translatesAutoresizingMaskIntoConstraints = false
+    label.textAlignment = .center
+    label.textColor = .oomieSecondaryText
+    label.text = "and"
+    label.font = .systemFont(ofSize: 13, weight: .regular)
+    return label
+  }()
+  
+  private let indicatorView = CustomIndicatorView()
+  
   private var buttonBottom: NSLayoutConstraint!
   
   private var allProducts: [OomieProProucts] = OomieProProucts.allCases
@@ -108,6 +138,19 @@ final class SubscriptionView: UIView {
         self?.selectedSubscription = product
       }
     }
+  }
+  
+  func showIndicator() {
+    indicatorView.translatesAutoresizingMaskIntoConstraints = false
+    addSubview(indicatorView)
+    indicatorView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+    indicatorView.bottomAnchor.constraint(equalTo: centerYAnchor, constant: -20).isActive = true
+    indicatorView.widthAnchor.constraint(equalToConstant: 124).isActive = true
+    indicatorView.heightAnchor.constraint(equalToConstant: 95).isActive = true
+  }
+  
+  func removeIndicator() {
+    indicatorView.removeFromSuperview()
   }
   
   private func unselect() {
@@ -169,5 +212,17 @@ private extension SubscriptionView {
     if UIScreen.main.bounds.height <= 667 {
       buttonBottom.constant = -32
     }
+    
+    let buttonStackView = UIStackView(arrangedSubviews: [termsButton, andLable, privacyButton])
+    buttonStackView.axis = .horizontal
+    buttonStackView.distribution = .fill
+    buttonStackView.spacing = 8
+    buttonStackView.translatesAutoresizingMaskIntoConstraints = false
+    
+    addSubview(buttonStackView)
+    
+    buttonStackView.topAnchor.constraint(equalTo: continueButton.bottomAnchor, constant: 8).isActive = true
+    buttonStackView.heightAnchor.constraint(equalToConstant: 32).isActive = true
+    buttonStackView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
   }
 }
