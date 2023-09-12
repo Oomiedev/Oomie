@@ -52,6 +52,13 @@ final class Package: Object {
     var previewURLString: String? {
         return Bundle.main.url(forResource: id + " Preview", withExtension: "wav")?.absoluteString
     }
+    
+    var downloadedURLString: String? {
+        let pathComponent = id + " Preview"
+        let directoryURL: URL = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask)[0]
+        let folderPath: URL = directoryURL.appendingPathComponent("Packages/\(pathComponent)", isDirectory: true)
+        return Bundle.url(forResource: pathComponent, withExtension: "wav", subdirectory: nil, in: folderPath)?.absoluteString
+    }
   
   @Persisted
     var serverImageURLString: String?

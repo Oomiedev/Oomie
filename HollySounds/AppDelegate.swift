@@ -47,10 +47,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     if sessionTracker.isFirstLaunch {
       purchaseStatus = false
-      soundPackService?.clearOldPackages { [weak self] in
-        self?.setupPackage(service: self?.soundPackService)
-        self?.subscribe()
-      }
+        soundPackService?.clearOldPackages(keys: soundPackService?.getOldPackages(onlyServer: false) ?? [], complete: {[weak self] in
+            self?.setupPackage(service: self?.soundPackService)
+            self?.subscribe()
+        })
     } else {
       self.setupPackage(service: self.soundPackService)
       self.fetchSubscription(animation: false)
@@ -166,9 +166,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
           packs.data.forEach { model in
             let imageURL = AppConstants.API.baseURL + model.attributes.image.data.attributes.url
             let contentURL = AppConstants.API.baseURL + model.attributes.content.data.attributes.url
+            var previewURL: String?
+              if let prev = model.attributes.previewSound?.data?.attributes?.url {
+                  previewURL = AppConstants.API.baseURL + prev
+              }
             let serverPack = PackURL(name: model.attributes.title,
                                      imageURL: imageURL,
-                                     contentURL: contentURL)
+                                     contentURL: contentURL,
+                                     previewURL: previewURL)
             packNames.append(serverPack)
           }
           
@@ -181,13 +186,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
   
   private func fetchPack(packs: [PackURL]) {
-    self.soundPackService?.setupServerPackage(packsKeys: packs, completion: {[weak self] _, _ in
-      self?.soundPackService = nil
-      if let vm = self?.viewModel, let job = self?.job {
-        vm.observe(job: job)
-        job.fetchingProcess = true
+      let oldPackages = soundPackService?.getOldPackages(onlyServer: true)
+      if packs.count != oldPackages?.count {
+          soundPackService?.clearOldPackages(keys: oldPackages ?? [], complete: {[weak self] in
+              self?.soundPackService?.setupServerPackage(packsKeys: packs, completion: {[weak self] _, _ in
+                self?.soundPackService = nil
+                if let vm = self?.viewModel, let job = self?.job {
+                  vm.observe(job: job)
+                  job.fetchingProcess = true
+                }
+              })
+          })
+      } else {
+          self.soundPackService?.setupServerPackage(packsKeys: packs, completion: {[weak self] _, _ in
+            self?.soundPackService = nil
+            if let vm = self?.viewModel, let job = self?.job {
+              vm.observe(job: job)
+              job.fetchingProcess = true
+            }
+          })
       }
-    })
+      
+      let urls: [URL] = packs.compactMap({ $0.previewURL }).map({ URL(string: $0) }).compactMap({$0})
+      viewModel.downloadPreview(with: urls)
   }
   
   private func decode() {
@@ -359,4 +380,11 @@ struct PackURL {
   let name: String
   let imageURL: String
   let contentURL: String
+  let previewURL: String?
+    
+    var listenURL: URL? {
+        guard let previewURL else { return nil }
+        guard let url = URL(string: previewURL) else { return nil }
+        return url
+    }
 }

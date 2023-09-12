@@ -9,7 +9,8 @@ import Foundation
 import RealmSwift
 
 protocol SoundPackService {
-  func clearOldPackages(complete: @escaping (() -> Void))
+  func getOldPackages(onlyServer: Bool) -> [String]
+  func clearOldPackages(keys: [String],complete: @escaping (() -> Void))
   func setupPackage(packsKeys: [String], completion: @escaping ((Bool, [SoundData]) -> Void))
   func setupServerPackage(packsKeys: [PackURL], completion: @escaping ((Bool, [SoundData]) -> Void))
   func setupSinglePackage(packKey: String, completion: @escaping ((Bool, URL) -> Void))
@@ -53,22 +54,40 @@ final class SoundPackServiceImpl {
 }
 
 extension SoundPackServiceImpl: SoundPackService {
+    
+    func getOldPackages(onlyServer: Bool) -> [String] {
+        var keys: [String] = []
+        do {
+            let realm = try Realm()
+            let packages = realm.objects(Package.self).map { $0 }
+            keys.append(contentsOf: packages.map { $0.title })
+            
+        } catch let error {
+            print("Can not get packeges ", error.localizedDescription)
+        }
+        
+        if onlyServer {
+            keys.removeAll(where: { $0 == "Neon Ocean"})
+            keys.removeAll(where: { $0 == "Desert Dawn"})
+        }
+        
+        return keys
+    }
   
-  func clearOldPackages(complete: @escaping (() -> Void)) {
-    let oldKeys = ["Sea Breeze", "Magic Forest", "Neon Ocean", "Desert Dawn", "Kaleidoscope", "Bedtime Story"]
+    func clearOldPackages(keys: [String], complete: @escaping (() -> Void)) {
     let fileManager = FileManager.default
     
     do {
       let realm = try Realm()
       realm.beginWrite()
       
-      oldKeys.forEach { [weak self] key in
+        keys.forEach { [weak self] key in
         
         if let oldPackage = realm.object(ofType: Package.self, forPrimaryKey: key) {
           realm.delete(oldPackage)
         }
         
-        if let path = createDestinationURL(with: key) {
+          if let path = self?.createDestinationURL(with: key) {
           self?.removeDirectory(manager: fileManager, path: path)
         }
       }

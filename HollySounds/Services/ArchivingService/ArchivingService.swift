@@ -11,6 +11,7 @@ import OggDecoder
 
 protocol ArchivingService: AnyObject {
   func unzip(data: [SoundData], completion: @escaping((Bool) -> Void))
+    func unzipPreview(destinationURL: URL, sourceURL: URL, key: String, completion: @escaping((Bool) -> Void))
 }
 
 final class ArchivingServiceImpl {
@@ -20,7 +21,36 @@ final class ArchivingServiceImpl {
 }
 
 extension ArchivingServiceImpl: ArchivingService {
-  
+    
+    func unzipPreview(destinationURL: URL, sourceURL: URL, key: String, completion: @escaping ((Bool) -> Void)) {
+        backgroundQueue.async {
+            
+            do {
+                if FileManager.default.fileExists(atPath: destinationURL.path) {
+                    try FileManager.default.removeItem(at: destinationURL)
+                }
+            } catch let error {
+                print("Error: ", error)
+            }
+            
+            do {
+                
+                try FileManager.default.createDirectory(at: destinationURL, withIntermediateDirectories: true, attributes: nil)
+                try FileManager.default.unzipItem(at: sourceURL, to: destinationURL)
+                self.createPreview(fileURL: destinationURL,
+                                   fileName: key) {
+                    if FileManager.default.fileExists(atPath: sourceURL.path) {
+                        try? FileManager.default.removeItem(at: sourceURL)
+                    }
+                    completion(true)
+                }
+            } catch let error {
+                print(error)
+                completion(false)
+            }
+        }
+    }
+    
   func unzip(data: [SoundData], completion: @escaping ((Bool) -> Void)) {
     
     let group = DispatchGroup()
@@ -94,4 +124,22 @@ extension ArchivingServiceImpl: ArchivingService {
           completeAction?(sound)
       }
   }
+    
+  private func createPreview(fileURL: URL, fileName: String, completion: (() -> Void)?) {
+      let oggURL = fileURL
+          .appendingPathComponent(fileName)
+          .appendingPathExtension("ogg")
+      let wavURL = fileURL
+          .appendingPathComponent(fileName)
+          .appendingPathExtension("wav")
+      guard FileManager.default.fileExists(atPath: oggURL.path) else {
+          completion?()
+          return
+      }
+      
+      let decoder = OGGDecoder()
+      decoder.decode(oggURL, into: wavURL) {_ in
+          completion?()
+      }
+    }
 }

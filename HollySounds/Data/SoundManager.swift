@@ -203,8 +203,15 @@ final class SoundManager: NSObject {
      */
     
   func playPreview(for package: Package, completion: @escaping ((Float64) -> Void)) {
-        guard let url = URL(string: package.previewURLString ?? "" ) else { return }
-        
+      var url: URL?
+      if let local = package.previewURLString {
+          url = URL(string: local)
+      } else if let remote = package.downloadedURLString {
+          url = URL(string: remote)
+      }
+      
+      guard let url else { return }
+      
         previewPlayer = try? AVAudioPlayer(contentsOf: url)
         previewPlayer?.volume = 0
         previewPlayer?.numberOfLoops = 0

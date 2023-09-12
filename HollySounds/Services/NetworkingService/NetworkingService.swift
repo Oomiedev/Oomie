@@ -8,12 +8,17 @@
 import Foundation
 
 protocol NetworkingService: AnyObject {
-  func fetchServerPacks(url: URL, completion: @escaping (Result<ServerPack, Error>) -> Void)
+    func fetchServerPacks(url: URL, completion: @escaping (Result<ServerPack, Error>) -> Void)
+    func downloadOGG(urlString: String?, completion: @escaping (Result<URL, Error>) -> Void)
+}
+
+protocol NetworkingServiceOutput: AnyObject {
+    func getSource(url: URL)
 }
 
 final class NetworkingServiceImpl {
   
-
+    var downloadTaskSession: URLSessionDownloadTask?
 }
 
 extension NetworkingServiceImpl: NetworkingService {
@@ -36,6 +41,15 @@ extension NetworkingServiceImpl: NetworkingService {
     }
     task.resume()
   }
+    
+  func downloadOGG(urlString: String?, completion: @escaping (Result<URL, Error>) -> Void) {
+        guard let urlString, let url = URL(string: urlString) else {
+            completion(.failure(NSError(domain: "Broken URL", code: 0)))
+            return
+        }
+      
+      
+    }
 }
 
 struct ServerPack: Decodable {
@@ -50,6 +64,7 @@ struct Attributes: Decodable {
   let title: String
   let content: Content
   let image: Content
+  let previewSound: PreviewContent?
 }
 
 struct Content: Decodable {
@@ -65,4 +80,14 @@ struct ContentAttributes: Decodable {
   let url: String
 }
 
+struct PreviewContent: Decodable {
+    let data: PreviewContentData?
+}
 
+struct PreviewContentData: Decodable {
+    let attributes: PreviewContentAttributes?
+}
+
+struct PreviewContentAttributes: Decodable {
+    let url: String?
+}
